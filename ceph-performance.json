@@ -23,7 +23,7 @@
     },
     "editable": true,
     "fiscalYearStartMonth": 0,
-    "graphTooltip": 0,
+    "graphTooltip": 2,
     "links": [],
     "panels": [
       {
@@ -192,11 +192,11 @@
             "calcs": [],
             "displayMode": "list",
             "placement": "bottom",
-            "showLegend": true
+            "showLegend": false
           },
           "tooltip": {
-            "mode": "single",
-            "sort": "none"
+            "mode": "multi",
+            "sort": "desc"
           }
         },
         "pluginVersion": "11.3.0",
@@ -289,8 +289,8 @@
             "showLegend": true
           },
           "tooltip": {
-            "mode": "single",
-            "sort": "none"
+            "mode": "multi",
+            "sort": "desc"
           }
         },
         "pluginVersion": "11.3.0",
