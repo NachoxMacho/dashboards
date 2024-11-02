@@ -402,6 +402,7 @@
           }
         ],
         "title": "Proxmox VM Disk Write",
+        "transparent": true,
         "type": "timeseries"
       }
     ],
