@@ -1,5 +1,5 @@
 {
-  "apiVersion": "dashboard.grafana.app/v1beta1",
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
   "kind": "Dashboard",
   "metadata": {
     "name": "ce2qxf15qpwqoa"
@@ -23,13 +23,13 @@
     },
     "editable": true,
     "fiscalYearStartMonth": 0,
-    "graphTooltip": 1,
+    "graphTooltip": 0,
     "links": [],
     "panels": [
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aeblussiy6cqoa"
+          "uid": "ae2p4cnh657nka"
         },
         "fieldConfig": {
           "defaults": {
@@ -63,7 +63,7 @@
               "spanNulls": 3600000,
               "stacking": {
                 "group": "A",
-                "mode": "normal"
+                "mode": "none"
               },
               "thresholdsStyle": {
                 "mode": "off"
@@ -95,11 +95,11 @@
             "calcs": [],
             "displayMode": "list",
             "placement": "bottom",
-            "showLegend": false
+            "showLegend": true
           },
           "tooltip": {
-            "mode": "multi",
-            "sort": "desc"
+            "mode": "single",
+            "sort": "none"
           }
         },
         "pluginVersion": "11.3.0",
@@ -107,7 +107,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aeblussiy6cqoa"
+              "uid": "ae2p4cnh657nka"
             },
             "editorMode": "code",
             "expr": "rate(ceph_pool_rd_bytes[$__rate_interval]) * on(pool_id) group_left(name) ceph_pool_metadata",
@@ -123,7 +123,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aeblussiy6cqoa"
+          "uid": "ae2p4cnh657nka"
         },
         "fieldConfig": {
           "defaults": {
@@ -160,7 +160,7 @@
               "spanNulls": 3600000,
               "stacking": {
                 "group": "A",
-                "mode": "normal"
+                "mode": "none"
               },
               "thresholdsStyle": {
                 "mode": "off"
@@ -192,26 +192,22 @@
             "calcs": [],
             "displayMode": "list",
             "placement": "bottom",
-            "showLegend": false
+            "showLegend": true
           },
           "tooltip": {
-            "mode": "multi",
-            "sort": "desc"
+            "mode": "single",
+            "sort": "none"
           }
         },
         "pluginVersion": "11.3.0",
         "targets": [
           {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "aeblussiy6cqoa"
-            },
             "disableTextWrap": false,
-            "editorMode": "code",
-            "expr": "sum by(id) (rate(pve_disk_read_bytes[5m]))\n* on(id) group_left(name) max(pve_guest_info) by(id,name)",
+            "editorMode": "builder",
+            "expr": "sum by(id) (rate(pve_disk_read_bytes[5m]))",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
-            "legendFormat": "{{name}} - {{id}}",
+            "legendFormat": "__auto",
             "range": true,
             "refId": "A",
             "useBackend": false
@@ -224,7 +220,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aeblussiy6cqoa"
+          "uid": "ae2p4cnh657nka"
         },
         "fieldConfig": {
           "defaults": {
@@ -258,105 +254,7 @@
               "spanNulls": 3600000,
               "stacking": {
                 "group": "A",
-                "mode": "normal"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "bytes"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 24,
-          "x": 0,
-          "y": 14
-        },
-        "id": 5,
-        "options": {
-          "legend": {
-            "calcs": [],
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": false
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "desc"
-          }
-        },
-        "pluginVersion": "11.3.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "aeblussiy6cqoa"
-            },
-            "editorMode": "code",
-            "expr": "sum(rate(pve_network_receive_bytes[$__rate_interval])) by (id)\n* on(id) group_left(name) max(pve_guest_info) by(id,name)",
-            "legendFormat": "{{name}} - {{id}}",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "Proxmox Guest Network Read",
-        "transparent": true,
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "aeblussiy6cqoa"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "barWidthFactor": 0.6,
-              "drawStyle": "line",
-              "fillOpacity": 100,
-              "gradientMode": "opacity",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineInterpolation": "smooth",
-              "lineWidth": 3,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": 3600000,
-              "stacking": {
-                "group": "A",
-                "mode": "normal"
+                "mode": "none"
               },
               "thresholdsStyle": {
                 "mode": "off"
@@ -380,7 +278,7 @@
           "h": 6,
           "w": 24,
           "x": 0,
-          "y": 22
+          "y": 14
         },
         "id": 3,
         "options": {
@@ -388,11 +286,11 @@
             "calcs": [],
             "displayMode": "list",
             "placement": "bottom",
-            "showLegend": false
+            "showLegend": true
           },
           "tooltip": {
-            "mode": "multi",
-            "sort": "desc"
+            "mode": "single",
+            "sort": "none"
           }
         },
         "pluginVersion": "11.3.0",
@@ -400,7 +298,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aeblussiy6cqoa"
+              "uid": "ae2p4cnh657nka"
             },
             "editorMode": "code",
             "expr": "rate(ceph_pool_wr_bytes[$__rate_interval]) * on(pool_id) group_left(name) ceph_pool_metadata",
@@ -416,7 +314,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aeblussiy6cqoa"
+          "uid": "ae2p4cnh657nka"
         },
         "fieldConfig": {
           "defaults": {
@@ -450,7 +348,7 @@
               "spanNulls": 3600000,
               "stacking": {
                 "group": "A",
-                "mode": "normal"
+                "mode": "none"
               },
               "thresholdsStyle": {
                 "mode": "off"
@@ -474,7 +372,7 @@
           "h": 6,
           "w": 24,
           "x": 0,
-          "y": 28
+          "y": 20
         },
         "id": 4,
         "options": {
@@ -482,46 +380,36 @@
             "calcs": [],
             "displayMode": "list",
             "placement": "bottom",
-            "showLegend": false
+            "showLegend": true
           },
           "tooltip": {
-            "mode": "multi",
-            "sort": "desc"
+            "mode": "single",
+            "sort": "none"
           }
         },
         "pluginVersion": "11.3.0",
         "targets": [
           {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "aeblussiy6cqoa"
-            },
             "disableTextWrap": false,
-            "editorMode": "code",
-            "expr": "sum by(id) (rate(pve_disk_write_bytes[5m]))\n* on(id) group_left(name) max(pve_guest_info) by(id,name)",
+            "editorMode": "builder",
+            "expr": "sum by(id) (rate(pve_disk_write_bytes[5m]))",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
-            "legendFormat": "{{name}} - {{id}}",
+            "legendFormat": "__auto",
             "range": true,
             "refId": "A",
             "useBackend": false
           }
         ],
         "title": "Proxmox VM Disk Write",
-        "transparent": true,
         "type": "timeseries"
       }
     ],
     "preload": false,
-    "refresh": "30s",
-    "schemaVersion": 41,
+    "schemaVersion": 40,
     "tags": [],
     "templating": {
       "list": []
-    },
-    "time": {
-      "from": "now-30m",
-      "to": "now"
     },
     "timepicker": {},
     "timezone": "browser",
