@@ -95,7 +95,7 @@
             "calcs": [],
             "displayMode": "list",
             "placement": "bottom",
-            "showLegend": true
+            "showLegend": false
           },
           "tooltip": {
             "mode": "multi",
@@ -203,11 +203,11 @@
         "targets": [
           {
             "disableTextWrap": false,
-            "editorMode": "builder",
-            "expr": "sum by(id) (rate(pve_disk_read_bytes[5m]))",
+            "editorMode": "code",
+            "expr": "sum by(id) (rate(pve_disk_read_bytes[5m]))\n* on(id) group_left(name) max(pve_guest_info) by(id,name)",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
-            "legendFormat": "__auto",
+            "legendFormat": "{{name}}",
             "range": true,
             "refId": "A",
             "useBackend": false
@@ -286,7 +286,7 @@
             "calcs": [],
             "displayMode": "list",
             "placement": "bottom",
-            "showLegend": true
+            "showLegend": false
           },
           "tooltip": {
             "mode": "multi",
@@ -380,7 +380,7 @@
             "calcs": [],
             "displayMode": "list",
             "placement": "bottom",
-            "showLegend": true
+            "showLegend": false
           },
           "tooltip": {
             "mode": "multi",
@@ -391,11 +391,11 @@
         "targets": [
           {
             "disableTextWrap": false,
-            "editorMode": "builder",
-            "expr": "sum by(id) (rate(pve_disk_write_bytes[5m]))",
+            "editorMode": "code",
+            "expr": "sum by(id) (rate(pve_disk_write_bytes[5m]))\n* on(id) group_left(name) max(pve_guest_info) by(id,name)",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
-            "legendFormat": "__auto",
+            "legendFormat": "{{name}}",
             "range": true,
             "refId": "A",
             "useBackend": false
