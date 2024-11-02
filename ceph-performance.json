@@ -98,8 +98,8 @@
             "showLegend": true
           },
           "tooltip": {
-            "mode": "single",
-            "sort": "none"
+            "mode": "multi",
+            "sort": "desc"
           }
         },
         "pluginVersion": "11.3.0",
@@ -383,8 +383,8 @@
             "showLegend": true
           },
           "tooltip": {
-            "mode": "single",
-            "sort": "none"
+            "mode": "multi",
+            "sort": "desc"
           }
         },
         "pluginVersion": "11.3.0",
