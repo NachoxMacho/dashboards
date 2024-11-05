@@ -104,6 +104,28 @@
                   ]
                 }
               ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "cooling"
+              },
+              "properties": [
+                {
+                  "id": "mappings",
+                  "value": [
+                    {
+                      "options": {
+                        "1": {
+                          "color": "blue",
+                          "index": 0
+                        }
+                      },
+                      "type": "value"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
