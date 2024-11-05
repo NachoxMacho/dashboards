@@ -95,7 +95,8 @@
             "useBackend": false
           }
         ],
-        "title": "Panel Title",
+        "title": "House Temperature",
+        "transparent": true,
         "type": "stat"
       }
     ],
