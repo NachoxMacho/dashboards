@@ -21,7 +21,6 @@
         }
       ]
     },
-    "description": "",
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
@@ -37,6 +36,7 @@
             "color": {
               "mode": "continuous-BlYlRd"
             },
+            "decimals": 1,
             "mappings": [],
             "max": 80,
             "min": 60,
