@@ -1,5 +1,5 @@
 {
-  "apiVersion": "dashboard.grafana.app/v1beta1",
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
   "kind": "Dashboard",
   "metadata": {
     "name": "ce303v3juf1mof"
@@ -29,274 +29,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aeblussiy6cqoa"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "barWidthFactor": 0.6,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineInterpolation": "smooth",
-              "lineStyle": {
-                "fill": "solid"
-              },
-              "lineWidth": 3,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": 3600000,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 24,
-          "x": 0,
-          "y": 0
-        },
-        "id": 4,
-        "options": {
-          "legend": {
-            "calcs": [],
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": true
-          },
-          "tooltip": {
-            "hideZeros": false,
-            "mode": "single",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "11.5.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "aeblussiy6cqoa"
-            },
-            "editorMode": "code",
-            "expr": "max(ha_climate_target_temperature_high_celsius) * 1.8 + 32",
-            "legendFormat": "Maximum",
-            "range": true,
-            "refId": "A"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "aeblussiy6cqoa"
-            },
-            "editorMode": "code",
-            "expr": "min(ha_climate_target_temperature_low_celsius) * 1.8 + 32",
-            "hide": false,
-            "instant": false,
-            "legendFormat": "Minimum",
-            "range": true,
-            "refId": "B"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "aeblussiy6cqoa"
-            },
-            "editorMode": "code",
-            "expr": "max(ha_climate_current_temperature_celsius) * 1.8 + 32",
-            "hide": false,
-            "instant": false,
-            "legendFormat": "Current",
-            "range": true,
-            "refId": "C"
-          }
-        ],
-        "title": "Current Temperature",
-        "transparent": true,
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "aeblussiy6cqoa"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "fixedColor": "transparent",
-              "mode": "fixed"
-            },
-            "custom": {
-              "fillOpacity": 70,
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineWidth": 0,
-              "spanNulls": 3600000
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                }
-              ]
-            },
-            "unit": "bool_on_off"
-          },
-          "overrides": [
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "heating"
-              },
-              "properties": [
-                {
-                  "id": "mappings",
-                  "value": [
-                    {
-                      "options": {
-                        "1": {
-                          "color": "orange",
-                          "index": 0
-                        }
-                      },
-                      "type": "value"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "idle"
-              },
-              "properties": [
-                {
-                  "id": "mappings",
-                  "value": [
-                    {
-                      "options": {
-                        "1": {
-                          "color": "purple",
-                          "index": 0
-                        }
-                      },
-                      "type": "value"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "cooling"
-              },
-              "properties": [
-                {
-                  "id": "mappings",
-                  "value": [
-                    {
-                      "options": {
-                        "1": {
-                          "color": "blue",
-                          "index": 0
-                        }
-                      },
-                      "type": "value"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        "gridPos": {
-          "h": 9,
-          "w": 24,
-          "x": 0,
-          "y": 8
-        },
-        "id": 3,
-        "options": {
-          "alignValue": "left",
-          "legend": {
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": true
-          },
-          "mergeValues": true,
-          "rowHeight": 0.9,
-          "showValue": "auto",
-          "tooltip": {
-            "hideZeros": false,
-            "mode": "single",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "11.5.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "aeblussiy6cqoa"
-            },
-            "editorMode": "code",
-            "expr": "max(ha_climate_action) by (action)",
-            "legendFormat": "__auto",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "Furnace State",
-        "transparent": true,
-        "type": "state-timeline"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "aeblussiy6cqoa"
+          "uid": "ae2p4cnh657nka"
         },
         "fieldConfig": {
           "defaults": {
@@ -324,7 +57,7 @@
           "h": 5,
           "w": 24,
           "x": 0,
-          "y": 17
+          "y": 0
         },
         "id": 1,
         "options": {
@@ -345,12 +78,12 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "11.5.0",
+        "pluginVersion": "11.3.0",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aeblussiy6cqoa"
+              "uid": "ae2p4cnh657nka"
             },
             "disableTextWrap": false,
             "editorMode": "code",
@@ -375,92 +108,13 @@
         ],
         "transparent": true,
         "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "aeblussiy6cqoa"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "red",
-                  "value": null
-                },
-                {
-                  "color": "#EAB839",
-                  "value": 50
-                },
-                {
-                  "color": "yellow",
-                  "value": 75
-                },
-                {
-                  "color": "green",
-                  "value": 90
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 24,
-          "x": 0,
-          "y": 22
-        },
-        "id": 5,
-        "options": {
-          "minVizHeight": 75,
-          "minVizWidth": 75,
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showThresholdLabels": false,
-          "showThresholdMarkers": true,
-          "sizing": "auto"
-        },
-        "pluginVersion": "11.5.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "aeblussiy6cqoa"
-            },
-            "editorMode": "code",
-            "expr": "ha_sensor_battery_percent",
-            "legendFormat": "{{friendly_name}}",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "Battery Levels",
-        "transparent": true,
-        "type": "gauge"
       }
     ],
     "preload": false,
-    "schemaVersion": 41,
+    "schemaVersion": 40,
     "tags": [],
     "templating": {
       "list": []
-    },
-    "time": {
-      "from": "now-6h",
-      "to": "now"
     },
     "timepicker": {},
     "timezone": "browser",
