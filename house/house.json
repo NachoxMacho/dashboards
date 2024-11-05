@@ -34,6 +34,122 @@
         "fieldConfig": {
           "defaults": {
             "color": {
+              "fixedColor": "transparent",
+              "mode": "fixed"
+            },
+            "custom": {
+              "fillOpacity": 70,
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineWidth": 0,
+              "spanNulls": 3600000
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "bool_on_off"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "heating"
+              },
+              "properties": [
+                {
+                  "id": "mappings",
+                  "value": [
+                    {
+                      "options": {
+                        "1": {
+                          "color": "orange",
+                          "index": 0
+                        }
+                      },
+                      "type": "value"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "idle"
+              },
+              "properties": [
+                {
+                  "id": "mappings",
+                  "value": [
+                    {
+                      "options": {
+                        "1": {
+                          "color": "purple",
+                          "index": 0
+                        }
+                      },
+                      "type": "value"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "id": 2,
+        "options": {
+          "alignValue": "left",
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "mergeValues": true,
+          "rowHeight": 0.9,
+          "showValue": "auto",
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.3.0",
+        "targets": [
+          {
+            "editorMode": "code",
+            "expr": "max(ha_climate_action) by (action)",
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Panel Title",
+        "type": "state-timeline"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "ae2p4cnh657nka"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
               "mode": "continuous-BlYlRd"
             },
             "decimals": 1,
@@ -57,7 +173,7 @@
           "h": 5,
           "w": 24,
           "x": 0,
-          "y": 0
+          "y": 8
         },
         "id": 1,
         "options": {
