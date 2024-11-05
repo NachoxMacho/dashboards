@@ -160,7 +160,7 @@
               "spanNulls": 3600000,
               "stacking": {
                 "group": "A",
-                "mode": "none"
+                "mode": "normal"
               },
               "thresholdsStyle": {
                 "mode": "off"
