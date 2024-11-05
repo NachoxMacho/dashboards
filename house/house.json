@@ -140,7 +140,8 @@
             "refId": "C"
           }
         ],
-        "title": "Panel Title",
+        "title": "Current Temperature",
+        "transparent": true,
         "type": "timeseries"
       },
       {
