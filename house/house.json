@@ -34,6 +34,142 @@
         "fieldConfig": {
           "defaults": {
             "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "smooth",
+              "lineStyle": {
+                "fill": "solid"
+              },
+              "lineWidth": 3,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": 3600000,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Current"
+              },
+              "properties": [
+                {
+                  "id": "custom.lineStyle",
+                  "value": {
+                    "dash": [
+                      10,
+                      10
+                    ],
+                    "fill": "dash"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "id": 4,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.3.0",
+        "targets": [
+          {
+            "editorMode": "code",
+            "expr": "max(ha_climate_target_temperature_high_celsius) * 1.8 + 32",
+            "legendFormat": "Maximum",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "ae2p4cnh657nka"
+            },
+            "editorMode": "code",
+            "expr": "min(ha_climate_target_temperature_low_celsius) * 1.8 + 32",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Minimum",
+            "range": true,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "ae2p4cnh657nka"
+            },
+            "editorMode": "code",
+            "expr": "max(ha_climate_current_temperature_celsius) * 1.8 + 32",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Current",
+            "range": true,
+            "refId": "C"
+          }
+        ],
+        "title": "Panel Title",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "ae2p4cnh657nka"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
               "fixedColor": "transparent",
               "mode": "fixed"
             },
@@ -135,7 +271,7 @@
           "x": 0,
           "y": 0
         },
-        "id": 2,
+        "id": 3,
         "options": {
           "alignValue": "left",
           "legend": {
