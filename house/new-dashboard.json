@@ -74,9 +74,7 @@
             "values": false
           },
           "showPercentChange": false,
-          "text": {
-            "titleSize": 20
-          },
+          "text": {},
           "textMode": "auto",
           "wideLayout": true
         },
