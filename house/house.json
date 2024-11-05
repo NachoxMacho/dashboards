@@ -130,8 +130,8 @@
           ]
         },
         "gridPos": {
-          "h": 8,
-          "w": 12,
+          "h": 9,
+          "w": 24,
           "x": 0,
           "y": 0
         },
@@ -161,7 +161,8 @@
             "refId": "A"
           }
         ],
-        "title": "Panel Title",
+        "title": "Furnace State",
+        "transparent": true,
         "type": "state-timeline"
       },
       {
@@ -195,7 +196,7 @@
           "h": 5,
           "w": 24,
           "x": 0,
-          "y": 8
+          "y": 9
         },
         "id": 1,
         "options": {
