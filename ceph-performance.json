@@ -251,7 +251,7 @@
                 "type": "linear"
               },
               "showPoints": "auto",
-              "spanNulls": false,
+              "spanNulls": 3600000,
               "stacking": {
                 "group": "A",
                 "mode": "normal"
