@@ -38,6 +38,7 @@
               "mode": "thresholds"
             },
             "mappings": [],
+            "min": 0,
             "thresholds": {
               "mode": "absolute",
               "steps": [
@@ -87,7 +88,7 @@
         "targets": [
           {
             "editorMode": "code",
-            "expr": "time() - ha_last_updated_time_seconds{friendly_name=\"Shower Clean\"}",
+            "expr": "time() - ha_last_updated_time_seconds{friendly_name=\"Clean Shower Floor\"}",
             "legendFormat": "__auto",
             "range": true,
             "refId": "A"
@@ -170,12 +171,14 @@
           "type": "prometheus",
           "uid": "ae2p4cnh657nka"
         },
+        "description": "Includes the office and utility room",
         "fieldConfig": {
           "defaults": {
             "color": {
               "mode": "thresholds"
             },
             "mappings": [],
+            "min": 0,
             "thresholds": {
               "mode": "absolute",
               "steps": [
@@ -185,11 +188,11 @@
                 },
                 {
                   "color": "#EAB839",
-                  "value": 86400
+                  "value": 259200
                 },
                 {
                   "color": "red",
-                  "value": 1209600
+                  "value": 604800
                 }
               ]
             },
