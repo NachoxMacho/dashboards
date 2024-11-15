@@ -777,13 +777,13 @@
         "targets": [
           {
             "editorMode": "code",
-            "expr": "time() - ha_last_updated_time_seconds{friendly_name=\"Clean Master Toilet\"}",
+            "expr": "time() - ha_last_updated_time_seconds{friendly_name=\"Mop floors\"}",
             "legendFormat": "__auto",
             "range": true,
             "refId": "A"
           }
         ],
-        "title": "Time since master bathroom toilet was cleaned",
+        "title": "Time since floors were mopped",
         "type": "stat"
       }
     ],
