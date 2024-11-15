@@ -1,5 +1,5 @@
 {
-  "apiVersion": "dashboard.grafana.app/v1beta1",
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
   "kind": "Dashboard",
   "metadata": {
     "name": "ce3dbn3ckk64gc"
@@ -30,7 +30,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aeblussiy6cqoa"
+          "uid": "ae2p4cnh657nka"
         },
         "fieldConfig": {
           "defaults": {
@@ -38,7 +38,6 @@
               "mode": "thresholds"
             },
             "mappings": [],
-            "min": 0,
             "thresholds": {
               "mode": "absolute",
               "steps": [
@@ -48,7 +47,7 @@
                 },
                 {
                   "color": "#EAB839",
-                  "value": 604800
+                  "value": 86400
                 },
                 {
                   "color": "red",
@@ -62,7 +61,7 @@
         },
         "gridPos": {
           "h": 8,
-          "w": 24,
+          "w": 6,
           "x": 0,
           "y": 0
         },
@@ -85,108 +84,370 @@
           "wideLayout": true
         },
         "pluginVersion": "11.3.0",
-        "repeat": "task",
-        "repeatDirection": "h",
         "targets": [
           {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "aeblussiy6cqoa"
-            },
             "editorMode": "code",
-            "expr": "time() - max_over_time(timestamp(sum(changes(ha_state_change_total{friendly_name=\"$task\"}[2m])) \u003e 0)[30d:1m])",
+            "expr": "time() - ha_last_updated_time_seconds{friendly_name=\"Shower Clean\"}",
             "legendFormat": "__auto",
             "range": true,
             "refId": "A"
           }
         ],
-        "title": "Time Since $task",
-        "transparent": true,
+        "title": "Time Since Shower was last cleaned",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "ae2p4cnh657nka"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 86400
+                },
+                {
+                  "color": "red",
+                  "value": 1209600
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 6,
+          "x": 6,
+          "y": 0
+        },
+        "id": 3,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.3.0",
+        "targets": [
+          {
+            "editorMode": "code",
+            "expr": "time() - ha_last_updated_time_seconds{friendly_name=\"Do Laundry\"}",
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Time since last laundry load for Rob",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "ae2p4cnh657nka"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 86400
+                },
+                {
+                  "color": "red",
+                  "value": 1209600
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 6,
+          "x": 12,
+          "y": 0
+        },
+        "id": 4,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.3.0",
+        "targets": [
+          {
+            "editorMode": "code",
+            "expr": "time() - ha_last_updated_time_seconds{friendly_name=\"Vacuum Basement\"}",
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Time since basement was last vacuumed",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "ae2p4cnh657nka"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 86400
+                },
+                {
+                  "color": "red",
+                  "value": 1209600
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 6,
+          "x": 18,
+          "y": 0
+        },
+        "id": 5,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.3.0",
+        "targets": [
+          {
+            "editorMode": "code",
+            "expr": "time() - ha_last_updated_time_seconds{friendly_name=\"Clean Cat Litter\"}",
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Time since cat litter was cleaned",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "ae2p4cnh657nka"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 86400
+                },
+                {
+                  "color": "red",
+                  "value": 1209600
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 6,
+          "x": 12,
+          "y": 8
+        },
+        "id": 7,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.3.0",
+        "targets": [
+          {
+            "editorMode": "code",
+            "expr": "time() - ha_last_updated_time_seconds{friendly_name=\"Clean Guest Toilet\"}",
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Time since guest bathroom toilet was cleaned",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "ae2p4cnh657nka"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 86400
+                },
+                {
+                  "color": "red",
+                  "value": 1209600
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 6,
+          "x": 18,
+          "y": 8
+        },
+        "id": 6,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.3.0",
+        "targets": [
+          {
+            "editorMode": "code",
+            "expr": "time() - ha_last_updated_time_seconds{friendly_name=\"Clean Master Toilet\"}",
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Time since master bathroom toilet was cleaned",
         "type": "stat"
       }
     ],
-    "preload": true,
+    "preload": false,
     "refresh": "1m",
-    "schemaVersion": 41,
+    "schemaVersion": 40,
     "tags": [],
     "templating": {
-      "list": [
-        {
-          "current": {
-            "text": [
-              "$__all"
-            ],
-            "value": [
-              "$__all"
-            ]
-          },
-          "description": "",
-          "hide": 2,
-          "includeAll": true,
-          "label": "Task",
-          "multi": true,
-          "name": "task",
-          "options": [
-            {
-              "selected": false,
-              "text": "Clean Cat Litter",
-              "value": "Clean Cat Litter"
-            },
-            {
-              "selected": false,
-              "text": "Clean Guest Toilet",
-              "value": "Clean Guest Toilet"
-            },
-            {
-              "selected": false,
-              "text": "Clean Master Toilet",
-              "value": "Clean Master Toilet"
-            },
-            {
-              "selected": false,
-              "text": "Clean Shower Door",
-              "value": "Clean Shower Door"
-            },
-            {
-              "selected": false,
-              "text": "Clean Shower Floor",
-              "value": "Clean Shower Floor"
-            },
-            {
-              "selected": false,
-              "text": "Do Laundry",
-              "value": "Do Laundry"
-            },
-            {
-              "selected": false,
-              "text": "Dust house",
-              "value": "Dust house"
-            },
-            {
-              "selected": false,
-              "text": "Mop floors",
-              "value": "Mop floors"
-            },
-            {
-              "selected": false,
-              "text": "Mow the lawn",
-              "value": "Mow the lawn"
-            },
-            {
-              "selected": false,
-              "text": "Vacuum Basement",
-              "value": "Vacuum Basement"
-            },
-            {
-              "selected": false,
-              "text": "Vacuum House",
-              "value": "Vacuum House"
-            }
-          ],
-          "query": "Clean Cat Litter,Clean Guest Toilet,Clean Master Toilet,Clean Shower Door,Clean Shower Floor,Do Laundry,Dust house,Mop floors,Mow the lawn,Vacuum Basement,Vacuum House",
-          "type": "custom"
-        }
-      ]
+      "list": []
     },
     "timepicker": {},
     "timezone": "browser",
