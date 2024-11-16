@@ -53,103 +53,6 @@
                 "viz": false
               },
               "insertNulls": false,
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "bytes"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 0,
-          "y": 0
-        },
-        "id": 3,
-        "options": {
-          "legend": {
-            "calcs": [],
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": true
-          },
-          "tooltip": {
-            "mode": "single",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "11.3.0",
-        "targets": [
-          {
-            "disableTextWrap": false,
-            "editorMode": "code",
-            "expr": "ceph_pool_bytes_used{pool_id=\"14\"}",
-            "fullMetaSearch": false,
-            "includeNullMetadata": true,
-            "legendFormat": "{{auto}}",
-            "range": true,
-            "refId": "A",
-            "useBackend": false
-          }
-        ],
-        "title": "Panel Title",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "ae2p4cnh657nka"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "barWidthFactor": 0.6,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
               "lineInterpolation": "smooth",
               "lineWidth": 4,
               "pointSize": 5,
@@ -188,7 +91,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 8
+          "y": 0
         },
         "id": 2,
         "options": {
@@ -224,6 +127,105 @@
         "fieldConfig": {
           "defaults": {
             "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "fillOpacity": 80,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineWidth": 1,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "orange",
+                  "value": 1000000000
+                },
+                {
+                  "color": "red",
+                  "value": 5000000000
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        },
+        "id": 3,
+        "interval": "1d",
+        "options": {
+          "barRadius": 0,
+          "barWidth": 0.97,
+          "fullHighlight": false,
+          "groupWidth": 0.7,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "auto",
+          "showValue": "auto",
+          "stacking": "none",
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          },
+          "xTickLabelRotation": 0,
+          "xTickLabelSpacing": 0
+        },
+        "pluginVersion": "11.3.0",
+        "targets": [
+          {
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "expr": "delta(ceph_pool_bytes_used{pool_id=\"14\"}[$__interval]) / 3",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "legendFormat": "{{auto}}",
+            "range": true,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "Mimir \u0026 Loki Growth rate",
+        "type": "barchart"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "ae2p4cnh657nka"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
               "mode": "palette-classic"
             },
             "custom": {
@@ -242,7 +244,7 @@
           "h": 15,
           "w": 8,
           "x": 0,
-          "y": 16
+          "y": 8
         },
         "id": 1,
         "options": {
