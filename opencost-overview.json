@@ -1,30 +1,13 @@
 {
-  "apiVersion": "dashboard.grafana.app/v1beta1",
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
   "kind": "Dashboard",
   "metadata": {
     "name": "opencost-mixin-kover-jkwq"
   },
   "spec": {
-    "annotations": {
-      "list": [
-        {
-          "builtIn": 1,
-          "datasource": {
-            "type": "grafana",
-            "uid": "-- Grafana --"
-          },
-          "enable": true,
-          "hide": true,
-          "iconColor": "rgba(0, 211, 255, 1)",
-          "name": "Annotations \u0026 Alerts",
-          "type": "dashboard"
-        }
-      ]
-    },
     "description": "A dashboard that monitors OpenCost and focuses on giving a overview for OpenCost. It is created using the [OpenCost-mixin](https://github.com/adinhodovic/opencost-mixin).",
     "editable": true,
-    "fiscalYearStartMonth": 0,
-    "graphTooltip": 0,
+    "gnetId": 22208,
     "links": [
       {
         "tags": [
@@ -46,7 +29,6 @@
           "y": 0
         },
         "id": 1,
-        "panels": [],
         "title": "Cluster Summary",
         "type": "row"
       },
@@ -57,13 +39,11 @@
         },
         "fieldConfig": {
           "defaults": {
-            "mappings": [],
             "thresholds": {
-              "mode": "absolute",
               "steps": [
                 {
                   "color": "red",
-                  "value": null
+                  "value": 0
                 },
                 {
                   "color": "green",
@@ -72,8 +52,7 @@
               ]
             },
             "unit": "currencyUSD"
-          },
-          "overrides": []
+          }
         },
         "gridPos": {
           "h": 3,
@@ -83,31 +62,23 @@
         },
         "id": 2,
         "options": {
-          "colorMode": "value",
           "graphMode": "none",
-          "justifyMode": "auto",
-          "orientation": "auto",
           "percentChangeColorMode": "inverted",
           "reduceOptions": {
             "calcs": [
               "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
+            ]
           },
-          "showPercentChange": true,
-          "textMode": "auto",
-          "wideLayout": true
+          "showPercentChange": true
         },
-        "pluginVersion": "11.5.0",
+        "pluginVersion": "v11.1.0",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
               "uid": "$datasource"
             },
-            "expr": "sum(\n  node_total_hourly_cost{\n    job=~\"$job\"\n  }\n) \n+\nsum(\n  sum(\n    kube_persistentvolume_capacity_bytes{\n      job=~\"$job\"\n    }\n    / 1024 / 1024 / 1024\n  ) by (persistentvolume)\n  *\n  sum(\n    pv_hourly_cost{\n      job=~\"$job\"\n    }\n  ) by (persistentvolume)\n) \n",
-            "refId": "A"
+            "expr": "sum(\n  node_total_hourly_cost{\n    job=~\"$job\"\n  }\n) \n+\nsum(\n  sum(\n    kube_persistentvolume_capacity_bytes{\n      job=~\"$job\"\n    }\n    / 1024 / 1024 / 1024\n  ) by (persistentvolume)\n  *\n  sum(\n    pv_hourly_cost{\n      job=~\"$job\"\n    }\n  ) by (persistentvolume)\n) \n"
           }
         ],
         "title": "Hourly Cost",
@@ -120,13 +91,11 @@
         },
         "fieldConfig": {
           "defaults": {
-            "mappings": [],
             "thresholds": {
-              "mode": "absolute",
               "steps": [
                 {
                   "color": "red",
-                  "value": null
+                  "value": 0
                 },
                 {
                   "color": "green",
@@ -135,8 +104,7 @@
               ]
             },
             "unit": "currencyUSD"
-          },
-          "overrides": []
+          }
         },
         "gridPos": {
           "h": 3,
@@ -146,31 +114,23 @@
         },
         "id": 3,
         "options": {
-          "colorMode": "value",
           "graphMode": "none",
-          "justifyMode": "auto",
-          "orientation": "auto",
           "percentChangeColorMode": "inverted",
           "reduceOptions": {
             "calcs": [
               "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
+            ]
           },
-          "showPercentChange": true,
-          "textMode": "auto",
-          "wideLayout": true
+          "showPercentChange": true
         },
-        "pluginVersion": "11.5.0",
+        "pluginVersion": "v11.1.0",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
               "uid": "$datasource"
             },
-            "expr": "sum(\n  node_total_hourly_cost{\n    job=~\"$job\"\n  }\n) * 24\n+\nsum(\n  sum(\n    kube_persistentvolume_capacity_bytes{\n      job=~\"$job\"\n    }\n    / 1024 / 1024 / 1024\n  ) by (persistentvolume)\n  *\n  sum(\n    pv_hourly_cost{\n      job=~\"$job\"\n    }\n  ) by (persistentvolume)\n) * 24\n",
-            "refId": "A"
+            "expr": "sum(\n  node_total_hourly_cost{\n    job=~\"$job\"\n  }\n) * 24\n+\nsum(\n  sum(\n    kube_persistentvolume_capacity_bytes{\n      job=~\"$job\"\n    }\n    / 1024 / 1024 / 1024\n  ) by (persistentvolume)\n  *\n  sum(\n    pv_hourly_cost{\n      job=~\"$job\"\n    }\n  ) by (persistentvolume)\n) * 24\n"
           }
         ],
         "title": "Daily Cost",
@@ -183,13 +143,11 @@
         },
         "fieldConfig": {
           "defaults": {
-            "mappings": [],
             "thresholds": {
-              "mode": "absolute",
               "steps": [
                 {
                   "color": "red",
-                  "value": null
+                  "value": 0
                 },
                 {
                   "color": "green",
@@ -198,8 +156,7 @@
               ]
             },
             "unit": "currencyUSD"
-          },
-          "overrides": []
+          }
         },
         "gridPos": {
           "h": 3,
@@ -209,31 +166,23 @@
         },
         "id": 4,
         "options": {
-          "colorMode": "value",
           "graphMode": "none",
-          "justifyMode": "auto",
-          "orientation": "auto",
           "percentChangeColorMode": "inverted",
           "reduceOptions": {
             "calcs": [
               "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
+            ]
           },
-          "showPercentChange": true,
-          "textMode": "auto",
-          "wideLayout": true
+          "showPercentChange": true
         },
-        "pluginVersion": "11.5.0",
+        "pluginVersion": "v11.1.0",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
               "uid": "$datasource"
             },
-            "expr": "sum(\n  node_total_hourly_cost{\n    job=~\"$job\"\n  }\n) * 730\n+\nsum(\n  sum(\n    kube_persistentvolume_capacity_bytes{\n      job=~\"$job\"\n    }\n    / 10730 / 10730 / 10730\n  ) by (persistentvolume)\n  *\n  sum(\n    pv_hourly_cost{\n      job=~\"$job\"\n    }\n  ) by (persistentvolume)\n) * 730\n",
-            "refId": "A"
+            "expr": "sum(\n  node_total_hourly_cost{\n    job=~\"$job\"\n  }\n) * 730\n+\nsum(\n  sum(\n    kube_persistentvolume_capacity_bytes{\n      job=~\"$job\"\n    }\n    / 10730 / 10730 / 10730\n  ) by (persistentvolume)\n  *\n  sum(\n    pv_hourly_cost{\n      job=~\"$job\"\n    }\n  ) by (persistentvolume)\n) * 730\n"
           }
         ],
         "title": "Monthly Cost",
@@ -246,13 +195,11 @@
         },
         "fieldConfig": {
           "defaults": {
-            "mappings": [],
             "thresholds": {
-              "mode": "absolute",
               "steps": [
                 {
                   "color": "red",
-                  "value": null
+                  "value": 0
                 },
                 {
                   "color": "green",
@@ -261,8 +208,7 @@
               ]
             },
             "unit": "currencyUSD"
-          },
-          "overrides": []
+          }
         },
         "gridPos": {
           "h": 3,
@@ -272,31 +218,23 @@
         },
         "id": 5,
         "options": {
-          "colorMode": "value",
           "graphMode": "none",
-          "justifyMode": "auto",
-          "orientation": "auto",
           "percentChangeColorMode": "inverted",
           "reduceOptions": {
             "calcs": [
               "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
+            ]
           },
-          "showPercentChange": true,
-          "textMode": "auto",
-          "wideLayout": true
+          "showPercentChange": true
         },
-        "pluginVersion": "11.5.0",
+        "pluginVersion": "v11.1.0",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
               "uid": "$datasource"
             },
-            "expr": "sum(\n  sum(\n    kube_node_status_capacity{\n      job=~\"$job\",\n      resource=\"cpu\",\n      unit=\"core\"\n    }\n  ) by (node)\n  *\n  sum(\n    node_cpu_hourly_cost{\n      job=~\"$job\"\n    }\n  ) by (node)\n  * 730\n)\n",
-            "refId": "A"
+            "expr": "sum(\n  sum(\n    kube_node_status_capacity{\n      job=~\"$job\",\n      resource=\"cpu\",\n      unit=\"core\"\n    }\n  ) by (node)\n  *\n  sum(\n    node_cpu_hourly_cost{\n      job=~\"$job\"\n    }\n  ) by (node)\n  * 730\n)\n"
           }
         ],
         "title": "Monthly CPU Cost",
@@ -309,13 +247,11 @@
         },
         "fieldConfig": {
           "defaults": {
-            "mappings": [],
             "thresholds": {
-              "mode": "absolute",
               "steps": [
                 {
                   "color": "red",
-                  "value": null
+                  "value": 0
                 },
                 {
                   "color": "green",
@@ -324,8 +260,7 @@
               ]
             },
             "unit": "currencyUSD"
-          },
-          "overrides": []
+          }
         },
         "gridPos": {
           "h": 3,
@@ -335,31 +270,23 @@
         },
         "id": 6,
         "options": {
-          "colorMode": "value",
           "graphMode": "none",
-          "justifyMode": "auto",
-          "orientation": "auto",
           "percentChangeColorMode": "inverted",
           "reduceOptions": {
             "calcs": [
               "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
+            ]
           },
-          "showPercentChange": true,
-          "textMode": "auto",
-          "wideLayout": true
+          "showPercentChange": true
         },
-        "pluginVersion": "11.5.0",
+        "pluginVersion": "v11.1.0",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
               "uid": "$datasource"
             },
-            "expr": "sum(\n  sum(\n    kube_node_status_capacity{\n      job=~\"$job\",\n      resource=\"memory\",\n      unit=\"byte\"\n    }\n  ) by (node)\n  / 1024 / 1024 / 1024\n  *\n  sum(\n    node_ram_hourly_cost{\n      job=~\"$job\"\n    }\n  ) by (node)\n  * 730\n)\n",
-            "refId": "A"
+            "expr": "sum(\n  sum(\n    kube_node_status_capacity{\n      job=~\"$job\",\n      resource=\"memory\",\n      unit=\"byte\"\n    }\n  ) by (node)\n  / 1024 / 1024 / 1024\n  *\n  sum(\n    node_ram_hourly_cost{\n      job=~\"$job\"\n    }\n  ) by (node)\n  * 730\n)\n"
           }
         ],
         "title": "Monthly Ram Cost",
@@ -372,13 +299,11 @@
         },
         "fieldConfig": {
           "defaults": {
-            "mappings": [],
             "thresholds": {
-              "mode": "absolute",
               "steps": [
                 {
                   "color": "red",
-                  "value": null
+                  "value": 0
                 },
                 {
                   "color": "green",
@@ -387,8 +312,7 @@
               ]
             },
             "unit": "currencyUSD"
-          },
-          "overrides": []
+          }
         },
         "gridPos": {
           "h": 3,
@@ -398,31 +322,23 @@
         },
         "id": 7,
         "options": {
-          "colorMode": "value",
           "graphMode": "none",
-          "justifyMode": "auto",
-          "orientation": "auto",
           "percentChangeColorMode": "inverted",
           "reduceOptions": {
             "calcs": [
               "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
+            ]
           },
-          "showPercentChange": true,
-          "textMode": "auto",
-          "wideLayout": true
+          "showPercentChange": true
         },
-        "pluginVersion": "11.5.0",
+        "pluginVersion": "v11.1.0",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
               "uid": "$datasource"
             },
-            "expr": "sum(\n  sum(\n    kube_persistentvolume_capacity_bytes{\n        job=~\"$job\"\n      }\n    / 1024 / 1024 / 1024\n  ) by (persistentvolume)\n  *\n  sum(\n    pv_hourly_cost{\n      job=~\"$job\"\n    }\n  ) by (persistentvolume)\n) * 730\n",
-            "refId": "A"
+            "expr": "sum(\n  sum(\n    kube_persistentvolume_capacity_bytes{\n        job=~\"$job\"\n      }\n    / 1024 / 1024 / 1024\n  ) by (persistentvolume)\n  *\n  sum(\n    pv_hourly_cost{\n      job=~\"$job\"\n    }\n  ) by (persistentvolume)\n) * 730\n"
           }
         ],
         "title": "Monthly PV Cost",
@@ -435,81 +351,25 @@
         },
         "fieldConfig": {
           "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
             "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "barWidthFactor": 0.6,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
+              "spanNulls": false
             },
             "unit": "currencyUSD"
-          },
-          "overrides": []
+          }
         },
         "gridPos": {
           "h": 5,
           "w": 8,
           "x": 0,
-          "y": 4
+          "y": 5
         },
         "id": 8,
         "options": {
           "legend": {
-            "calcs": [],
-            "displayMode": "list",
-            "placement": "bottom",
             "showLegend": false
-          },
-          "tooltip": {
-            "hideZeros": false,
-            "mode": "single",
-            "sort": "none"
           }
         },
-        "pluginVersion": "11.5.0",
+        "pluginVersion": "v11.1.0",
         "targets": [
           {
             "datasource": {
@@ -518,8 +378,7 @@
             },
             "expr": "sum(\n  node_total_hourly_cost{\n    job=~\"$job\"\n  }\n) \n+\nsum(\n  sum(\n    kube_persistentvolume_capacity_bytes{\n      job=~\"$job\"\n    }\n    / 1024 / 1024 / 1024\n  ) by (persistentvolume)\n  *\n  sum(\n    pv_hourly_cost{\n      job=~\"$job\"\n    }\n  ) by (persistentvolume)\n) \n",
             "interval": "1m",
-            "legendFormat": "Hourly Cost",
-            "refId": "A"
+            "legendFormat": "Hourly Cost"
           }
         ],
         "title": "Hourly Cost",
@@ -532,81 +391,25 @@
         },
         "fieldConfig": {
           "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
             "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "barWidthFactor": 0.6,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
+              "spanNulls": false
             },
             "unit": "currencyUSD"
-          },
-          "overrides": []
+          }
         },
         "gridPos": {
           "h": 5,
           "w": 8,
           "x": 8,
-          "y": 4
+          "y": 5
         },
         "id": 9,
         "options": {
           "legend": {
-            "calcs": [],
-            "displayMode": "list",
-            "placement": "bottom",
             "showLegend": false
-          },
-          "tooltip": {
-            "hideZeros": false,
-            "mode": "single",
-            "sort": "none"
           }
         },
-        "pluginVersion": "11.5.0",
+        "pluginVersion": "v11.1.0",
         "targets": [
           {
             "datasource": {
@@ -615,8 +418,7 @@
             },
             "expr": "sum(\n  node_total_hourly_cost{\n    job=~\"$job\"\n  }\n) * 24\n+\nsum(\n  sum(\n    kube_persistentvolume_capacity_bytes{\n      job=~\"$job\"\n    }\n    / 1024 / 1024 / 1024\n  ) by (persistentvolume)\n  *\n  sum(\n    pv_hourly_cost{\n      job=~\"$job\"\n    }\n  ) by (persistentvolume)\n) * 24\n",
             "interval": "1m",
-            "legendFormat": "Daily Cost",
-            "refId": "A"
+            "legendFormat": "Daily Cost"
           }
         ],
         "title": "Daily Cost",
@@ -629,81 +431,25 @@
         },
         "fieldConfig": {
           "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
             "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "barWidthFactor": 0.6,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
+              "spanNulls": false
             },
             "unit": "currencyUSD"
-          },
-          "overrides": []
+          }
         },
         "gridPos": {
           "h": 5,
           "w": 8,
           "x": 16,
-          "y": 4
+          "y": 5
         },
         "id": 10,
         "options": {
           "legend": {
-            "calcs": [],
-            "displayMode": "list",
-            "placement": "bottom",
             "showLegend": false
-          },
-          "tooltip": {
-            "hideZeros": false,
-            "mode": "single",
-            "sort": "none"
           }
         },
-        "pluginVersion": "11.5.0",
+        "pluginVersion": "v11.1.0",
         "targets": [
           {
             "datasource": {
@@ -712,8 +458,7 @@
             },
             "expr": "sum(\n  node_total_hourly_cost{\n    job=~\"$job\"\n  }\n) * 730\n+\nsum(\n  sum(\n    kube_persistentvolume_capacity_bytes{\n      job=~\"$job\"\n    }\n    / 10730 / 10730 / 10730\n  ) by (persistentvolume)\n  *\n  sum(\n    pv_hourly_cost{\n      job=~\"$job\"\n    }\n  ) by (persistentvolume)\n) * 730\n",
             "interval": "1m",
-            "legendFormat": "Monthly Cost",
-            "refId": "A"
+            "legendFormat": "Monthly Cost"
           }
         ],
         "title": "Monthly Cost",
@@ -726,26 +471,14 @@
         },
         "fieldConfig": {
           "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              }
-            },
-            "mappings": [],
             "unit": "currencyUSD"
-          },
-          "overrides": []
+          }
         },
         "gridPos": {
           "h": 5,
           "w": 8,
           "x": 0,
-          "y": 9
+          "y": 5
         },
         "id": 11,
         "options": {
@@ -753,28 +486,15 @@
             "asTable": true,
             "displayMode": "table",
             "placement": "right",
-            "showLegend": true,
             "sortDesc": true,
             "values": [
               "value",
               "percent"
             ]
           },
-          "pieType": "pie",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "tooltip": {
-            "hideZeros": false,
-            "mode": "single",
-            "sort": "none"
-          }
+          "pieType": "pie"
         },
-        "pluginVersion": "11.5.0",
+        "pluginVersion": "v11.1.0",
         "targets": [
           {
             "datasource": {
@@ -783,8 +503,7 @@
             },
             "expr": "sum(\n  sum(\n    kube_node_status_capacity{\n      job=~\"$job\",\n      resource=\"cpu\",\n      unit=\"core\"\n    }\n  ) by (node)\n  *\n  sum(\n    node_cpu_hourly_cost{\n      job=~\"$job\"\n    }\n  ) by (node)\n  * 730\n)\n",
             "instant": true,
-            "legendFormat": "CPU",
-            "refId": "A"
+            "legendFormat": "CPU"
           },
           {
             "datasource": {
@@ -793,8 +512,7 @@
             },
             "expr": "sum(\n  sum(\n    kube_node_status_capacity{\n      job=~\"$job\",\n      resource=\"memory\",\n      unit=\"byte\"\n    }\n  ) by (node)\n  / 1024 / 1024 / 1024\n  *\n  sum(\n    node_ram_hourly_cost{\n      job=~\"$job\"\n    }\n  ) by (node)\n  * 730\n)\n",
             "instant": true,
-            "legendFormat": "RAM",
-            "refId": "B"
+            "legendFormat": "RAM"
           },
           {
             "datasource": {
@@ -803,8 +521,7 @@
             },
             "expr": "sum(\n  sum(\n    kube_persistentvolume_capacity_bytes{\n        job=~\"$job\"\n      }\n    / 1024 / 1024 / 1024\n  ) by (persistentvolume)\n  *\n  sum(\n    pv_hourly_cost{\n      job=~\"$job\"\n    }\n  ) by (persistentvolume)\n) * 730\n",
             "instant": true,
-            "legendFormat": "PV",
-            "refId": "C"
+            "legendFormat": "PV"
           }
         ],
         "title": "Cost by Resource",
@@ -817,26 +534,14 @@
         },
         "fieldConfig": {
           "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              }
-            },
-            "mappings": [],
             "unit": "currencyUSD"
-          },
-          "overrides": []
+          }
         },
         "gridPos": {
           "h": 5,
           "w": 8,
           "x": 8,
-          "y": 9
+          "y": 5
         },
         "id": 12,
         "options": {
@@ -844,28 +549,15 @@
             "asTable": true,
             "displayMode": "table",
             "placement": "right",
-            "showLegend": true,
             "sortDesc": true,
             "values": [
               "value",
               "percent"
             ]
           },
-          "pieType": "pie",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "tooltip": {
-            "hideZeros": false,
-            "mode": "single",
-            "sort": "none"
-          }
+          "pieType": "pie"
         },
-        "pluginVersion": "11.5.0",
+        "pluginVersion": "v11.1.0",
         "targets": [
           {
             "datasource": {
@@ -874,8 +566,7 @@
             },
             "expr": "topk(10,\n  sum(\n    sum(\n      container_memory_allocation_bytes{job=~\"$job\"}\n    )\n    by (namespace, instance)\n    * on(instance) group_left() (\n      node_ram_hourly_cost{job=~\"$job\"}\n      / 1024 / 1024 / 1024 * 730\n      + on(node,instance_type) group_left()\n      label_replace\n      (\n        kube_node_labels{job=~\"$job\"}, \"instance_type\", \"$1\", \"label_node_kubernetes_io_instance_type\", \"(.*)\"\n      ) * 0\n    )\n    +\n    sum(\n      container_cpu_allocation{job=~\"$job\"}\n    )\n    by (namespace,instance)\n    * on(instance) group_left() (\n      node_cpu_hourly_cost{job=~\"$job\"}\n      * 730\n      + on(node, instance_type) group_left()\n      label_replace\n      (\n        kube_node_labels{job=~\"$job\"}, \"instance_type\", \"$1\", \"label_node_kubernetes_io_instance_type\", \"(.*)\"\n      ) * 0\n    )\n  ) by (namespace)\n)\n",
             "instant": true,
-            "legendFormat": "{{ namespace }}",
-            "refId": "A"
+            "legendFormat": "{{ namespace }}"
           }
         ],
         "title": "Cost by Namespace",
@@ -888,26 +579,14 @@
         },
         "fieldConfig": {
           "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              }
-            },
-            "mappings": [],
             "unit": "currencyUSD"
-          },
-          "overrides": []
+          }
         },
         "gridPos": {
           "h": 5,
           "w": 8,
           "x": 16,
-          "y": 9
+          "y": 5
         },
         "id": 13,
         "options": {
@@ -915,28 +594,15 @@
             "asTable": true,
             "displayMode": "table",
             "placement": "right",
-            "showLegend": true,
             "sortDesc": true,
             "values": [
               "value",
               "percent"
             ]
           },
-          "pieType": "pie",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "tooltip": {
-            "hideZeros": false,
-            "mode": "single",
-            "sort": "none"
-          }
+          "pieType": "pie"
         },
-        "pluginVersion": "11.5.0",
+        "pluginVersion": "v11.1.0",
         "targets": [
           {
             "datasource": {
@@ -945,8 +611,7 @@
             },
             "expr": "topk(10,\n  sum(\n    node_total_hourly_cost{\n      job=~\"$job\"\n    }\n  ) by (instance_type) * 730\n)\n",
             "instant": true,
-            "legendFormat": "{{ instance_type }}",
-            "refId": "A"
+            "legendFormat": "{{ instance_type }}"
           }
         ],
         "title": "Cost by Instance Type",
@@ -958,10 +623,9 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 14
+          "y": 15
         },
         "id": 14,
-        "panels": [],
         "title": "Cloud Resources",
         "type": "row"
       },
@@ -972,50 +636,20 @@
         },
         "fieldConfig": {
           "defaults": {
-            "custom": {
-              "align": "auto",
-              "cellOptions": {
-                "type": "auto"
-              },
-              "inspect": false
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
             "unit": "currencyUSD"
-          },
-          "overrides": []
+          }
         },
         "gridPos": {
           "h": 10,
           "w": 16,
           "x": 0,
-          "y": 15
+          "y": 16
         },
         "id": 15,
         "options": {
-          "cellHeight": "sm",
           "footer": {
-            "countRows": false,
-            "enablePagination": true,
-            "fields": "",
-            "reducer": [
-              "sum"
-            ],
-            "show": false
+            "enablePagination": true
           },
-          "showHeader": true,
           "sortBy": [
             {
               "desc": true,
@@ -1023,7 +657,7 @@
             }
           ]
         },
-        "pluginVersion": "11.5.0",
+        "pluginVersion": "v11.1.0",
         "targets": [
           {
             "datasource": {
@@ -1032,8 +666,7 @@
             },
             "expr": "sum(\n  kube_node_status_capacity{\n    job=~\"$job\",\n    resource=\"cpu\",\n    unit=\"core\"\n  }\n) by (node)\n*\non(node) group_left(instance_type, arch)\nsum(\n  node_cpu_hourly_cost{\n    job=~\"$job\"\n  }\n) by (node, instance_type, arch)\n* 730\n",
             "format": "table",
-            "instant": true,
-            "refId": "A"
+            "instant": true
           },
           {
             "datasource": {
@@ -1042,8 +675,7 @@
             },
             "expr": "sum(\n  kube_node_status_capacity{\n    job=~\"$job\",\n    resource=\"memory\",\n    unit=\"byte\"\n  }\n) by (node)\n/ 1024 / 1024 / 1024\n*\non(node) group_left(instance_type, arch)\nsum(\n  node_ram_hourly_cost{\n    job=~\"$job\"\n  }\n) by (node, instance_type, arch)\n* 730\n",
             "format": "table",
-            "instant": true,
-            "refId": "B"
+            "instant": true
           },
           {
             "datasource": {
@@ -1052,8 +684,7 @@
             },
             "expr": "sum(\n  node_total_hourly_cost{\n    job=~\"$job\"\n  }\n) by (node, instance_type, arch)\n* 730\n",
             "format": "table",
-            "instant": true,
-            "refId": "C"
+            "instant": true
           }
         ],
         "title": "Nodes Monthly Cost",
@@ -1096,27 +727,6 @@
         },
         "fieldConfig": {
           "defaults": {
-            "custom": {
-              "align": "auto",
-              "cellOptions": {
-                "type": "auto"
-              },
-              "inspect": false
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
             "unit": "decgbytes"
           },
           "overrides": [
@@ -1138,21 +748,13 @@
           "h": 10,
           "w": 8,
           "x": 16,
-          "y": 15
+          "y": 16
         },
         "id": 16,
         "options": {
-          "cellHeight": "sm",
           "footer": {
-            "countRows": false,
-            "enablePagination": true,
-            "fields": "",
-            "reducer": [
-              "sum"
-            ],
-            "show": false
+            "enablePagination": true
           },
-          "showHeader": true,
           "sortBy": [
             {
               "desc": true,
@@ -1160,7 +762,7 @@
             }
           ]
         },
-        "pluginVersion": "11.5.0",
+        "pluginVersion": "v11.1.0",
         "targets": [
           {
             "datasource": {
@@ -1169,8 +771,7 @@
             },
             "expr": "sum(\n  kube_persistentvolume_capacity_bytes{\n    job=~\"$job\"\n  }\n  / 1024 / 1024 / 1024\n) by (persistentvolume)\n",
             "format": "table",
-            "instant": true,
-            "refId": "A"
+            "instant": true
           },
           {
             "datasource": {
@@ -1179,8 +780,7 @@
             },
             "expr": "sum(\n  kube_persistentvolume_capacity_bytes{\n      job=~\"$job\"\n    }\n  / 1024 / 1024 / 1024\n) by (persistentvolume)\n*\nsum(\n  pv_hourly_cost{\n    job=~\"$job\"\n  }\n  * 730\n) by (persistentvolume)\n",
             "format": "table",
-            "instant": true,
-            "refId": "B"
+            "instant": true
           }
         ],
         "title": "Persistent Volumes Monthly Cost",
@@ -1216,10 +816,9 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 25
+          "y": 17
         },
         "id": 17,
-        "panels": [],
         "title": "Namespace Summary",
         "type": "row"
       },
@@ -1230,20 +829,11 @@
         },
         "fieldConfig": {
           "defaults": {
-            "custom": {
-              "align": "auto",
-              "cellOptions": {
-                "type": "auto"
-              },
-              "inspect": false
-            },
-            "mappings": [],
             "thresholds": {
-              "mode": "absolute",
               "steps": [
                 {
                   "color": "green",
-                  "value": null
+                  "value": 0
                 },
                 {
                   "color": "yellow",
@@ -1312,21 +902,13 @@
           "h": 12,
           "w": 24,
           "x": 0,
-          "y": 26
+          "y": 18
         },
         "id": 18,
         "options": {
-          "cellHeight": "sm",
           "footer": {
-            "countRows": false,
-            "enablePagination": true,
-            "fields": "",
-            "reducer": [
-              "sum"
-            ],
-            "show": false
+            "enablePagination": true
           },
-          "showHeader": true,
           "sortBy": [
             {
               "desc": true,
@@ -1334,7 +916,7 @@
             }
           ]
         },
-        "pluginVersion": "11.5.0",
+        "pluginVersion": "v11.1.0",
         "targets": [
           {
             "datasource": {
@@ -1343,8 +925,7 @@
             },
             "expr": "topk(10,\n  sum(\n    sum(\n      container_memory_allocation_bytes{job=~\"$job\"}\n    )\n    by (namespace, instance)\n    * on(instance) group_left() (\n      node_ram_hourly_cost{job=~\"$job\"}\n      / 1024 / 1024 / 1024 * 730\n      + on(node,instance_type) group_left()\n      label_replace\n      (\n        kube_node_labels{job=~\"$job\"}, \"instance_type\", \"$1\", \"label_node_kubernetes_io_instance_type\", \"(.*)\"\n      ) * 0\n    )\n    +\n    sum(\n      container_cpu_allocation{job=~\"$job\"}\n    )\n    by (namespace,instance)\n    * on(instance) group_left() (\n      node_cpu_hourly_cost{job=~\"$job\"}\n      * 730\n      + on(node, instance_type) group_left()\n      label_replace\n      (\n        kube_node_labels{job=~\"$job\"}, \"instance_type\", \"$1\", \"label_node_kubernetes_io_instance_type\", \"(.*)\"\n      ) * 0\n    )\n  ) by (namespace)\n)\n",
             "format": "table",
-            "instant": true,
-            "refId": "A"
+            "instant": true
           },
           {
             "datasource": {
@@ -1353,8 +934,7 @@
             },
             "expr": "topk(10,\n  sum(\n    sum(\n      container_memory_allocation_bytes{job=~\"$job\"}\n    )\n    by (namespace, instance)\n    * on(instance) group_left() (\n      node_ram_hourly_cost{job=~\"$job\"}\n      / 1024 / 1024 / 1024 * 730\n      + on(node,instance_type) group_left()\n      label_replace\n      (\n        kube_node_labels{job=~\"$job\"}, \"instance_type\", \"$1\", \"label_node_kubernetes_io_instance_type\", \"(.*)\"\n      ) * 0\n    )\n    +\n    sum(\n      container_cpu_allocation{job=~\"$job\"}\n    )\n    by (namespace,instance)\n    * on(instance) group_left() (\n      node_cpu_hourly_cost{job=~\"$job\"}\n      * 730\n      + on(node, instance_type) group_left()\n      label_replace\n      (\n        kube_node_labels{job=~\"$job\"}, \"instance_type\", \"$1\", \"label_node_kubernetes_io_instance_type\", \"(.*)\"\n      ) * 0\n    )\n  ) by (namespace)\n)\n\n/\ntopk(10,\n  sum(\n    sum(\n      container_memory_allocation_bytes{job=~\"$job\"} offset 7d\n    )\n    by (namespace, instance)\n    * on(instance) group_left() (\n      node_ram_hourly_cost{job=~\"$job\"} offset 7d\n      / 1024 / 1024 / 1024 * 730\n      + on(node,instance_type) group_left()\n      label_replace\n      (\n        kube_node_labels{job=~\"$job\"} offset 7d, \"instance_type\", \"$1\", \"label_node_kubernetes_io_instance_type\", \"(.*)\"\n      ) * 0\n    )\n    +\n    sum(\n      container_cpu_allocation{job=~\"$job\"} offset 7d\n    )\n    by (namespace,instance)\n    * on(instance) group_left() (\n      node_cpu_hourly_cost{job=~\"$job\"} offset 7d\n      * 730\n      + on(node, instance_type) group_left()\n      label_replace\n      (\n        kube_node_labels{job=~\"$job\"} offset 7d, \"instance_type\", \"$1\", \"label_node_kubernetes_io_instance_type\", \"(.*)\"\n      ) * 0\n    )\n  ) by (namespace)\n)\n\n* 100\n- 100\n",
             "format": "table",
-            "instant": true,
-            "refId": "B"
+            "instant": true
           },
           {
             "datasource": {
@@ -1363,9 +943,7 @@
             },
             "expr": "topk(10,\n  sum(\n    sum(\n      container_memory_allocation_bytes{job=~\"$job\"}\n    )\n    by (namespace, instance)\n    * on(instance) group_left() (\n      node_ram_hourly_cost{job=~\"$job\"}\n      / 1024 / 1024 / 1024 * 730\n      + on(node,instance_type) group_left()\n      label_replace\n      (\n        kube_node_labels{job=~\"$job\"}, \"instance_type\", \"$1\", \"label_node_kubernetes_io_instance_type\", \"(.*)\"\n      ) * 0\n    )\n    +\n    sum(\n      container_cpu_allocation{job=~\"$job\"}\n    )\n    by (namespace,instance)\n    * on(instance) group_left() (\n      node_cpu_hourly_cost{job=~\"$job\"}\n      * 730\n      + on(node, instance_type) group_left()\n      label_replace\n      (\n        kube_node_labels{job=~\"$job\"}, \"instance_type\", \"$1\", \"label_node_kubernetes_io_instance_type\", \"(.*)\"\n      ) * 0\n    )\n  ) by (namespace)\n)\n\n/\ntopk(10,\n  sum(\n    sum(\n      container_memory_allocation_bytes{job=~\"$job\"} offset 30d\n    )\n    by (namespace, instance)\n    * on(instance) group_left() (\n      node_ram_hourly_cost{job=~\"$job\"} offset 30d\n      / 1024 / 1024 / 1024 * 730\n      + on(node,instance_type) group_left()\n      label_replace\n      (\n        kube_node_labels{job=~\"$job\"} offset 30d, \"instance_type\", \"$1\", \"label_node_kubernetes_io_instance_type\", \"(.*)\"\n      ) * 0\n    )\n    +\n    sum(\n      container_cpu_allocation{job=~\"$job\"} offset 30d\n    )\n    by (namespace,instance)\n    * on(instance) group_left() (\n      node_cpu_hourly_cost{job=~\"$job\"} offset 30d\n      * 730\n      + on(node, instance_type) group_left()\n      label_replace\n      (\n        kube_node_labels{job=~\"$job\"} offset 30d, \"instance_type\", \"$1\", \"label_node_kubernetes_io_instance_type\", \"(.*)\"\n      ) * 0\n    )\n  ) by (namespace)\n)\n\n* 100\n- 100\n",
             "format": "table",
-            "hide": false,
-            "instant": true,
-            "refId": "C"
+            "instant": true
           }
         ],
         "title": "Namespace Monthly Cost",
@@ -1398,9 +976,7 @@
         "type": "table"
       }
     ],
-    "preload": false,
-    "refresh": "",
-    "schemaVersion": 41,
+    "schemaVersion": 39,
     "tags": [
       "opencost",
       "opencost-mixin"
@@ -1408,46 +984,30 @@
     "templating": {
       "list": [
         {
-          "current": {
-            "text": "Mimir",
-            "value": "mimir"
-          },
           "label": "Data source",
           "name": "datasource",
-          "options": [],
           "query": "prometheus",
-          "refresh": 1,
           "type": "datasource"
         },
         {
-          "current": {
-            "text": "opencost",
-            "value": "opencost"
-          },
           "datasource": {
             "type": "prometheus",
             "uid": "${datasource}"
           },
           "label": "Job",
           "name": "job",
-          "options": [],
           "query": "label_values(opencost_build_info, job)",
           "refresh": 2,
           "sort": 1,
           "type": "query"
         },
         {
-          "current": {
-            "text": "audiobookshelf",
-            "value": "audiobookshelf"
-          },
           "datasource": {
             "type": "prometheus",
             "uid": "${datasource}"
           },
           "label": "Namespace",
           "name": "namespace",
-          "options": [],
           "query": "label_values(kube_namespace_labels, namespace)",
           "refresh": 2,
           "sort": 1,
@@ -1459,9 +1019,7 @@
       "from": "now-7d",
       "to": "now"
     },
-    "timepicker": {},
     "timezone": "utc",
-    "title": "OpenCost / Overview",
-    "weekStart": ""
+    "title": "OpenCost / Overview"
   }
 }
