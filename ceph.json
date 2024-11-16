@@ -292,6 +292,10 @@
     "templating": {
       "list": []
     },
+    "time": {
+      "from": "now-7d",
+      "to": "now"
+    },
     "timepicker": {},
     "timezone": "browser",
     "title": "Ceph",
