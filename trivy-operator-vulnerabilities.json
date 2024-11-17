@@ -1,5 +1,5 @@
 {
-  "apiVersion": "dashboard.grafana.app/v1beta1",
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
   "kind": "Dashboard",
   "metadata": {
     "name": "security_trivy_operator"
@@ -753,9 +753,7 @@
           "defaults": {
             "custom": {
               "align": "auto",
-              "cellOptions": {
-                "type": "auto"
-              },
+              "displayMode": "auto",
               "filterable": true,
               "inspect": false
             },
@@ -812,10 +810,8 @@
                   ]
                 },
                 {
-                  "id": "custom.cellOptions",
-                  "value": {
-                    "type": "color-text"
-                  }
+                  "id": "custom.displayMode",
+                  "value": "color-text"
                 }
               ]
             }
@@ -966,9 +962,7 @@
             },
             "custom": {
               "align": "auto",
-              "cellOptions": {
-                "type": "auto"
-              },
+              "displayMode": "auto",
               "filterable": true,
               "inspect": false
             },
@@ -1027,10 +1021,8 @@
                   ]
                 },
                 {
-                  "id": "custom.cellOptions",
-                  "value": {
-                    "type": "color-text"
-                  }
+                  "id": "custom.displayMode",
+                  "value": "color-text"
                 }
               ]
             },
@@ -2520,7 +2512,7 @@
       }
     ],
     "refresh": "30s",
-    "schemaVersion": 41,
+    "schemaVersion": 37,
     "style": "dark",
     "tags": [
       "Prometheus",
