@@ -301,7 +301,7 @@
         "targets": [
           {
             "editorMode": "code",
-            "expr": "time() - ha_last_updated_time_seconds{friendly_name=\"Clean Cat Litter\"}",
+            "expr": "time() - max_over_time(timestamp(changes(ha_state_change_total{friendly_name=\"Clean Cat Litter\"}[5m]) \u003e 0)[30d:1m])",
             "legendFormat": "__auto",
             "range": true,
             "refId": "A"
@@ -370,7 +370,7 @@
         "targets": [
           {
             "editorMode": "code",
-            "expr": "time() - ha_last_updated_time_seconds{friendly_name=\"Dust house\"}",
+            "expr": "time() - max_over_time(timestamp(changes(ha_state_change_total{friendly_name=\"Dust house\"}[5m]) \u003e 0)[30d:1m])",
             "legendFormat": "__auto",
             "range": true,
             "refId": "A"
@@ -439,7 +439,7 @@
         "targets": [
           {
             "editorMode": "code",
-            "expr": "time() - ha_last_updated_time_seconds{friendly_name=\"Clean Shower Door\"}",
+            "expr": "time() - max_over_time(timestamp(changes(ha_state_change_total{friendly_name=\"Clean Shower Door\"}[5m]) \u003e 0)[30d:1m])",
             "legendFormat": "__auto",
             "range": true,
             "refId": "A"
@@ -508,7 +508,7 @@
         "targets": [
           {
             "editorMode": "code",
-            "expr": "time() - ha_last_updated_time_seconds{friendly_name=\"Vacuum House\"}",
+            "expr": "time() - max_over_time(timestamp(changes(ha_state_change_total{friendly_name=\"Vacuum House\"}[5m]) \u003e 0)[30d:1m])",
             "legendFormat": "__auto",
             "range": true,
             "refId": "A"
@@ -646,7 +646,7 @@
         "targets": [
           {
             "editorMode": "code",
-            "expr": "time() - ha_last_updated_time_seconds{friendly_name=\"Mow the lawn\"}",
+            "expr": "time() - max_over_time(timestamp(changes(ha_state_change_total{friendly_name=\"Mow the lawn\"}[5m]) \u003e 0)[30d:1m])",
             "legendFormat": "__auto",
             "range": true,
             "refId": "A"
@@ -715,7 +715,7 @@
         "targets": [
           {
             "editorMode": "code",
-            "expr": "time() - ha_last_updated_time_seconds{friendly_name=\"Clean Guest Toilet\"}",
+            "expr": "time() - max_over_time(timestamp(changes(ha_state_change_total{friendly_name=\"Clean Guest Toilet\"}[5m]) \u003e 0)[30d:1m])",
             "legendFormat": "__auto",
             "range": true,
             "refId": "A"
@@ -784,7 +784,7 @@
         "targets": [
           {
             "editorMode": "code",
-            "expr": "time() - ha_last_updated_time_seconds{friendly_name=\"Mop floors\"}",
+            "expr": "time() - max_over_time(timestamp(changes(ha_state_change_total{friendly_name=\"Mop floors\"}[5m]) \u003e 0)[30d:1m])",
             "legendFormat": "__auto",
             "range": true,
             "refId": "A"
