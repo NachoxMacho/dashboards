@@ -88,7 +88,7 @@
         "targets": [
           {
             "editorMode": "code",
-            "expr": "time() - ha_last_updated_time_seconds{friendly_name=\"Clean Shower Floor\"}",
+            "expr": "time() - max_over_time(timestamp(changes(ha_state_change_total{friendly_name=\"Clean Shower Floor\"}[5m]) \u003e 0)[30d:1m])",
             "legendFormat": "__auto",
             "range": true,
             "refId": "A"
@@ -158,7 +158,7 @@
           {
             "disableTextWrap": false,
             "editorMode": "code",
-            "expr": "# timestamp(changes([$__rate_interval]) \u003e 0)\ntime() - max_over_time(timestamp(changes(ha_state_change_total{friendly_name=\"Do Laundry\"}[5m]) \u003e 0)[30d:1m])",
+            "expr": "time() - max_over_time(timestamp(changes(ha_state_change_total{friendly_name=\"Do Laundry\"}[5m]) \u003e 0)[30d:1m])",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
             "legendFormat": "__auto",
@@ -232,7 +232,7 @@
         "targets": [
           {
             "editorMode": "code",
-            "expr": "time() - ha_last_updated_time_seconds{friendly_name=\"Vacuum Basement\"}",
+            "expr": "time() - max_over_time(timestamp(changes(ha_state_change_total{friendly_name=\"Vacuum Basement\"}[5m]) \u003e 0)[30d:1m])",
             "legendFormat": "__auto",
             "range": true,
             "refId": "A"
@@ -577,7 +577,7 @@
         "targets": [
           {
             "editorMode": "code",
-            "expr": "time() - ha_last_updated_time_seconds{friendly_name=\"Clean Master Toilet\"}",
+            "expr": "time() - max_over_time(timestamp(changes(ha_state_change_total{friendly_name=\"Clean Master Toilet\"}[5m]) \u003e 0)[30d:1m])",
             "legendFormat": "__auto",
             "range": true,
             "refId": "A"
