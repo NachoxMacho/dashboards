@@ -117,6 +117,7 @@
             ]
           },
           "description": "",
+          "hide": 2,
           "includeAll": true,
           "label": "Task",
           "multi": true,
