@@ -100,7 +100,7 @@
         "type": "stat"
       }
     ],
-    "preload": false,
+    "preload": true,
     "refresh": "1m",
     "schemaVersion": 40,
     "tags": [],
