@@ -156,11 +156,15 @@
         "pluginVersion": "11.3.0",
         "targets": [
           {
+            "disableTextWrap": false,
             "editorMode": "code",
-            "expr": "time() - ha_last_updated_time_seconds{friendly_name=\"Do Laundry\"}",
+            "expr": "# timestamp(changes([$__rate_interval]) \u003e 0)\ntime() - max_over_time(timestamp(changes(ha_state_change_total{friendly_name=\"Do Laundry\"}[5m]) \u003e 0)[30d:1m])",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
             "legendFormat": "__auto",
             "range": true,
-            "refId": "A"
+            "refId": "A",
+            "useBackend": false
           }
         ],
         "title": "Time since last laundry load for Rob",
