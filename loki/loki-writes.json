@@ -554,9 +554,11 @@
             "datasource": {
               "uid": "$datasource"
             },
+            "editorMode": "code",
             "expr": "sum (rate(loki_loki-distributor_structured_metadata_bytes_received_total{cluster=~\"$cluster\",job=~\"($namespace)/loki-distributor\",}[$__rate_interval])) / sum(rate(loki_loki-distributor_bytes_received_total{cluster=~\"$cluster\",job=~\"($namespace)/loki-distributor\",}[$__rate_interval]))",
             "format": "time_series",
             "legendFormat": "bytes",
+            "range": true,
             "refId": "A"
           }
         ],
@@ -1945,18 +1947,43 @@
         },
         "fieldConfig": {
           "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
             "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
               "drawStyle": "line",
               "fillOpacity": 100,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
               "lineWidth": 0,
               "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
               "showPoints": "never",
               "spanNulls": false,
               "stacking": {
                 "group": "A",
                 "mode": "normal"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
               }
             },
+            "mappings": [],
             "min": 0,
             "thresholds": {
               "mode": "absolute",
@@ -2111,6 +2138,9 @@
         "id": 15,
         "options": {
           "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
             "showLegend": true
           },
           "tooltip": {
@@ -2118,6 +2148,7 @@
             "sort": "none"
           }
         },
+        "pluginVersion": "11.3.0",
         "targets": [
           {
             "datasource": {
@@ -2138,18 +2169,43 @@
         },
         "fieldConfig": {
           "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
             "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
               "drawStyle": "line",
               "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
               "lineWidth": 1,
               "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
               "showPoints": "never",
               "spanNulls": false,
               "stacking": {
                 "group": "A",
                 "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
               }
             },
+            "mappings": [],
             "thresholds": {
               "mode": "absolute",
               "steps": []
@@ -2167,6 +2223,9 @@
         "id": 16,
         "options": {
           "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
             "showLegend": true
           },
           "tooltip": {
@@ -2174,6 +2233,7 @@
             "sort": "none"
           }
         },
+        "pluginVersion": "11.3.0",
         "targets": [
           {
             "datasource": {
@@ -2212,18 +2272,43 @@
         },
         "fieldConfig": {
           "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
             "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
               "drawStyle": "line",
               "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
               "lineWidth": 1,
               "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
               "showPoints": "never",
               "spanNulls": false,
               "stacking": {
                 "group": "A",
                 "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
               }
             },
+            "mappings": [],
             "thresholds": {
               "mode": "absolute",
               "steps": []
@@ -2241,6 +2326,9 @@
         "id": 17,
         "options": {
           "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
             "showLegend": true
           },
           "tooltip": {
@@ -2248,6 +2336,7 @@
             "sort": "none"
           }
         },
+        "pluginVersion": "11.3.0",
         "targets": [
           {
             "datasource": {
