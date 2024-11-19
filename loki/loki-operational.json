@@ -1720,8 +1720,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     },
                     {
                       "color": "red",
@@ -1790,8 +1789,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     },
                     {
                       "color": "red",
@@ -1962,8 +1960,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     },
                     {
                       "color": "red",
@@ -2056,8 +2053,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     },
                     {
                       "color": "red",
@@ -2152,8 +2148,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     },
                     {
                       "color": "red",
@@ -2282,8 +2277,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     },
                     {
                       "color": "red",
@@ -2377,8 +2371,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     },
                     {
                       "color": "red",
@@ -2474,8 +2467,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     },
                     {
                       "color": "red",
@@ -2571,8 +2563,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     },
                     {
                       "color": "red",
@@ -2724,7 +2715,7 @@
               "uid": "$datasource"
             },
             "editorMode": "code",
-            "expr": "sum by(pod) (rate(container_cpu_usage_seconds_total{cluster=~\"$cluster\", namespace=~\"$namespace\", pod=~\"(loki-ingester.*|partition-ingester.*)\"}[$__rate_interval]))",
+            "expr": "sum by(pod) (rate(container_cpu_usage_seconds_total{namespace=~\"$namespace\", pod=~\"(loki-ingester.*|partition-ingester.*)\"}[$__rate_interval]))",
             "intervalFactor": 3,
             "legendFormat": "{{pod}}",
             "range": true,
@@ -2950,7 +2941,8 @@
             "datasource": {
               "uid": "$datasource"
             },
-            "expr": "go_memstats_heap_inuse_bytes{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"(ingester.*|partition-ingester.*)\"}",
+            "editorMode": "code",
+            "expr": "go_memstats_heap_inuse_bytes{namespace=\"$namespace\", pod=~\"(loki-ingester.*|partition-ingester.*)\"}",
             "instant": false,
             "intervalFactor": 3,
             "legendFormat": "{{pod}}",
@@ -3045,10 +3037,12 @@
             "datasource": {
               "uid": "$datasource"
             },
-            "expr": "sum(rate(loki_request_duration_seconds_count{cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/(ingester.*|partition-ingester.*)\", status_code!~\"5[0-9]{2}\"}[$__rate_interval])) by (route)\n/\nsum(rate(loki_request_duration_seconds_count{cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/(ingester.*|partition-ingester.*)\"}[$__rate_interval])) by (route) \u003e 0",
+            "editorMode": "code",
+            "expr": "sum(rate(loki_request_duration_seconds_count{cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/(loki-ingester.*|partition-ingester.*)\", status_code!~\"5[0-9]{2}\"}[$__rate_interval])) by (route)\n/\nsum(rate(loki_request_duration_seconds_count{cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/(loki-ingester.*|partition-ingester.*)\"}[$__rate_interval])) by (route) \u003e 0",
             "interval": "",
             "intervalFactor": 1,
             "legendFormat": "{{route}}",
+            "range": true,
             "refId": "A"
           }
         ],
