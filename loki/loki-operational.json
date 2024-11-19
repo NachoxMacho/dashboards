@@ -2204,7 +2204,7 @@
               "h": 18,
               "w": 12,
               "x": 12,
-              "y": 98
+              "y": 115
             },
             "id": 29,
             "options": {
@@ -2292,7 +2292,7 @@
               "h": 7,
               "w": 6,
               "x": 0,
-              "y": 101
+              "y": 118
             },
             "id": 33,
             "options": {
@@ -2387,7 +2387,7 @@
               "h": 7,
               "w": 6,
               "x": 6,
-              "y": 101
+              "y": 118
             },
             "id": 32,
             "options": {
@@ -2483,7 +2483,7 @@
               "h": 7,
               "w": 6,
               "x": 0,
-              "y": 108
+              "y": 125
             },
             "id": 34,
             "options": {
@@ -2579,7 +2579,7 @@
               "h": 7,
               "w": 6,
               "x": 6,
-              "y": 108
+              "y": 125
             },
             "id": 35,
             "options": {
@@ -2828,7 +2828,7 @@
               "h": 18,
               "w": 18,
               "x": 6,
-              "y": 61
+              "y": 78
             },
             "id": 39,
             "options": {
@@ -2920,7 +2920,7 @@
               "h": 7,
               "w": 6,
               "x": 0,
-              "y": 81
+              "y": 98
             },
             "id": 37,
             "options": {
@@ -3016,7 +3016,7 @@
               "h": 7,
               "w": 6,
               "x": 0,
-              "y": 88
+              "y": 105
             },
             "id": 67,
             "options": {
@@ -3260,7 +3260,7 @@
         "type": "timeseries"
       },
       {
-        "collapsed": true,
+        "collapsed": false,
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -3268,147 +3268,374 @@
           "y": 38
         },
         "id": 94,
-        "panels": [
-          {
-            "datasource": {
-              "uid": "$datasource"
-            },
-            "fieldConfig": {
-              "defaults": {},
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 8,
-              "w": 12,
-              "x": 0,
-              "y": 127
-            },
-            "id": 102,
-            "options": {
-              "dataLinks": []
-            },
-            "targets": [
-              {
-                "datasource": {
-                  "uid": "$datasource"
-                },
-                "expr": "sum(rate(loki_ingester_chunks_flushed_total{cluster=\"$cluster\",job=~\"($namespace)/(ingester.*|partition-ingester.*)\"}[$__rate_interval]))",
-                "interval": "",
-                "legendFormat": "Chunks",
-                "refId": "A"
-              },
-              {
-                "datasource": {
-                  "uid": "$datasource"
-                },
-                "expr": "sum(increase(loki_chunk_store_deduped_chunks_total{cluster=\"$cluster\", job=~\"($namespace)/(ingester.*|partition-ingester.*)\"}[$__rate_interval]))/sum(increase(loki_ingester_chunks_flushed_total{cluster=\"$cluster\", job=~\"($namespace)/(ingester.*|partition-ingester.*)\"}[$__rate_interval])) \u003c 1",
-                "interval": "",
-                "legendFormat": "De-Dupe Ratio",
-                "refId": "B"
-              }
-            ],
-            "title": "Chunks Flushed/Sec",
-            "type": "timeseries"
-          },
-          {
-            "datasource": {
-              "uid": "$datasource"
-            },
-            "fieldConfig": {
-              "defaults": {},
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 8,
-              "w": 12,
-              "x": 12,
-              "y": 127
-            },
-            "id": 100,
-            "options": {},
-            "targets": [
-              {
-                "datasource": {
-                  "uid": "$datasource"
-                },
-                "expr": "sum(rate(loki_ingester_chunk_size_bytes_bucket{cluster=\"$cluster\",job=~\"($namespace)/(ingester.*|partition-ingester.*)\"}[$__rate_interval])) by (le)",
-                "format": "heatmap",
-                "instant": false,
-                "interval": "",
-                "legendFormat": "{{ le }}",
-                "refId": "A"
-              }
-            ],
-            "title": "Chunk Size Bytes",
-            "type": "heatmap"
-          },
-          {
-            "datasource": {
-              "uid": "$datasource"
-            },
-            "fieldConfig": {
-              "defaults": {},
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 9,
-              "w": 12,
-              "x": 0,
-              "y": 135
-            },
-            "id": 96,
-            "options": {
-              "dataLinks": []
-            },
-            "targets": [
-              {
-                "datasource": {
-                  "uid": "$datasource"
-                },
-                "expr": "sum by(reason) (rate(loki_ingester_chunks_flushed_total{cluster=~\"$cluster\",job=~\"($namespace)/(ingester.*|partition-ingester.*)\", namespace=~\"$namespace\"}[$__rate_interval])) / ignoring(reason) group_left sum(rate(loki_ingester_chunks_flushed_total{cluster=~\"$cluster\",job=~\"($namespace)/(ingester.*|partition-ingester.*)\", namespace=~\"$namespace\"}[$__rate_interval]))",
-                "interval": "",
-                "legendFormat": "{{ reason }}",
-                "refId": "A"
-              }
-            ],
-            "title": "Chunk Flush Reason %",
-            "type": "timeseries"
-          },
-          {
-            "datasource": {
-              "uid": "$datasource"
-            },
-            "fieldConfig": {
-              "defaults": {},
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 9,
-              "w": 12,
-              "x": 12,
-              "y": 135
-            },
-            "id": 98,
-            "options": {},
-            "targets": [
-              {
-                "datasource": {
-                  "uid": "$datasource"
-                },
-                "expr": "sum by (le) (rate(loki_ingester_chunk_utilization_bucket{cluster=\"$cluster\", job=~\"($namespace)/(ingester.*|partition-ingester.*)\"}[$__rate_interval]))",
-                "format": "heatmap",
-                "instant": false,
-                "interval": "",
-                "legendFormat": "{{ le }}",
-                "refId": "A"
-              }
-            ],
-            "title": "Chunk Utilization",
-            "type": "heatmap"
-          }
-        ],
+        "panels": [],
         "title": "Chunks",
         "type": "row"
+      },
+      {
+        "datasource": {
+          "uid": "$datasource"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 39
+        },
+        "id": 102,
+        "options": {
+          "dataLinks": [],
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.3.0",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$datasource"
+            },
+            "editorMode": "code",
+            "expr": "sum(rate(loki_ingester_chunks_flushed_total{cluster=\"$cluster\",job=~\"($namespace)/(loki-ingester.*|partition-ingester.*)\"}[$__rate_interval]))",
+            "interval": "",
+            "legendFormat": "Chunks",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "uid": "$datasource"
+            },
+            "editorMode": "code",
+            "expr": "sum(increase(loki_chunk_store_deduped_chunks_total{cluster=\"$cluster\", job=~\"($namespace)/(loki-ingester.*|partition-ingester.*)\"}[$__rate_interval]))/sum(increase(loki_ingester_chunks_flushed_total{cluster=\"$cluster\", job=~\"($namespace)/(loki-ingester.*|partition-ingester.*)\"}[$__rate_interval])) \u003c 1",
+            "interval": "",
+            "legendFormat": "De-Dupe Ratio",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Chunks Flushed/Sec",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$datasource"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "scaleDistribution": {
+                "type": "linear"
+              }
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 39
+        },
+        "id": 100,
+        "options": {
+          "calculate": true,
+          "calculation": {},
+          "cellGap": 2,
+          "cellValues": {},
+          "color": {
+            "exponent": 0.5,
+            "fill": "dark-orange",
+            "mode": "scheme",
+            "reverse": false,
+            "scale": "exponential",
+            "scheme": "Oranges",
+            "steps": 128
+          },
+          "exemplars": {
+            "color": "rgba(255,0,255,0.7)"
+          },
+          "filterValues": {
+            "le": 1e-9
+          },
+          "legend": {
+            "show": false
+          },
+          "rowsFrame": {
+            "layout": "auto"
+          },
+          "showValue": "never",
+          "tooltip": {
+            "mode": "none",
+            "showColorScale": false,
+            "yHistogram": false
+          },
+          "yAxis": {
+            "axisPlacement": "left",
+            "reverse": false
+          }
+        },
+        "pluginVersion": "11.3.0",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$datasource"
+            },
+            "editorMode": "code",
+            "expr": "sum(rate(loki_ingester_chunk_size_bytes_bucket{cluster=\"$cluster\",job=~\"($namespace)/(loki-ingester.*|partition-ingester.*)\"}[$__rate_interval])) by (le)",
+            "format": "heatmap",
+            "instant": false,
+            "interval": "",
+            "legendFormat": "{{ le }}",
+            "refId": "A"
+          }
+        ],
+        "title": "Chunk Size Bytes",
+        "type": "heatmap"
+      },
+      {
+        "datasource": {
+          "uid": "$datasource"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 47
+        },
+        "id": 96,
+        "options": {
+          "dataLinks": [],
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.3.0",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$datasource"
+            },
+            "editorMode": "code",
+            "expr": "sum by(reason) (rate(loki_ingester_chunks_flushed_total{cluster=~\"$cluster\",job=~\"($namespace)/(loki-ingester.*|partition-ingester.*)\", namespace=~\"$namespace\"}[$__rate_interval])) / ignoring(reason) group_left sum(rate(loki_ingester_chunks_flushed_total{cluster=~\"$cluster\",job=~\"($namespace)/(loki-ingester.*|partition-ingester.*)\", namespace=~\"$namespace\"}[$__rate_interval]))",
+            "interval": "",
+            "legendFormat": "{{ reason }}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Chunk Flush Reason %",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$datasource"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "scaleDistribution": {
+                "type": "linear"
+              }
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 47
+        },
+        "id": 98,
+        "options": {
+          "calculate": true,
+          "calculation": {},
+          "cellGap": 2,
+          "cellValues": {},
+          "color": {
+            "exponent": 0.5,
+            "fill": "dark-orange",
+            "mode": "scheme",
+            "reverse": false,
+            "scale": "exponential",
+            "scheme": "Oranges",
+            "steps": 128
+          },
+          "exemplars": {
+            "color": "rgba(255,0,255,0.7)"
+          },
+          "filterValues": {
+            "le": 1e-9
+          },
+          "legend": {
+            "show": false
+          },
+          "rowsFrame": {
+            "layout": "auto"
+          },
+          "showValue": "never",
+          "tooltip": {
+            "mode": "none",
+            "showColorScale": false,
+            "yHistogram": false
+          },
+          "yAxis": {
+            "axisPlacement": "left",
+            "reverse": false
+          }
+        },
+        "pluginVersion": "11.3.0",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$datasource"
+            },
+            "editorMode": "code",
+            "expr": "sum by (le) (rate(loki_ingester_chunk_utilization_bucket{cluster=\"$cluster\", job=~\"($namespace)/(loki-ingester.*|partition-ingester.*)\"}[$__rate_interval]))",
+            "format": "heatmap",
+            "instant": false,
+            "interval": "",
+            "legendFormat": "{{ le }}",
+            "refId": "A"
+          }
+        ],
+        "title": "Chunk Utilization",
+        "type": "heatmap"
       },
       {
         "collapsed": true,
@@ -3416,7 +3643,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 39
+          "y": 56
         },
         "id": 64,
         "panels": [
@@ -3483,7 +3710,7 @@
               "h": 7,
               "w": 6,
               "x": 0,
-              "y": 40
+              "y": 57
             },
             "id": 68,
             "options": {
@@ -3577,7 +3804,7 @@
               "h": 3,
               "w": 18,
               "x": 6,
-              "y": 40
+              "y": 57
             },
             "id": 65,
             "options": {
@@ -3618,7 +3845,7 @@
               "h": 18,
               "w": 18,
               "x": 6,
-              "y": 43
+              "y": 60
             },
             "id": 66,
             "options": {
@@ -3708,7 +3935,7 @@
               "h": 7,
               "w": 6,
               "x": 0,
-              "y": 47
+              "y": 64
             },
             "id": 69,
             "options": {
@@ -3803,7 +4030,7 @@
               "h": 7,
               "w": 6,
               "x": 0,
-              "y": 54
+              "y": 71
             },
             "id": 70,
             "options": {
@@ -3845,7 +4072,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 40
+          "y": 57
         },
         "id": 52,
         "panels": [
@@ -3913,7 +4140,7 @@
               "h": 8,
               "w": 24,
               "x": 0,
-              "y": 62
+              "y": 79
             },
             "id": 53,
             "options": {
@@ -4025,7 +4252,7 @@
               "h": 8,
               "w": 24,
               "x": 0,
-              "y": 70
+              "y": 87
             },
             "id": 54,
             "options": {
@@ -4066,7 +4293,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 41
+          "y": 58
         },
         "id": 57,
         "panels": [
@@ -4084,7 +4311,7 @@
               "h": 8,
               "w": 24,
               "x": 0,
-              "y": 127
+              "y": 144
             },
             "id": 55,
             "options": {
@@ -4136,7 +4363,7 @@
               "h": 8,
               "w": 24,
               "x": 0,
-              "y": 135
+              "y": 152
             },
             "id": 58,
             "options": {
@@ -4166,7 +4393,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 42
+          "y": 59
         },
         "id": 43,
         "panels": [
@@ -4518,7 +4745,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 43
+          "y": 60
         },
         "id": 60,
         "panels": [
@@ -4536,7 +4763,7 @@
               "h": 8,
               "w": 24,
               "x": 0,
-              "y": 129
+              "y": 146
             },
             "id": 61,
             "options": {
@@ -4586,7 +4813,7 @@
               "h": 8,
               "w": 24,
               "x": 0,
-              "y": 137
+              "y": 154
             },
             "id": 62,
             "options": {
@@ -4616,7 +4843,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 44
+          "y": 61
         },
         "id": 76,
         "panels": [
@@ -4893,7 +5120,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 45
+          "y": 62
         },
         "id": 78,
         "panels": [
@@ -4991,7 +5218,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 46
+          "y": 63
         },
         "id": 117,
         "panels": [
@@ -5089,7 +5316,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 47
+          "y": 64
         },
         "id": 114,
         "panels": [
