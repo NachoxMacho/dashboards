@@ -818,8 +818,10 @@
             "datasource": {
               "uid": "$datasource"
             },
+            "editorMode": "code",
             "expr": "histogram_quantile(0.99, sum by (le) (cluster_job:loki_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/loki-distributor\", cluster=~\"$cluster\"})) * 1e3",
             "legendFormat": ".99",
+            "range": true,
             "refId": "A"
           },
           {
