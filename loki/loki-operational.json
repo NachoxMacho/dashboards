@@ -1678,7 +1678,58 @@
               "uid": "$datasource"
             },
             "fieldConfig": {
-              "defaults": {},
+              "defaults": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisBorderShow": false,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "barWidthFactor": 0.6,
+                  "drawStyle": "line",
+                  "fillOpacity": 0,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "insertNulls": false,
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "auto",
+                  "spanNulls": false,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
               "overrides": []
             },
             "gridPos": {
@@ -1689,8 +1740,19 @@
             },
             "id": 112,
             "options": {
-              "dataLinks": []
+              "dataLinks": [],
+              "legend": {
+                "calcs": [],
+                "displayMode": "list",
+                "placement": "bottom",
+                "showLegend": true
+              },
+              "tooltip": {
+                "mode": "single",
+                "sort": "none"
+              }
             },
+            "pluginVersion": "11.3.0",
             "targets": [
               {
                 "datasource": {
@@ -1728,7 +1790,8 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green"
+                      "color": "green",
+                      "value": null
                     },
                     {
                       "color": "red",
@@ -1813,7 +1876,7 @@
               },
               "showHeader": true
             },
-            "pluginVersion": "10.4.0",
+            "pluginVersion": "11.3.0",
             "targets": [
               {
                 "datasource": {
@@ -1843,7 +1906,7 @@
         "type": "row"
       },
       {
-        "collapsed": true,
+        "collapsed": false,
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -1851,275 +1914,715 @@
           "y": 27
         },
         "id": 23,
-        "panels": [
-          {
-            "datasource": {
-              "uid": "$datasource"
-            },
-            "fieldConfig": {
-              "defaults": {},
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 7,
-              "w": 6,
-              "x": 0,
-              "y": 28
-            },
-            "id": 26,
-            "options": {
-              "dataLinks": []
-            },
-            "targets": [
-              {
-                "datasource": {
-                  "uid": "$datasource"
-                },
-                "expr": "sum by(pod) (rate(container_cpu_usage_seconds_total{cluster=~\"$cluster\", namespace=~\"$namespace\", pod=~\"loki-distributor.*\"}[$__rate_interval]))",
-                "intervalFactor": 3,
-                "legendFormat": "{{pod}}",
-                "refId": "A"
-              }
-            ],
-            "title": "CPU Usage",
-            "type": "timeseries"
-          },
-          {
-            "datasource": {
-              "uid": "$datasource"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "unit": "binBps"
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 7,
-              "w": 6,
-              "x": 6,
-              "y": 28
-            },
-            "id": 27,
-            "options": {
-              "dataLinks": []
-            },
-            "targets": [
-              {
-                "datasource": {
-                  "uid": "$datasource"
-                },
-                "expr": "go_memstats_heap_inuse_bytes{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"loki-distributor.*\"}",
-                "instant": false,
-                "intervalFactor": 3,
-                "legendFormat": "{{pod}}",
-                "refId": "A"
-              }
-            ],
-            "title": "Memory Usage",
-            "type": "timeseries"
-          },
-          {
-            "datasource": {
-              "uid": "$loki_datasource"
-            },
-            "fieldConfig": {
-              "defaults": {},
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 4,
-              "w": 12,
-              "x": 12,
-              "y": 28
-            },
-            "id": 31,
-            "options": {
-              "dataLinks": []
-            },
-            "targets": [
-              {
-                "datasource": {
-                  "uid": "$loki_datasource"
-                },
-                "expr": "sum(rate({cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/loki-distributor\"} | logfmt | level=\"error\"[$__auto]))",
-                "refId": "A"
-              }
-            ],
-            "title": "Error Log Rate",
-            "type": "timeseries"
-          },
-          {
-            "datasource": {
-              "uid": "$loki_datasource"
-            },
-            "fieldConfig": {
-              "defaults": {},
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 18,
-              "w": 12,
-              "x": 12,
-              "y": 32
-            },
-            "id": 29,
-            "options": {
-              "showLabels": false,
-              "showTime": false,
-              "sortOrder": "Descending",
-              "wrapLogMessage": true
-            },
-            "targets": [
-              {
-                "datasource": {
-                  "uid": "$loki_datasource"
-                },
-                "expr": "{cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/loki-distributor\"} |= \"level=error\"",
-                "refId": "A"
-              }
-            ],
-            "title": "Logs",
-            "type": "logs"
-          },
-          {
-            "datasource": {
-              "uid": "$datasource"
-            },
-            "fieldConfig": {
-              "defaults": {},
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 7,
-              "w": 6,
-              "x": 0,
-              "y": 35
-            },
-            "id": 33,
-            "options": {
-              "dataLinks": []
-            },
-            "targets": [
-              {
-                "datasource": {
-                  "uid": "$datasource"
-                },
-                "expr": "sum(rate(loki_request_duration_seconds_count{cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/loki-distributor\", status_code!~\"5[0-9]{2}\"}[$__rate_interval])) by (route)\n/\nsum(rate(loki_request_duration_seconds_count{cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/loki-distributor\"}[$__rate_interval])) by (route) \u003e 0",
-                "interval": "",
-                "intervalFactor": 1,
-                "legendFormat": "{{route}}",
-                "refId": "A"
-              }
-            ],
-            "title": "Success Rate",
-            "type": "timeseries"
-          },
-          {
-            "datasource": {
-              "uid": "$datasource"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "unit": "binBps"
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 7,
-              "w": 6,
-              "x": 6,
-              "y": 35
-            },
-            "id": 32,
-            "options": {
-              "dataLinks": []
-            },
-            "targets": [
-              {
-                "datasource": {
-                  "uid": "$datasource"
-                },
-                "expr": "sum(rate(loki_loki-distributor_ingester_append_failures_total{cluster=\"$cluster\", namespace=\"$namespace\"}[$__rate_interval])) by (pod)",
-                "intervalFactor": 1,
-                "legendFormat": "{{pod}}",
-                "refId": "A"
-              }
-            ],
-            "title": "Append Failures By Ingester",
-            "type": "timeseries"
-          },
-          {
-            "datasource": {
-              "uid": "$datasource"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "unit": "binBps"
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 7,
-              "w": 6,
-              "x": 0,
-              "y": 42
-            },
-            "id": 34,
-            "options": {
-              "dataLinks": []
-            },
-            "targets": [
-              {
-                "datasource": {
-                  "uid": "$datasource"
-                },
-                "expr": "sum(rate(loki_loki-distributor_bytes_received_total{cluster=\"$cluster\", namespace=\"$namespace\"}[$__rate_interval])) by (pod)",
-                "intervalFactor": 1,
-                "legendFormat": "{{pod}}",
-                "refId": "A"
-              }
-            ],
-            "title": "Bytes Received/Second",
-            "type": "timeseries"
-          },
-          {
-            "datasource": {
-              "uid": "$datasource"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "unit": "ops"
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 7,
-              "w": 6,
-              "x": 6,
-              "y": 42
-            },
-            "id": 35,
-            "options": {
-              "dataLinks": []
-            },
-            "targets": [
-              {
-                "datasource": {
-                  "uid": "$datasource"
-                },
-                "expr": "sum(rate(loki_loki-distributor_lines_received_total{cluster=\"$cluster\", namespace=\"$namespace\"}[$__rate_interval])) by (pod)",
-                "intervalFactor": 1,
-                "legendFormat": "{{pod}}",
-                "refId": "A"
-              }
-            ],
-            "title": "Lines Received/Second",
-            "type": "timeseries"
-          }
-        ],
+        "panels": [],
         "title": "loki-Distributor",
         "type": "row"
+      },
+      {
+        "datasource": {
+          "uid": "$datasource"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 0,
+          "y": 28
+        },
+        "id": 26,
+        "options": {
+          "dataLinks": [],
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.3.0",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$datasource"
+            },
+            "expr": "sum by(pod) (rate(container_cpu_usage_seconds_total{cluster=~\"$cluster\", namespace=~\"$namespace\", pod=~\"loki-distributor.*\"}[$__rate_interval]))",
+            "intervalFactor": 3,
+            "legendFormat": "{{pod}}",
+            "refId": "A"
+          }
+        ],
+        "title": "CPU Usage",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$datasource"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "binBps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 6,
+          "y": 28
+        },
+        "id": 27,
+        "options": {
+          "dataLinks": [],
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.3.0",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$datasource"
+            },
+            "expr": "go_memstats_heap_inuse_bytes{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"loki-distributor.*\"}",
+            "instant": false,
+            "intervalFactor": 3,
+            "legendFormat": "{{pod}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Memory Usage",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$loki_datasource"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 12,
+          "x": 12,
+          "y": 28
+        },
+        "id": 31,
+        "options": {
+          "dataLinks": [],
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.3.0",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$loki_datasource"
+            },
+            "expr": "sum(rate({cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/loki-distributor\"} | logfmt | level=\"error\"[$__auto]))",
+            "refId": "A"
+          }
+        ],
+        "title": "Error Log Rate",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$loki_datasource"
+        },
+        "fieldConfig": {
+          "defaults": {},
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 18,
+          "w": 12,
+          "x": 12,
+          "y": 32
+        },
+        "id": 29,
+        "options": {
+          "dedupStrategy": "none",
+          "enableLogDetails": true,
+          "prettifyLogMessage": false,
+          "showCommonLabels": false,
+          "showLabels": false,
+          "showTime": false,
+          "sortOrder": "Descending",
+          "wrapLogMessage": true
+        },
+        "pluginVersion": "11.3.0",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$loki_datasource"
+            },
+            "expr": "{cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/loki-distributor\"} |= \"level=error\"",
+            "refId": "A"
+          }
+        ],
+        "title": "Logs",
+        "type": "logs"
+      },
+      {
+        "datasource": {
+          "uid": "$datasource"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 0,
+          "y": 35
+        },
+        "id": 33,
+        "options": {
+          "dataLinks": [],
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.3.0",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$datasource"
+            },
+            "expr": "sum(rate(loki_request_duration_seconds_count{cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/loki-distributor\", status_code!~\"5[0-9]{2}\"}[$__rate_interval])) by (route)\n/\nsum(rate(loki_request_duration_seconds_count{cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/loki-distributor\"}[$__rate_interval])) by (route) \u003e 0",
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "{{route}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Success Rate",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$datasource"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "binBps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 6,
+          "y": 35
+        },
+        "id": 32,
+        "options": {
+          "dataLinks": [],
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.3.0",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$datasource"
+            },
+            "editorMode": "code",
+            "expr": "sum(rate(loki_distributor_ingester_append_failures_total{cluster=\"$cluster\", namespace=\"$namespace\"}[$__rate_interval])) by (pod)",
+            "intervalFactor": 1,
+            "legendFormat": "{{pod}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Append Failures By Ingester",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$datasource"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "binBps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 0,
+          "y": 42
+        },
+        "id": 34,
+        "options": {
+          "dataLinks": [],
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.3.0",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$datasource"
+            },
+            "editorMode": "code",
+            "expr": "sum(rate(loki_distributor_bytes_received_total{cluster=\"$cluster\", namespace=\"$namespace\"}[$__rate_interval])) by (pod)",
+            "intervalFactor": 1,
+            "legendFormat": "{{pod}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Bytes Received/Second",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$datasource"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "ops"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 6,
+          "y": 42
+        },
+        "id": 35,
+        "options": {
+          "dataLinks": [],
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.3.0",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$datasource"
+            },
+            "editorMode": "code",
+            "expr": "sum(rate(loki_distributor_lines_received_total{cluster=\"$cluster\", namespace=\"$namespace\"}[$__rate_interval])) by (pod)",
+            "intervalFactor": 1,
+            "legendFormat": "{{pod}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Lines Received/Second",
+        "type": "timeseries"
       },
       {
         "collapsed": true,
@@ -2127,7 +2630,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 28
+          "y": 50
         },
         "id": 19,
         "panels": [
@@ -2143,7 +2646,7 @@
               "h": 7,
               "w": 6,
               "x": 0,
-              "y": 29
+              "y": 59
             },
             "id": 36,
             "options": {
@@ -2175,7 +2678,7 @@
               "h": 3,
               "w": 18,
               "x": 12,
-              "y": 29
+              "y": 59
             },
             "id": 38,
             "options": {
@@ -2205,7 +2708,7 @@
               "h": 18,
               "w": 18,
               "x": 12,
-              "y": 32
+              "y": 62
             },
             "id": 39,
             "options": {
@@ -2240,7 +2743,7 @@
               "h": 7,
               "w": 6,
               "x": 0,
-              "y": 36
+              "y": 66
             },
             "id": 37,
             "options": {
@@ -2273,7 +2776,7 @@
               "h": 7,
               "w": 6,
               "x": 0,
-              "y": 41
+              "y": 71
             },
             "id": 67,
             "options": {
@@ -2304,7 +2807,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 29
+          "y": 51
         },
         "id": 104,
         "panels": [
@@ -2320,7 +2823,7 @@
               "h": 8,
               "w": 12,
               "x": 0,
-              "y": 30
+              "y": 60
             },
             "id": 106,
             "options": {
@@ -2352,7 +2855,7 @@
               "h": 8,
               "w": 12,
               "x": 12,
-              "y": 30
+              "y": 60
             },
             "id": 108,
             "options": {
@@ -2382,7 +2885,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 30
+          "y": 52
         },
         "id": 94,
         "panels": [
@@ -2398,7 +2901,7 @@
               "h": 8,
               "w": 12,
               "x": 0,
-              "y": 31
+              "y": 61
             },
             "id": 102,
             "options": {
@@ -2439,7 +2942,7 @@
               "h": 8,
               "w": 12,
               "x": 12,
-              "y": 31
+              "y": 61
             },
             "id": 100,
             "options": {},
@@ -2471,7 +2974,7 @@
               "h": 9,
               "w": 12,
               "x": 0,
-              "y": 39
+              "y": 69
             },
             "id": 96,
             "options": {
@@ -2503,7 +3006,7 @@
               "h": 9,
               "w": 12,
               "x": 12,
-              "y": 39
+              "y": 69
             },
             "id": 98,
             "options": {},
@@ -2533,7 +3036,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 31
+          "y": 53
         },
         "id": 64,
         "panels": [
@@ -2549,7 +3052,7 @@
               "h": 7,
               "w": 6,
               "x": 0,
-              "y": 32
+              "y": 62
             },
             "id": 68,
             "options": {
@@ -2581,7 +3084,7 @@
               "h": 3,
               "w": 18,
               "x": 12,
-              "y": 32
+              "y": 62
             },
             "id": 65,
             "options": {
@@ -2611,7 +3114,7 @@
               "h": 18,
               "w": 18,
               "x": 12,
-              "y": 35
+              "y": 65
             },
             "id": 66,
             "options": {
@@ -2646,7 +3149,7 @@
               "h": 7,
               "w": 6,
               "x": 0,
-              "y": 39
+              "y": 69
             },
             "id": 69,
             "options": {
@@ -2679,7 +3182,7 @@
               "h": 7,
               "w": 6,
               "x": 0,
-              "y": 46
+              "y": 76
             },
             "id": 70,
             "options": {
@@ -2710,7 +3213,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 32
+          "y": 54
         },
         "id": 52,
         "panels": [
@@ -2728,7 +3231,7 @@
               "h": 8,
               "w": 24,
               "x": 0,
-              "y": 30
+              "y": 60
             },
             "id": 53,
             "options": {
@@ -2778,7 +3281,7 @@
               "h": 8,
               "w": 24,
               "x": 0,
-              "y": 38
+              "y": 68
             },
             "id": 54,
             "options": {
@@ -2808,7 +3311,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 33
+          "y": 55
         },
         "id": 57,
         "panels": [
@@ -2826,7 +3329,7 @@
               "h": 8,
               "w": 24,
               "x": 0,
-              "y": 31
+              "y": 61
             },
             "id": 55,
             "options": {
@@ -2878,7 +3381,7 @@
               "h": 8,
               "w": 24,
               "x": 0,
-              "y": 39
+              "y": 69
             },
             "id": 58,
             "options": {
@@ -2908,7 +3411,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 34
+          "y": 56
         },
         "id": 43,
         "panels": [
@@ -3260,7 +3763,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 35
+          "y": 57
         },
         "id": 60,
         "panels": [
@@ -3278,7 +3781,7 @@
               "h": 8,
               "w": 24,
               "x": 0,
-              "y": 33
+              "y": 63
             },
             "id": 61,
             "options": {
@@ -3328,7 +3831,7 @@
               "h": 8,
               "w": 24,
               "x": 0,
-              "y": 41
+              "y": 71
             },
             "id": 62,
             "options": {
@@ -3358,7 +3861,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 36
+          "y": 58
         },
         "id": 76,
         "panels": [
@@ -3635,7 +4138,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 37
+          "y": 59
         },
         "id": 78,
         "panels": [
@@ -3733,7 +4236,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 38
+          "y": 60
         },
         "id": 117,
         "panels": [
@@ -3831,7 +4334,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 39
+          "y": 61
         },
         "id": 114,
         "panels": [
