@@ -2810,7 +2810,9 @@
             "datasource": {
               "uid": "$loki_datasource"
             },
-            "expr": "sum(rate({cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/(ingester.*|partition-ingester.*)\"} | logfmt | level=\"error\"[$__auto]))",
+            "editorMode": "code",
+            "expr": "sum(rate({namespace=\"$namespace\", job=~\"($namespace)/(loki-ingester.*|partition-ingester.*)\"} | logfmt | level=\"error\"[$__auto]))",
+            "queryType": "range",
             "refId": "A"
           }
         ],
@@ -2848,7 +2850,9 @@
             "datasource": {
               "uid": "$loki_datasource"
             },
-            "expr": "{cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/(ingester.*|partition-ingester.*)\"} |= \"level=error\"",
+            "editorMode": "code",
+            "expr": "{cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/(loki-ingester.*|loki-partition-ingester.*)\"} |= \"level=error\"",
+            "queryType": "range",
             "refId": "A"
           }
         ],
