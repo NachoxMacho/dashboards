@@ -1906,7 +1906,7 @@
         "type": "row"
       },
       {
-        "collapsed": false,
+        "collapsed": true,
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -1914,8 +1914,728 @@
           "y": 27
         },
         "id": 23,
-        "panels": [],
+        "panels": [
+          {
+            "datasource": {
+              "uid": "$datasource"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisBorderShow": false,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "barWidthFactor": 0.6,
+                  "drawStyle": "line",
+                  "fillOpacity": 0,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "insertNulls": false,
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "auto",
+                  "spanNulls": false,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 7,
+              "w": 6,
+              "x": 0,
+              "y": 28
+            },
+            "id": 26,
+            "options": {
+              "dataLinks": [],
+              "legend": {
+                "calcs": [],
+                "displayMode": "list",
+                "placement": "bottom",
+                "showLegend": true
+              },
+              "tooltip": {
+                "mode": "single",
+                "sort": "none"
+              }
+            },
+            "pluginVersion": "11.3.0",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$datasource"
+                },
+                "expr": "sum by(pod) (rate(container_cpu_usage_seconds_total{cluster=~\"$cluster\", namespace=~\"$namespace\", pod=~\"loki-distributor.*\"}[$__rate_interval]))",
+                "intervalFactor": 3,
+                "legendFormat": "{{pod}}",
+                "refId": "A"
+              }
+            ],
+            "title": "CPU Usage",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "uid": "$datasource"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisBorderShow": false,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "barWidthFactor": 0.6,
+                  "drawStyle": "line",
+                  "fillOpacity": 0,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "insertNulls": false,
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "auto",
+                  "spanNulls": false,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "binBps"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 7,
+              "w": 6,
+              "x": 6,
+              "y": 28
+            },
+            "id": 27,
+            "options": {
+              "dataLinks": [],
+              "legend": {
+                "calcs": [],
+                "displayMode": "list",
+                "placement": "bottom",
+                "showLegend": true
+              },
+              "tooltip": {
+                "mode": "single",
+                "sort": "none"
+              }
+            },
+            "pluginVersion": "11.3.0",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$datasource"
+                },
+                "expr": "go_memstats_heap_inuse_bytes{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"loki-distributor.*\"}",
+                "instant": false,
+                "intervalFactor": 3,
+                "legendFormat": "{{pod}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Memory Usage",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "uid": "$loki_datasource"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisBorderShow": false,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "barWidthFactor": 0.6,
+                  "drawStyle": "line",
+                  "fillOpacity": 0,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "insertNulls": false,
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "auto",
+                  "spanNulls": false,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 4,
+              "w": 12,
+              "x": 12,
+              "y": 28
+            },
+            "id": 31,
+            "options": {
+              "dataLinks": [],
+              "legend": {
+                "calcs": [],
+                "displayMode": "list",
+                "placement": "bottom",
+                "showLegend": true
+              },
+              "tooltip": {
+                "mode": "single",
+                "sort": "none"
+              }
+            },
+            "pluginVersion": "11.3.0",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$loki_datasource"
+                },
+                "expr": "sum(rate({cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/loki-distributor\"} | logfmt | level=\"error\"[$__auto]))",
+                "refId": "A"
+              }
+            ],
+            "title": "Error Log Rate",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "uid": "$loki_datasource"
+            },
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 18,
+              "w": 12,
+              "x": 12,
+              "y": 53
+            },
+            "id": 29,
+            "options": {
+              "dedupStrategy": "none",
+              "enableLogDetails": true,
+              "prettifyLogMessage": false,
+              "showCommonLabels": false,
+              "showLabels": false,
+              "showTime": false,
+              "sortOrder": "Descending",
+              "wrapLogMessage": true
+            },
+            "pluginVersion": "11.3.0",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$loki_datasource"
+                },
+                "expr": "{cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/loki-distributor\"} |= \"level=error\"",
+                "refId": "A"
+              }
+            ],
+            "title": "Logs",
+            "type": "logs"
+          },
+          {
+            "datasource": {
+              "uid": "$datasource"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisBorderShow": false,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "barWidthFactor": 0.6,
+                  "drawStyle": "line",
+                  "fillOpacity": 0,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "insertNulls": false,
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "auto",
+                  "spanNulls": false,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 7,
+              "w": 6,
+              "x": 0,
+              "y": 56
+            },
+            "id": 33,
+            "options": {
+              "dataLinks": [],
+              "legend": {
+                "calcs": [],
+                "displayMode": "list",
+                "placement": "bottom",
+                "showLegend": true
+              },
+              "tooltip": {
+                "mode": "single",
+                "sort": "none"
+              }
+            },
+            "pluginVersion": "11.3.0",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$datasource"
+                },
+                "expr": "sum(rate(loki_request_duration_seconds_count{cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/loki-distributor\", status_code!~\"5[0-9]{2}\"}[$__rate_interval])) by (route)\n/\nsum(rate(loki_request_duration_seconds_count{cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/loki-distributor\"}[$__rate_interval])) by (route) \u003e 0",
+                "interval": "",
+                "intervalFactor": 1,
+                "legendFormat": "{{route}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Success Rate",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "uid": "$datasource"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisBorderShow": false,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "barWidthFactor": 0.6,
+                  "drawStyle": "line",
+                  "fillOpacity": 0,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "insertNulls": false,
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "auto",
+                  "spanNulls": false,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "binBps"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 7,
+              "w": 6,
+              "x": 6,
+              "y": 56
+            },
+            "id": 32,
+            "options": {
+              "dataLinks": [],
+              "legend": {
+                "calcs": [],
+                "displayMode": "list",
+                "placement": "bottom",
+                "showLegend": true
+              },
+              "tooltip": {
+                "mode": "single",
+                "sort": "none"
+              }
+            },
+            "pluginVersion": "11.3.0",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$datasource"
+                },
+                "editorMode": "code",
+                "expr": "sum(rate(loki_distributor_ingester_append_failures_total{cluster=\"$cluster\", namespace=\"$namespace\"}[$__rate_interval])) by (pod)",
+                "intervalFactor": 1,
+                "legendFormat": "{{pod}}",
+                "range": true,
+                "refId": "A"
+              }
+            ],
+            "title": "Append Failures By Ingester",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "uid": "$datasource"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisBorderShow": false,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "barWidthFactor": 0.6,
+                  "drawStyle": "line",
+                  "fillOpacity": 0,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "insertNulls": false,
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "auto",
+                  "spanNulls": false,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "binBps"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 7,
+              "w": 6,
+              "x": 0,
+              "y": 63
+            },
+            "id": 34,
+            "options": {
+              "dataLinks": [],
+              "legend": {
+                "calcs": [],
+                "displayMode": "list",
+                "placement": "bottom",
+                "showLegend": true
+              },
+              "tooltip": {
+                "mode": "single",
+                "sort": "none"
+              }
+            },
+            "pluginVersion": "11.3.0",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$datasource"
+                },
+                "editorMode": "code",
+                "expr": "sum(rate(loki_distributor_bytes_received_total{cluster=\"$cluster\", namespace=\"$namespace\"}[$__rate_interval])) by (pod)",
+                "intervalFactor": 1,
+                "legendFormat": "{{pod}}",
+                "range": true,
+                "refId": "A"
+              }
+            ],
+            "title": "Bytes Received/Second",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "uid": "$datasource"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisBorderShow": false,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "barWidthFactor": 0.6,
+                  "drawStyle": "line",
+                  "fillOpacity": 0,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "insertNulls": false,
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "auto",
+                  "spanNulls": false,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "ops"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 7,
+              "w": 6,
+              "x": 6,
+              "y": 63
+            },
+            "id": 35,
+            "options": {
+              "dataLinks": [],
+              "legend": {
+                "calcs": [],
+                "displayMode": "list",
+                "placement": "bottom",
+                "showLegend": true
+              },
+              "tooltip": {
+                "mode": "single",
+                "sort": "none"
+              }
+            },
+            "pluginVersion": "11.3.0",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$datasource"
+                },
+                "editorMode": "code",
+                "expr": "sum(rate(loki_distributor_lines_received_total{cluster=\"$cluster\", namespace=\"$namespace\"}[$__rate_interval])) by (pod)",
+                "intervalFactor": 1,
+                "legendFormat": "{{pod}}",
+                "range": true,
+                "refId": "A"
+              }
+            ],
+            "title": "Lines Received/Second",
+            "type": "timeseries"
+          }
+        ],
         "title": "loki-Distributor",
+        "type": "row"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 28
+        },
+        "id": 19,
+        "panels": [],
+        "title": "Ingester",
         "type": "row"
       },
       {
@@ -1981,9 +2701,9 @@
           "h": 7,
           "w": 6,
           "x": 0,
-          "y": 28
+          "y": 29
         },
-        "id": 26,
+        "id": 36,
         "options": {
           "dataLinks": [],
           "legend": {
@@ -2003,109 +2723,15 @@
             "datasource": {
               "uid": "$datasource"
             },
-            "expr": "sum by(pod) (rate(container_cpu_usage_seconds_total{cluster=~\"$cluster\", namespace=~\"$namespace\", pod=~\"loki-distributor.*\"}[$__rate_interval]))",
+            "editorMode": "code",
+            "expr": "sum by(pod) (rate(container_cpu_usage_seconds_total{cluster=~\"$cluster\", namespace=~\"$namespace\", pod=~\"(loki-ingester.*|partition-ingester.*)\"}[$__rate_interval]))",
             "intervalFactor": 3,
             "legendFormat": "{{pod}}",
+            "range": true,
             "refId": "A"
           }
         ],
         "title": "CPU Usage",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "uid": "$datasource"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "barWidthFactor": 0.6,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "binBps"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 7,
-          "w": 6,
-          "x": 6,
-          "y": 28
-        },
-        "id": 27,
-        "options": {
-          "dataLinks": [],
-          "legend": {
-            "calcs": [],
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": true
-          },
-          "tooltip": {
-            "mode": "single",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "11.3.0",
-        "targets": [
-          {
-            "datasource": {
-              "uid": "$datasource"
-            },
-            "expr": "go_memstats_heap_inuse_bytes{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"loki-distributor.*\"}",
-            "instant": false,
-            "intervalFactor": 3,
-            "legendFormat": "{{pod}}",
-            "refId": "A"
-          }
-        ],
-        "title": "Memory Usage",
         "type": "timeseries"
       },
       {
@@ -2168,12 +2794,12 @@
           "overrides": []
         },
         "gridPos": {
-          "h": 4,
-          "w": 12,
-          "x": 12,
-          "y": 28
+          "h": 3,
+          "w": 18,
+          "x": 6,
+          "y": 29
         },
-        "id": 31,
+        "id": 38,
         "options": {
           "dataLinks": [],
           "legend": {
@@ -2193,7 +2819,7 @@
             "datasource": {
               "uid": "$loki_datasource"
             },
-            "expr": "sum(rate({cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/loki-distributor\"} | logfmt | level=\"error\"[$__auto]))",
+            "expr": "sum(rate({cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/(ingester.*|partition-ingester.*)\"} | logfmt | level=\"error\"[$__auto]))",
             "refId": "A"
           }
         ],
@@ -2210,11 +2836,11 @@
         },
         "gridPos": {
           "h": 18,
-          "w": 12,
-          "x": 12,
+          "w": 18,
+          "x": 6,
           "y": 32
         },
-        "id": 29,
+        "id": 39,
         "options": {
           "dedupStrategy": "none",
           "enableLogDetails": true,
@@ -2231,7 +2857,7 @@
             "datasource": {
               "uid": "$loki_datasource"
             },
-            "expr": "{cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/loki-distributor\"} |= \"level=error\"",
+            "expr": "{cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/(ingester.*|partition-ingester.*)\"} |= \"level=error\"",
             "refId": "A"
           }
         ],
@@ -2293,7 +2919,8 @@
                   "value": 80
                 }
               ]
-            }
+            },
+            "unit": "binBps"
           },
           "overrides": []
         },
@@ -2301,9 +2928,9 @@
           "h": 7,
           "w": 6,
           "x": 0,
-          "y": 35
+          "y": 36
         },
-        "id": 33,
+        "id": 37,
         "options": {
           "dataLinks": [],
           "legend": {
@@ -2323,7 +2950,102 @@
             "datasource": {
               "uid": "$datasource"
             },
-            "expr": "sum(rate(loki_request_duration_seconds_count{cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/loki-distributor\", status_code!~\"5[0-9]{2}\"}[$__rate_interval])) by (route)\n/\nsum(rate(loki_request_duration_seconds_count{cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/loki-distributor\"}[$__rate_interval])) by (route) \u003e 0",
+            "expr": "go_memstats_heap_inuse_bytes{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"(ingester.*|partition-ingester.*)\"}",
+            "instant": false,
+            "intervalFactor": 3,
+            "legendFormat": "{{pod}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Memory Usage",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$datasource"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 0,
+          "y": 43
+        },
+        "id": 67,
+        "options": {
+          "dataLinks": [],
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.3.0",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$datasource"
+            },
+            "expr": "sum(rate(loki_request_duration_seconds_count{cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/(ingester.*|partition-ingester.*)\", status_code!~\"5[0-9]{2}\"}[$__rate_interval])) by (route)\n/\nsum(rate(loki_request_duration_seconds_count{cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/(ingester.*|partition-ingester.*)\"}[$__rate_interval])) by (route) \u003e 0",
             "interval": "",
             "intervalFactor": 1,
             "legendFormat": "{{route}}",
@@ -2334,480 +3056,12 @@
         "type": "timeseries"
       },
       {
-        "datasource": {
-          "uid": "$datasource"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "barWidthFactor": 0.6,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "binBps"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 7,
-          "w": 6,
-          "x": 6,
-          "y": 35
-        },
-        "id": 32,
-        "options": {
-          "dataLinks": [],
-          "legend": {
-            "calcs": [],
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": true
-          },
-          "tooltip": {
-            "mode": "single",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "11.3.0",
-        "targets": [
-          {
-            "datasource": {
-              "uid": "$datasource"
-            },
-            "editorMode": "code",
-            "expr": "sum(rate(loki_distributor_ingester_append_failures_total{cluster=\"$cluster\", namespace=\"$namespace\"}[$__rate_interval])) by (pod)",
-            "intervalFactor": 1,
-            "legendFormat": "{{pod}}",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "Append Failures By Ingester",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "uid": "$datasource"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "barWidthFactor": 0.6,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "binBps"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 7,
-          "w": 6,
-          "x": 0,
-          "y": 42
-        },
-        "id": 34,
-        "options": {
-          "dataLinks": [],
-          "legend": {
-            "calcs": [],
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": true
-          },
-          "tooltip": {
-            "mode": "single",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "11.3.0",
-        "targets": [
-          {
-            "datasource": {
-              "uid": "$datasource"
-            },
-            "editorMode": "code",
-            "expr": "sum(rate(loki_distributor_bytes_received_total{cluster=\"$cluster\", namespace=\"$namespace\"}[$__rate_interval])) by (pod)",
-            "intervalFactor": 1,
-            "legendFormat": "{{pod}}",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "Bytes Received/Second",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "uid": "$datasource"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "barWidthFactor": 0.6,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "ops"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 7,
-          "w": 6,
-          "x": 6,
-          "y": 42
-        },
-        "id": 35,
-        "options": {
-          "dataLinks": [],
-          "legend": {
-            "calcs": [],
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": true
-          },
-          "tooltip": {
-            "mode": "single",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "11.3.0",
-        "targets": [
-          {
-            "datasource": {
-              "uid": "$datasource"
-            },
-            "editorMode": "code",
-            "expr": "sum(rate(loki_distributor_lines_received_total{cluster=\"$cluster\", namespace=\"$namespace\"}[$__rate_interval])) by (pod)",
-            "intervalFactor": 1,
-            "legendFormat": "{{pod}}",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "Lines Received/Second",
-        "type": "timeseries"
-      },
-      {
         "collapsed": true,
         "gridPos": {
           "h": 1,
           "w": 24,
           "x": 0,
           "y": 50
-        },
-        "id": 19,
-        "panels": [
-          {
-            "datasource": {
-              "uid": "$datasource"
-            },
-            "fieldConfig": {
-              "defaults": {},
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 7,
-              "w": 6,
-              "x": 0,
-              "y": 59
-            },
-            "id": 36,
-            "options": {
-              "dataLinks": []
-            },
-            "targets": [
-              {
-                "datasource": {
-                  "uid": "$datasource"
-                },
-                "expr": "sum by(pod) (rate(container_cpu_usage_seconds_total{cluster=~\"$cluster\", namespace=~\"$namespace\", pod=~\"(ingester.*|partition-ingester.*)\"}[$__rate_interval]))",
-                "intervalFactor": 3,
-                "legendFormat": "{{pod}}",
-                "refId": "A"
-              }
-            ],
-            "title": "CPU Usage",
-            "type": "timeseries"
-          },
-          {
-            "datasource": {
-              "uid": "$loki_datasource"
-            },
-            "fieldConfig": {
-              "defaults": {},
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 3,
-              "w": 18,
-              "x": 12,
-              "y": 59
-            },
-            "id": 38,
-            "options": {
-              "dataLinks": []
-            },
-            "targets": [
-              {
-                "datasource": {
-                  "uid": "$loki_datasource"
-                },
-                "expr": "sum(rate({cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/(ingester.*|partition-ingester.*)\"} | logfmt | level=\"error\"[$__auto]))",
-                "refId": "A"
-              }
-            ],
-            "title": "Error Log Rate",
-            "type": "timeseries"
-          },
-          {
-            "datasource": {
-              "uid": "$loki_datasource"
-            },
-            "fieldConfig": {
-              "defaults": {},
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 18,
-              "w": 18,
-              "x": 12,
-              "y": 62
-            },
-            "id": 39,
-            "options": {
-              "showLabels": false,
-              "showTime": false,
-              "sortOrder": "Descending",
-              "wrapLogMessage": true
-            },
-            "targets": [
-              {
-                "datasource": {
-                  "uid": "$loki_datasource"
-                },
-                "expr": "{cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/(ingester.*|partition-ingester.*)\"} |= \"level=error\"",
-                "refId": "A"
-              }
-            ],
-            "title": "Logs",
-            "type": "logs"
-          },
-          {
-            "datasource": {
-              "uid": "$datasource"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "unit": "binBps"
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 7,
-              "w": 6,
-              "x": 0,
-              "y": 66
-            },
-            "id": 37,
-            "options": {
-              "dataLinks": []
-            },
-            "targets": [
-              {
-                "datasource": {
-                  "uid": "$datasource"
-                },
-                "expr": "go_memstats_heap_inuse_bytes{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"(ingester.*|partition-ingester.*)\"}",
-                "instant": false,
-                "intervalFactor": 3,
-                "legendFormat": "{{pod}}",
-                "refId": "A"
-              }
-            ],
-            "title": "Memory Usage",
-            "type": "timeseries"
-          },
-          {
-            "datasource": {
-              "uid": "$datasource"
-            },
-            "fieldConfig": {
-              "defaults": {},
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 7,
-              "w": 6,
-              "x": 0,
-              "y": 71
-            },
-            "id": 67,
-            "options": {
-              "dataLinks": []
-            },
-            "targets": [
-              {
-                "datasource": {
-                  "uid": "$datasource"
-                },
-                "expr": "sum(rate(loki_request_duration_seconds_count{cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/(ingester.*|partition-ingester.*)\", status_code!~\"5[0-9]{2}\"}[$__rate_interval])) by (route)\n/\nsum(rate(loki_request_duration_seconds_count{cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/(ingester.*|partition-ingester.*)\"}[$__rate_interval])) by (route) \u003e 0",
-                "interval": "",
-                "intervalFactor": 1,
-                "legendFormat": "{{route}}",
-                "refId": "A"
-              }
-            ],
-            "title": "Success Rate",
-            "type": "timeseries"
-          }
-        ],
-        "title": "Ingester",
-        "type": "row"
-      },
-      {
-        "collapsed": true,
-        "gridPos": {
-          "h": 1,
-          "w": 24,
-          "x": 0,
-          "y": 51
         },
         "id": 104,
         "panels": [
@@ -2823,7 +3077,7 @@
               "h": 8,
               "w": 12,
               "x": 0,
-              "y": 60
+              "y": 81
             },
             "id": 106,
             "options": {
@@ -2855,7 +3109,7 @@
               "h": 8,
               "w": 12,
               "x": 12,
-              "y": 60
+              "y": 81
             },
             "id": 108,
             "options": {
@@ -2885,7 +3139,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 52
+          "y": 51
         },
         "id": 94,
         "panels": [
@@ -2901,7 +3155,7 @@
               "h": 8,
               "w": 12,
               "x": 0,
-              "y": 61
+              "y": 82
             },
             "id": 102,
             "options": {
@@ -2942,7 +3196,7 @@
               "h": 8,
               "w": 12,
               "x": 12,
-              "y": 61
+              "y": 82
             },
             "id": 100,
             "options": {},
@@ -2974,7 +3228,7 @@
               "h": 9,
               "w": 12,
               "x": 0,
-              "y": 69
+              "y": 90
             },
             "id": 96,
             "options": {
@@ -3006,7 +3260,7 @@
               "h": 9,
               "w": 12,
               "x": 12,
-              "y": 69
+              "y": 90
             },
             "id": 98,
             "options": {},
@@ -3036,7 +3290,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 53
+          "y": 52
         },
         "id": 64,
         "panels": [
@@ -3052,7 +3306,7 @@
               "h": 7,
               "w": 6,
               "x": 0,
-              "y": 62
+              "y": 83
             },
             "id": 68,
             "options": {
@@ -3084,7 +3338,7 @@
               "h": 3,
               "w": 18,
               "x": 12,
-              "y": 62
+              "y": 83
             },
             "id": 65,
             "options": {
@@ -3114,7 +3368,7 @@
               "h": 18,
               "w": 18,
               "x": 12,
-              "y": 65
+              "y": 86
             },
             "id": 66,
             "options": {
@@ -3149,7 +3403,7 @@
               "h": 7,
               "w": 6,
               "x": 0,
-              "y": 69
+              "y": 90
             },
             "id": 69,
             "options": {
@@ -3182,7 +3436,7 @@
               "h": 7,
               "w": 6,
               "x": 0,
-              "y": 76
+              "y": 97
             },
             "id": 70,
             "options": {
@@ -3213,7 +3467,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 54
+          "y": 53
         },
         "id": 52,
         "panels": [
@@ -3231,7 +3485,7 @@
               "h": 8,
               "w": 24,
               "x": 0,
-              "y": 60
+              "y": 81
             },
             "id": 53,
             "options": {
@@ -3281,7 +3535,7 @@
               "h": 8,
               "w": 24,
               "x": 0,
-              "y": 68
+              "y": 89
             },
             "id": 54,
             "options": {
@@ -3311,7 +3565,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 55
+          "y": 54
         },
         "id": 57,
         "panels": [
@@ -3329,7 +3583,7 @@
               "h": 8,
               "w": 24,
               "x": 0,
-              "y": 61
+              "y": 82
             },
             "id": 55,
             "options": {
@@ -3381,7 +3635,7 @@
               "h": 8,
               "w": 24,
               "x": 0,
-              "y": 69
+              "y": 90
             },
             "id": 58,
             "options": {
@@ -3411,7 +3665,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 56
+          "y": 55
         },
         "id": 43,
         "panels": [
@@ -3763,7 +4017,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 57
+          "y": 56
         },
         "id": 60,
         "panels": [
@@ -3781,7 +4035,7 @@
               "h": 8,
               "w": 24,
               "x": 0,
-              "y": 63
+              "y": 84
             },
             "id": 61,
             "options": {
@@ -3831,7 +4085,7 @@
               "h": 8,
               "w": 24,
               "x": 0,
-              "y": 71
+              "y": 92
             },
             "id": 62,
             "options": {
@@ -3861,7 +4115,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 58
+          "y": 57
         },
         "id": 76,
         "panels": [
@@ -4138,7 +4392,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 59
+          "y": 58
         },
         "id": 78,
         "panels": [
@@ -4236,7 +4490,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 60
+          "y": 59
         },
         "id": 117,
         "panels": [
@@ -4334,7 +4588,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 61
+          "y": 60
         },
         "id": 114,
         "panels": [
