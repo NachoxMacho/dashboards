@@ -608,10 +608,12 @@
             "datasource": {
               "uid": "$datasource"
             },
+            "editorMode": "code",
             "expr": "increase(kube_pod_container_status_restarts_total{cluster=\"$cluster\", namespace=\"$namespace\"}[10m]) \u003e 0",
             "hide": false,
             "interval": "",
             "legendFormat": "{{container}}-{{pod}}",
+            "range": true,
             "refId": "B"
           }
         ],
