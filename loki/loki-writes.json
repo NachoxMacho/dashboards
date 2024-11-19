@@ -49,7 +49,7 @@
         },
         "id": 18,
         "panels": [],
-        "title": "Distributor",
+        "title": "loki-Distributor",
         "type": "row"
       },
       {
@@ -265,7 +265,7 @@
             "datasource": {
               "uid": "$datasource"
             },
-            "expr": "sum by (status) (\n  label_replace(label_replace(rate(loki_request_duration_seconds_count{cluster=~\"$cluster\",job=~\"($namespace)/distributor\", route=~\"api_prom_push|loki_api_v1_push|otlp_v1_logs|/httpgrpc.HTTP/Handle\"}[$__rate_interval]),\n  \"status\", \"${1}xx\", \"status_code\", \"([0-9])..\"),\n  \"status\", \"${1}\", \"status_code\", \"([a-zA-Z]+)\"))\n",
+            "expr": "sum by (status) (\n  label_replace(label_replace(rate(loki_request_duration_seconds_count{cluster=~\"$cluster\",job=~\"($namespace)/loki-distributor\", route=~\"api_prom_push|loki_api_v1_push|otlp_v1_logs|/httpgrpc.HTTP/Handle\"}[$__rate_interval]),\n  \"status\", \"${1}xx\", \"status_code\", \"([0-9])..\"),\n  \"status\", \"${1}\", \"status_code\", \"([a-zA-Z]+)\"))\n",
             "format": "time_series",
             "legendFormat": "{{status}}",
             "refId": "A"
@@ -350,7 +350,7 @@
             "datasource": {
               "uid": "$datasource"
             },
-            "expr": "histogram_quantile(0.99, sum by (le) (cluster_job_route:loki_request_duration_seconds_bucket:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/distributor\", route=~\"api_prom_push|loki_api_v1_push|otlp_v1_logs|/httpgrpc.HTTP/Handle\"})) * 1e3",
+            "expr": "histogram_quantile(0.99, sum by (le) (cluster_job_route:loki_request_duration_seconds_bucket:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/loki-distributor\", route=~\"api_prom_push|loki_api_v1_push|otlp_v1_logs|/httpgrpc.HTTP/Handle\"})) * 1e3",
             "format": "time_series",
             "legendFormat": "99th percentile",
             "refId": "A"
@@ -359,7 +359,7 @@
             "datasource": {
               "uid": "$datasource"
             },
-            "expr": "histogram_quantile(0.50, sum by (le) (cluster_job_route:loki_request_duration_seconds_bucket:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/distributor\", route=~\"api_prom_push|loki_api_v1_push|otlp_v1_logs|/httpgrpc.HTTP/Handle\"})) * 1e3",
+            "expr": "histogram_quantile(0.50, sum by (le) (cluster_job_route:loki_request_duration_seconds_bucket:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/loki-distributor\", route=~\"api_prom_push|loki_api_v1_push|otlp_v1_logs|/httpgrpc.HTTP/Handle\"})) * 1e3",
             "format": "time_series",
             "legendFormat": "50th percentile",
             "refId": "B"
@@ -368,7 +368,7 @@
             "datasource": {
               "uid": "$datasource"
             },
-            "expr": "1e3 * sum(cluster_job_route:loki_request_duration_seconds_sum:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/distributor\", route=~\"api_prom_push|loki_api_v1_push|otlp_v1_logs|/httpgrpc.HTTP/Handle\"}) / sum(cluster_job_route:loki_request_duration_seconds_count:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/distributor\", route=~\"api_prom_push|loki_api_v1_push|otlp_v1_logs|/httpgrpc.HTTP/Handle\"})",
+            "expr": "1e3 * sum(cluster_job_route:loki_request_duration_seconds_sum:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/loki-distributor\", route=~\"api_prom_push|loki_api_v1_push|otlp_v1_logs|/httpgrpc.HTTP/Handle\"}) / sum(cluster_job_route:loki_request_duration_seconds_count:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/loki-distributor\", route=~\"api_prom_push|loki_api_v1_push|otlp_v1_logs|/httpgrpc.HTTP/Handle\"})",
             "format": "time_series",
             "legendFormat": "Average",
             "refId": "C"
@@ -453,7 +453,7 @@
             "datasource": {
               "uid": "$datasource"
             },
-            "expr": "histogram_quantile(0.99, sum(rate(loki_request_duration_seconds_bucket{cluster=~\"$cluster\", job=~\"($namespace)/distributor\", route=~\"api_prom_push|loki_api_v1_push|otlp_v1_logs|/httpgrpc.HTTP/Handle\"}[$__rate_interval])) by (le,pod)) * 1e3",
+            "expr": "histogram_quantile(0.99, sum(rate(loki_request_duration_seconds_bucket{cluster=~\"$cluster\", job=~\"($namespace)/loki-distributor\", route=~\"api_prom_push|loki_api_v1_push|otlp_v1_logs|/httpgrpc.HTTP/Handle\"}[$__rate_interval])) by (le,pod)) * 1e3",
             "format": "time_series",
             "interval": "1m",
             "intervalFactor": 2,
@@ -475,7 +475,7 @@
         },
         "id": 19,
         "panels": [],
-        "title": "Distributor - Structured Metadata",
+        "title": "loki-Distributor - Structured Metadata",
         "type": "row"
       },
       {
@@ -554,7 +554,7 @@
             "datasource": {
               "uid": "$datasource"
             },
-            "expr": "sum (rate(loki_distributor_structured_metadata_bytes_received_total{cluster=~\"$cluster\",job=~\"($namespace)/distributor\",}[$__rate_interval])) / sum(rate(loki_distributor_bytes_received_total{cluster=~\"$cluster\",job=~\"($namespace)/distributor\",}[$__rate_interval]))",
+            "expr": "sum (rate(loki_loki-distributor_structured_metadata_bytes_received_total{cluster=~\"$cluster\",job=~\"($namespace)/loki-distributor\",}[$__rate_interval])) / sum(rate(loki_loki-distributor_bytes_received_total{cluster=~\"$cluster\",job=~\"($namespace)/loki-distributor\",}[$__rate_interval]))",
             "format": "time_series",
             "legendFormat": "bytes",
             "refId": "A"
@@ -639,7 +639,7 @@
             "datasource": {
               "uid": "$datasource"
             },
-            "expr": "sum by (tenant) (rate(loki_distributor_structured_metadata_bytes_received_total{cluster=~\"$cluster\",job=~\"($namespace)/distributor\",}[$__rate_interval])) / ignoring(tenant) group_left sum(rate(loki_distributor_structured_metadata_bytes_received_total{cluster=~\"$cluster\",job=~\"($namespace)/distributor\",}[$__rate_interval]))",
+            "expr": "sum by (tenant) (rate(loki_loki-distributor_structured_metadata_bytes_received_total{cluster=~\"$cluster\",job=~\"($namespace)/loki-distributor\",}[$__rate_interval])) / ignoring(tenant) group_left sum(rate(loki_loki-distributor_structured_metadata_bytes_received_total{cluster=~\"$cluster\",job=~\"($namespace)/loki-distributor\",}[$__rate_interval]))",
             "format": "time_series",
             "legendFormat": "{{tenant}}",
             "refId": "A"
@@ -2276,8 +2276,8 @@
       "list": [
         {
           "current": {
-            "text": "default",
-            "value": "default"
+            "text": "mimir",
+            "value": "ae2p4cnh657nka"
           },
           "label": "Data source",
           "name": "datasource",
@@ -2289,8 +2289,8 @@
         },
         {
           "current": {
-            "text": "prod",
-            "value": "prod"
+            "text": "loki",
+            "value": "loki"
           },
           "datasource": "$datasource",
           "includeAll": false,
@@ -2305,8 +2305,8 @@
         },
         {
           "current": {
-            "text": "prod",
-            "value": "prod"
+            "text": "loki",
+            "value": "loki"
           },
           "datasource": "$datasource",
           "includeAll": false,
