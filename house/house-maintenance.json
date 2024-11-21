@@ -90,7 +90,7 @@
         "targets": [
           {
             "editorMode": "code",
-            "expr": "time() - max_over_time(timestamp(changes(ha_state_change_total{friendly_name=\"$task\"}[2m]) \u003e 0)[30d:1m])",
+            "expr": "time() - max_over_time(timestamp(sum(changes(ha_state_change_total{friendly_name=\"$task\"}[2m])) \u003e 0)[30d:1m])",
             "legendFormat": "__auto",
             "range": true,
             "refId": "A"
