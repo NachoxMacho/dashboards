@@ -2238,7 +2238,9 @@
             "datasource": {
               "uid": "$loki_datasource"
             },
-            "expr": "sum(rate({cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/loki-distributor\"} | logfmt | level=\"error\"[$__auto]))",
+            "editorMode": "code",
+            "expr": "sum(rate({cluster=\"$cluster\", namespace=\"$namespace\", job=~\"($namespace)/distributor\"} | logfmt | level=\"error\"[$__auto]))",
+            "queryType": "range",
             "refId": "A"
           }
         ],
