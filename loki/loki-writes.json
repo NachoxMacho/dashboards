@@ -350,27 +350,33 @@
             "datasource": {
               "uid": "$datasource"
             },
-            "expr": "histogram_quantile(0.99, sum by (le) (cluster_job_route:loki_request_duration_seconds_bucket:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/loki-distributor\", route=~\"api_prom_push|loki_api_v1_push|otlp_v1_logs|/httpgrpc.HTTP/Handle\"})) * 1e3",
+            "editorMode": "code",
+            "expr": "histogram_quantile(0.99, sum by (le) (job_route:loki_request_duration_seconds_bucket:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/loki-distributor\", route=~\"api_prom_push|loki_api_v1_push|otlp_v1_logs|/httpgrpc.HTTP/Handle\"})) * 1e3",
             "format": "time_series",
             "legendFormat": "99th percentile",
+            "range": true,
             "refId": "A"
           },
           {
             "datasource": {
               "uid": "$datasource"
             },
-            "expr": "histogram_quantile(0.50, sum by (le) (cluster_job_route:loki_request_duration_seconds_bucket:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/loki-distributor\", route=~\"api_prom_push|loki_api_v1_push|otlp_v1_logs|/httpgrpc.HTTP/Handle\"})) * 1e3",
+            "editorMode": "code",
+            "expr": "histogram_quantile(0.50, sum by (le) (job_route:loki_request_duration_seconds_bucket:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/loki-distributor\", route=~\"api_prom_push|loki_api_v1_push|otlp_v1_logs|/httpgrpc.HTTP/Handle\"})) * 1e3",
             "format": "time_series",
             "legendFormat": "50th percentile",
+            "range": true,
             "refId": "B"
           },
           {
             "datasource": {
               "uid": "$datasource"
             },
-            "expr": "1e3 * sum(cluster_job_route:loki_request_duration_seconds_sum:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/loki-distributor\", route=~\"api_prom_push|loki_api_v1_push|otlp_v1_logs|/httpgrpc.HTTP/Handle\"}) / sum(cluster_job_route:loki_request_duration_seconds_count:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/loki-distributor\", route=~\"api_prom_push|loki_api_v1_push|otlp_v1_logs|/httpgrpc.HTTP/Handle\"})",
+            "editorMode": "code",
+            "expr": "1e3 * sum(job_route:loki_request_duration_seconds_sum:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/loki-distributor\", route=~\"api_prom_push|loki_api_v1_push|otlp_v1_logs|/httpgrpc.HTTP/Handle\"}) / sum(job_route:loki_request_duration_seconds_count:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/loki-distributor\", route=~\"api_prom_push|loki_api_v1_push|otlp_v1_logs|/httpgrpc.HTTP/Handle\"})",
             "format": "time_series",
             "legendFormat": "Average",
+            "range": true,
             "refId": "C"
           }
         ],
@@ -965,7 +971,7 @@
             "datasource": {
               "uid": "$datasource"
             },
-            "expr": "histogram_quantile(0.99, sum by (le) (cluster_job_route:loki_request_duration_seconds_bucket:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/(loki-ingester-zone.*|partition-ingester-.*)\", route=\"/logproto.Pusher/Push\"})) * 1e3",
+            "expr": "histogram_quantile(0.99, sum by (le) (job_route:loki_request_duration_seconds_bucket:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/(loki-ingester-zone.*|partition-ingester-.*)\", route=\"/logproto.Pusher/Push\"})) * 1e3",
             "format": "time_series",
             "legendFormat": "99th percentile",
             "refId": "A"
@@ -974,7 +980,7 @@
             "datasource": {
               "uid": "$datasource"
             },
-            "expr": "histogram_quantile(0.50, sum by (le) (cluster_job_route:loki_request_duration_seconds_bucket:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/(loki-ingester-zone.*|partition-ingester-.*)\", route=\"/logproto.Pusher/Push\"})) * 1e3",
+            "expr": "histogram_quantile(0.50, sum by (le) (job_route:loki_request_duration_seconds_bucket:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/(loki-ingester-zone.*|partition-ingester-.*)\", route=\"/logproto.Pusher/Push\"})) * 1e3",
             "format": "time_series",
             "legendFormat": "50th percentile",
             "refId": "B"
@@ -983,7 +989,7 @@
             "datasource": {
               "uid": "$datasource"
             },
-            "expr": "1e3 * sum(cluster_job_route:loki_request_duration_seconds_sum:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/(loki-ingester-zone.*|partition-ingester-.*)\", route=\"/logproto.Pusher/Push\"}) / sum(cluster_job_route:loki_request_duration_seconds_count:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/(loki-ingester-zone.*|partition-ingester-.*)\", route=\"/logproto.Pusher/Push\"})",
+            "expr": "1e3 * sum(job_route:loki_request_duration_seconds_sum:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/(loki-ingester-zone.*|partition-ingester-.*)\", route=\"/logproto.Pusher/Push\"}) / sum(job_route:loki_request_duration_seconds_count:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/(loki-ingester-zone.*|partition-ingester-.*)\", route=\"/logproto.Pusher/Push\"})",
             "format": "time_series",
             "legendFormat": "Average",
             "refId": "C"
@@ -1394,7 +1400,7 @@
               "uid": "$datasource"
             },
             "editorMode": "code",
-            "expr": "histogram_quantile(0.99, sum by (le) (cluster_job_route:loki_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/(loki-ingester.*|partition-ingester.*)\", route=\"/logproto.Pusher/Push\"})) * 1e3",
+            "expr": "histogram_quantile(0.99, sum by (le) (job_route:loki_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/(loki-ingester.*|partition-ingester.*)\", route=\"/logproto.Pusher/Push\"})) * 1e3",
             "format": "time_series",
             "legendFormat": "99th percentile",
             "range": true,
@@ -1405,7 +1411,7 @@
               "uid": "$datasource"
             },
             "editorMode": "code",
-            "expr": "histogram_quantile(0.50, sum by (le) (cluster_job_route:loki_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/(loki-ingester.*|partition-ingester.*)\", route=\"/logproto.Pusher/Push\"})) * 1e3",
+            "expr": "histogram_quantile(0.50, sum by (le) (job_route:loki_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/(loki-ingester.*|partition-ingester.*)\", route=\"/logproto.Pusher/Push\"})) * 1e3",
             "format": "time_series",
             "legendFormat": "50th percentile",
             "range": true,
@@ -1416,7 +1422,7 @@
               "uid": "$datasource"
             },
             "editorMode": "code",
-            "expr": "1e3 * sum(cluster_job_route:loki_request_duration_seconds_sum:sum_rate{job=~\"($namespace)/(loki-ingester.*|partition-ingester.*)\", route=\"/logproto.Pusher/Push\"}) / sum(cluster_job_route:loki_request_duration_seconds_count:sum_rate{job=~\"($namespace)/(loki-ingester.*|partition-ingester.*)\", route=\"/logproto.Pusher/Push\"})",
+            "expr": "1e3 * sum(job_route:loki_request_duration_seconds_sum:sum_rate{job=~\"($namespace)/(loki-ingester.*|partition-ingester.*)\", route=\"/logproto.Pusher/Push\"}) / sum(job_route:loki_request_duration_seconds_count:sum_rate{job=~\"($namespace)/(loki-ingester.*|partition-ingester.*)\", route=\"/logproto.Pusher/Push\"})",
             "format": "time_series",
             "legendFormat": "Average",
             "range": true,
