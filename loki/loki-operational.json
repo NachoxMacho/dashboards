@@ -1026,26 +1026,32 @@
             "datasource": {
               "uid": "$datasource"
             },
-            "expr": "histogram_quantile(0.99, sum by (le) (cluster_job_route:loki_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/(ingester.*|partition-ingester.*)\", route=\"/logproto.Pusher/Push\", cluster=~\"$cluster\"})) * 1e3",
+            "editorMode": "code",
+            "expr": "histogram_quantile(0.99, sum by (le) (cluster_job_route:loki_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/(loki-ingester.*|partition-ingester.*)\", route=\"/logproto.Pusher/Push\", cluster=~\"$cluster\"})) * 1e3",
             "legendFormat": ".99",
+            "range": true,
             "refId": "A"
           },
           {
             "datasource": {
               "uid": "$datasource"
             },
-            "expr": "histogram_quantile(0.9, sum by (le) (cluster_job_route:loki_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/(ingester.*|partition-ingester.*)\", route=\"/logproto.Pusher/Push\", cluster=~\"$cluster\"})) * 1e3",
+            "editorMode": "code",
+            "expr": "histogram_quantile(0.9, sum by (le) (cluster_job_route:loki_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/(loki-ingester.*|partition-ingester.*)\", route=\"/logproto.Pusher/Push\", cluster=~\"$cluster\"})) * 1e3",
             "hide": false,
             "legendFormat": ".9",
+            "range": true,
             "refId": "B"
           },
           {
             "datasource": {
               "uid": "$datasource"
             },
-            "expr": "histogram_quantile(0.5, sum by (le) (cluster_job_route:loki_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/(ingester.*|partition-ingester.*)\", route=\"/logproto.Pusher/Push\", cluster=~\"$cluster\"})) * 1e3",
+            "editorMode": "code",
+            "expr": "histogram_quantile(0.5, sum by (le) (cluster_job_route:loki_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/(loki-ingester.*|partition-ingester.*)\", route=\"/logproto.Pusher/Push\", cluster=~\"$cluster\"})) * 1e3",
             "hide": false,
             "legendFormat": ".5",
+            "range": true,
             "refId": "C"
           }
         ],
