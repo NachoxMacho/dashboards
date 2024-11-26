@@ -555,7 +555,7 @@
               "uid": "$datasource"
             },
             "editorMode": "code",
-            "expr": "sum (rate(loki_loki-distributor_structured_metadata_bytes_received_total{cluster=~\"$cluster\",job=~\"($namespace)/loki-distributor\",}[$__rate_interval])) / sum(rate(loki_loki-distributor_bytes_received_total{cluster=~\"$cluster\",job=~\"($namespace)/loki-distributor\",}[$__rate_interval]))",
+            "expr": "sum (rate(loki_distributor_structured_metadata_bytes_received_total{job=~\"($namespace)/loki-distributor\"}[$__rate_interval])) / sum(rate(loki_distributor_bytes_received_total{job=~\"($namespace)/loki-distributor\"}[$__rate_interval]))",
             "format": "time_series",
             "legendFormat": "bytes",
             "range": true,
@@ -641,9 +641,11 @@
             "datasource": {
               "uid": "$datasource"
             },
-            "expr": "sum by (tenant) (rate(loki_loki-distributor_structured_metadata_bytes_received_total{cluster=~\"$cluster\",job=~\"($namespace)/loki-distributor\",}[$__rate_interval])) / ignoring(tenant) group_left sum(rate(loki_loki-distributor_structured_metadata_bytes_received_total{cluster=~\"$cluster\",job=~\"($namespace)/loki-distributor\",}[$__rate_interval]))",
+            "editorMode": "code",
+            "expr": "sum by (tenant) (rate(loki_distributor_structured_metadata_bytes_received_total{cluster=~\"$cluster\",job=~\"($namespace)/loki-distributor\",}[$__rate_interval])) / ignoring(tenant) group_left sum(rate(loki_distributor_structured_metadata_bytes_received_total{cluster=~\"$cluster\",job=~\"($namespace)/loki-distributor\",}[$__rate_interval]))",
             "format": "time_series",
             "legendFormat": "{{tenant}}",
+            "range": true,
             "refId": "A"
           }
         ],
