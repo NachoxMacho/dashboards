@@ -107,7 +107,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "ae2p4cnh657nka"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "expr": "rate(ceph_pool_rd_bytes[$__rate_interval]) * on(pool_id) group_left(name) ceph_pool_metadata",
@@ -123,7 +123,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ae2p4cnh657nka"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -220,7 +220,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ae2p4cnh657nka"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -314,7 +314,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ae2p4cnh657nka"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -392,7 +392,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "ae2p4cnh657nka"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "expr": "rate(ceph_pool_wr_bytes[$__rate_interval]) * on(pool_id) group_left(name) ceph_pool_metadata",
@@ -408,7 +408,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ae2p4cnh657nka"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
