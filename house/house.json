@@ -29,7 +29,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ae2p4cnh657nka"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -116,7 +116,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "ae2p4cnh657nka"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "expr": "min(ha_climate_target_temperature_low_celsius) * 1.8 + 32",
@@ -129,7 +129,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "ae2p4cnh657nka"
+              "uid": "mimir"
             },
             "editorMode": "code",
             "expr": "max(ha_climate_current_temperature_celsius) * 1.8 + 32",
@@ -147,7 +147,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ae2p4cnh657nka"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -286,7 +286,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ae2p4cnh657nka"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -340,7 +340,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "ae2p4cnh657nka"
+              "uid": "mimir"
             },
             "disableTextWrap": false,
             "editorMode": "code",
@@ -369,7 +369,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ae2p4cnh657nka"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
@@ -443,6 +443,10 @@
     "tags": [],
     "templating": {
       "list": []
+    },
+    "time": {
+      "from": "now-6h",
+      "to": "now"
     },
     "timepicker": {},
     "timezone": "browser",
