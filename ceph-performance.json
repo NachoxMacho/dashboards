@@ -29,7 +29,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ae2p4cnh657nka"
+          "uid": "mimir"
         },
         "fieldConfig": {
           "defaults": {
