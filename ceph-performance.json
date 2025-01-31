@@ -29,7 +29,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "mimir"
+          "uid": "aeblussiy6cqoa"
         },
         "fieldConfig": {
           "defaults": {
@@ -107,7 +107,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "mimir"
+              "uid": "aeblussiy6cqoa"
             },
             "editorMode": "code",
             "expr": "rate(ceph_pool_rd_bytes[$__rate_interval]) * on(pool_id) group_left(name) ceph_pool_metadata",
@@ -314,7 +314,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "mimir"
+          "uid": "aeblussiy6cqoa"
         },
         "fieldConfig": {
           "defaults": {
@@ -392,7 +392,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "mimir"
+              "uid": "aeblussiy6cqoa"
             },
             "editorMode": "code",
             "expr": "rate(ceph_pool_wr_bytes[$__rate_interval]) * on(pool_id) group_left(name) ceph_pool_metadata",
