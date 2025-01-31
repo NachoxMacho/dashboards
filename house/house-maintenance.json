@@ -30,7 +30,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "mimir"
+          "uid": "aeblussiy6cqoa"
         },
         "fieldConfig": {
           "defaults": {
@@ -91,7 +91,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "mimir"
+              "uid": "aeblussiy6cqoa"
             },
             "editorMode": "code",
             "expr": "time() - max_over_time(timestamp(sum(changes(ha_state_change_total{friendly_name=\"$task\"}[2m])) \u003e 0)[30d:1m])",
