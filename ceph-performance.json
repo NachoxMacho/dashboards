@@ -123,7 +123,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "mimir"
+          "uid": "aeblussiy6cqoa"
         },
         "fieldConfig": {
           "defaults": {
@@ -202,6 +202,10 @@
         "pluginVersion": "11.3.0",
         "targets": [
           {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "aeblussiy6cqoa"
+            },
             "disableTextWrap": false,
             "editorMode": "code",
             "expr": "sum by(id) (rate(pve_disk_read_bytes[5m]))\n* on(id) group_left(name) max(pve_guest_info) by(id,name)",
@@ -220,7 +224,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "mimir"
+          "uid": "aeblussiy6cqoa"
         },
         "fieldConfig": {
           "defaults": {
@@ -300,6 +304,10 @@
         "pluginVersion": "11.3.0",
         "targets": [
           {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "aeblussiy6cqoa"
+            },
             "editorMode": "code",
             "expr": "sum(rate(pve_network_receive_bytes[$__rate_interval])) by (id)\n* on(id) group_left(name) max(pve_guest_info) by(id,name)",
             "legendFormat": "{{name}} - {{id}}",
@@ -408,7 +416,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "mimir"
+          "uid": "aeblussiy6cqoa"
         },
         "fieldConfig": {
           "defaults": {
@@ -484,6 +492,10 @@
         "pluginVersion": "11.3.0",
         "targets": [
           {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "aeblussiy6cqoa"
+            },
             "disableTextWrap": false,
             "editorMode": "code",
             "expr": "sum by(id) (rate(pve_disk_write_bytes[5m]))\n* on(id) group_left(name) max(pve_guest_info) by(id,name)",
