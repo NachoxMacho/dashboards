@@ -29,7 +29,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "mimir"
+          "uid": "aeblussiy6cqoa"
         },
         "fieldConfig": {
           "defaults": {
@@ -109,6 +109,10 @@
         "pluginVersion": "11.3.0",
         "targets": [
           {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "aeblussiy6cqoa"
+            },
             "editorMode": "code",
             "expr": "ceph_pool_bytes_used * on(pool_id) group_left(name) ceph_pool_metadata",
             "legendFormat": "{{name}}",
@@ -122,7 +126,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "mimir"
+          "uid": "aeblussiy6cqoa"
         },
         "fieldConfig": {
           "defaults": {
@@ -204,6 +208,10 @@
         "pluginVersion": "11.3.0",
         "targets": [
           {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "aeblussiy6cqoa"
+            },
             "disableTextWrap": false,
             "editorMode": "code",
             "expr": "delta(ceph_pool_bytes_used{pool_id=\"14\"}[$__interval]) / 3",
@@ -221,7 +229,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "mimir"
+          "uid": "aeblussiy6cqoa"
         },
         "fieldConfig": {
           "defaults": {
@@ -271,7 +279,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "mimir"
+              "uid": "aeblussiy6cqoa"
             },
             "editorMode": "code",
             "exemplar": false,
