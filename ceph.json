@@ -28,8 +28,8 @@
     "panels": [
       {
         "datasource": {
-          "type": "prometheus",
-          "uid": "aeblussiy6cqoa"
+          "type": "datasource",
+          "uid": "-- Mixed --"
         },
         "fieldConfig": {
           "defaults": {
@@ -118,6 +118,19 @@
             "legendFormat": "{{name}}",
             "range": true,
             "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "mimir"
+            },
+            "editorMode": "code",
+            "expr": "ceph_pool_bytes_used * on(pool_id) group_left(name) ceph_pool_metadata",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "B"
           }
         ],
         "title": "Disk Space Usage",
@@ -125,8 +138,8 @@
       },
       {
         "datasource": {
-          "type": "prometheus",
-          "uid": "aeblussiy6cqoa"
+          "type": "datasource",
+          "uid": "-- Mixed --"
         },
         "fieldConfig": {
           "defaults": {
@@ -221,6 +234,19 @@
             "range": true,
             "refId": "A",
             "useBackend": false
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "mimir"
+            },
+            "editorMode": "code",
+            "expr": "delta(ceph_pool_bytes_used{pool_id=\"14\"}[$__interval]) / 3",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "B"
           }
         ],
         "title": "Mimir \u0026 Loki Growth rate",
