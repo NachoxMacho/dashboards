@@ -21,7 +21,6 @@
         }
       ]
     },
-    "description": "",
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
@@ -46,7 +45,7 @@
               "barAlignment": 0,
               "barWidthFactor": 0.6,
               "drawStyle": "line",
-              "fillOpacity": 16,
+              "fillOpacity": 0,
               "gradientMode": "none",
               "hideFrom": {
                 "legend": false,
@@ -93,7 +92,32 @@
               ]
             }
           },
-          "overrides": []
+          "overrides": [
+            {
+              "__systemRef": "hideSeriesFrom",
+              "matcher": {
+                "id": "byNames",
+                "options": {
+                  "mode": "exclude",
+                  "names": [
+                    "metallb-speaker-pm65k"
+                  ],
+                  "prefix": "All except:",
+                  "readOnly": true
+                }
+              },
+              "properties": [
+                {
+                  "id": "custom.hideFrom",
+                  "value": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": true
+                  }
+                }
+              ]
+            }
+          ]
         },
         "gridPos": {
           "h": 13,
@@ -123,7 +147,7 @@
               "uid": "mimir"
             },
             "editorMode": "code",
-            "expr": "round(sum(delta(kube_pod_container_status_restarts_total{}[8h])) by (pod)\u003e 0)",
+            "expr": "sum(round(delta(kube_pod_container_status_restarts_total{cluster=\"production\"}[8h]))) by (pod) \u003e 0",
             "instant": true,
             "legendFormat": "__auto",
             "range": true,
