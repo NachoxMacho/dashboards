@@ -1,5 +1,5 @@
 {
-  "apiVersion": "dashboard.grafana.app/v1beta1",
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
   "kind": "Dashboard",
   "metadata": {
     "name": "becvlayby3lz4f"
@@ -21,6 +21,7 @@
         }
       ]
     },
+    "description": "",
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
@@ -44,97 +45,8 @@
               "axisPlacement": "auto",
               "barAlignment": 0,
               "barWidthFactor": 0.6,
-              "drawStyle": "bars",
-              "fillOpacity": 68,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineInterpolation": "smooth",
-              "lineWidth": 3,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "normal"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green"
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 24,
-          "x": 0,
-          "y": 0
-        },
-        "id": 2,
-        "options": {
-          "legend": {
-            "calcs": [],
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": true
-          },
-          "tooltip": {
-            "hideZeros": true,
-            "mode": "multi",
-            "sort": "desc"
-          }
-        },
-        "pluginVersion": "12.0.2",
-        "targets": [
-          {
-            "editorMode": "code",
-            "expr": "sum(delta(harbor_artifact_pulled{}[10m])) by(project_name)",
-            "legendFormat": "__auto",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "Harbor Downloads by Registry",
-        "transparent": true,
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "mimir"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "barWidthFactor": 0.6,
               "drawStyle": "line",
-              "fillOpacity": 0,
+              "fillOpacity": 16,
               "gradientMode": "none",
               "hideFrom": {
                 "legend": false,
@@ -167,7 +79,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "orange",
@@ -186,7 +99,7 @@
           "h": 13,
           "w": 14,
           "x": 0,
-          "y": 8
+          "y": 0
         },
         "id": 1,
         "options": {
@@ -202,7 +115,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.0.2",
+        "pluginVersion": "11.5.0",
         "targets": [
           {
             "datasource": {
@@ -210,7 +123,7 @@
               "uid": "mimir"
             },
             "editorMode": "code",
-            "expr": "sum(round(increase(kube_pod_container_status_restarts_total{cluster=\"production\"}[8h]))) by (pod) \u003e 0",
+            "expr": "round(sum(delta(kube_pod_container_status_restarts_total{}[8h])) by (pod)\u003e 0)",
             "instant": true,
             "legendFormat": "__auto",
             "range": true,
@@ -220,86 +133,11 @@
         "title": "Container Restarts",
         "transparent": true,
         "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "mimir"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "continuous-GrYlRd"
-            },
-            "decimals": 2,
-            "mappings": [],
-            "max": 1,
-            "min": 0,
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green"
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "percentunit"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 13,
-          "w": 9,
-          "x": 15,
-          "y": 8
-        },
-        "id": 3,
-        "options": {
-          "displayMode": "lcd",
-          "legend": {
-            "calcs": [],
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": false
-          },
-          "maxVizHeight": 300,
-          "minVizHeight": 16,
-          "minVizWidth": 8,
-          "namePlacement": "auto",
-          "orientation": "horizontal",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showUnfilled": true,
-          "sizing": "auto",
-          "valueMode": "color"
-        },
-        "pluginVersion": "12.0.2",
-        "targets": [
-          {
-            "editorMode": "code",
-            "expr": "avg((etcd_mvcc_db_total_size_in_bytes{cluster=\"production\",job=\"kube-etcd\"} - etcd_mvcc_db_total_size_in_use_in_bytes{cluster=\"production\",job=\"kube-etcd\"}) / etcd_mvcc_db_total_size_in_bytes{cluster=\"production\",job=\"kube-etcd\"}) by (instance) * on(instance) group_left(node) label_replace(max(kube_node_info) by (internal_ip,node), \"instance\", \"$1:2379\",\"internal_ip\",\"(.*)\")",
-            "legendFormat": "{{node}}",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "etcd Fragmentation",
-        "transparent": true,
-        "type": "bargauge"
       }
     ],
     "preload": false,
-    "refresh": "30s",
-    "schemaVersion": 41,
+    "refresh": "",
+    "schemaVersion": 40,
     "tags": [],
     "templating": {
       "list": []
@@ -310,6 +148,7 @@
     },
     "timepicker": {},
     "timezone": "browser",
-    "title": "Homelab Maintenance"
+    "title": "Homelab Maintenance",
+    "weekStart": ""
   }
 }
