@@ -36,6 +36,39 @@
             "color": {
               "mode": "palette-classic"
             },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "bars",
+              "fillOpacity": 68,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "smooth",
+              "lineWidth": 3,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "normal"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
             "mappings": [],
             "thresholds": {
               "mode": "absolute",
@@ -43,10 +76,6 @@
                 {
                   "color": "green",
                   "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
                 }
               ]
             }
@@ -61,21 +90,17 @@
         },
         "id": 2,
         "options": {
-          "colorMode": "value",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "percentChangeColorMode": "standard",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
           },
-          "showPercentChange": false,
-          "textMode": "auto",
-          "wideLayout": true
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
         },
         "pluginVersion": "11.5.0",
         "targets": [
@@ -87,8 +112,9 @@
             "refId": "A"
           }
         ],
-        "title": "Panel Title",
-        "type": "stat"
+        "title": "Harbor Downloads by Registry",
+        "transparent": true,
+        "type": "timeseries"
       },
       {
         "datasource": {
