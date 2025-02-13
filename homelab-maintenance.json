@@ -106,7 +106,7 @@
         "targets": [
           {
             "editorMode": "code",
-            "expr": "sum(increase(harbor_artifact_pulled{}[$__range])) by(project_name)",
+            "expr": "sum(delta(harbor_artifact_pulled{}[10m])) by(project_name)",
             "legendFormat": "__auto",
             "range": true,
             "refId": "A"
