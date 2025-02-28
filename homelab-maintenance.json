@@ -212,7 +212,7 @@
               "uid": "mimir"
             },
             "editorMode": "code",
-            "expr": "sum(round(delta(kube_pod_container_status_restarts_total{cluster=\"production\"}[8h]))) by (pod) \u003e 0",
+            "expr": "sum(round(increase(kube_pod_container_status_restarts_total{cluster=\"production\"}[8h]))) by (pod) \u003e 0",
             "instant": true,
             "legendFormat": "__auto",
             "range": true,
