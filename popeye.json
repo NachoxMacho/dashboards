@@ -1,5 +1,5 @@
 {
-  "apiVersion": "dashboard.grafana.app/v1beta1",
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
   "kind": "Dashboard",
   "metadata": {
     "name": "ca2c5173-a010-4a3d-aab2-cb2871e6f3dd"
@@ -972,7 +972,7 @@
       }
     ],
     "refresh": "",
-    "schemaVersion": 41,
+    "schemaVersion": 38,
     "tags": [
       "popeye"
     ],
