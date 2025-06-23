@@ -74,8 +74,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 }
               ]
             }
@@ -102,7 +101,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "11.5.0",
+        "pluginVersion": "12.0.2",
         "targets": [
           {
             "editorMode": "code",
@@ -168,8 +167,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "orange",
@@ -204,7 +202,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "11.5.0",
+        "pluginVersion": "12.0.2",
         "targets": [
           {
             "datasource": {
@@ -222,11 +220,83 @@
         "title": "Container Restarts",
         "transparent": true,
         "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "mimir"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-GrYlRd"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percentunit"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 13,
+          "w": 9,
+          "x": 15,
+          "y": 8
+        },
+        "id": 3,
+        "options": {
+          "displayMode": "lcd",
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
+          },
+          "maxVizHeight": 300,
+          "minVizHeight": 16,
+          "minVizWidth": 8,
+          "namePlacement": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showUnfilled": true,
+          "sizing": "auto",
+          "valueMode": "color"
+        },
+        "pluginVersion": "12.0.2",
+        "targets": [
+          {
+            "editorMode": "code",
+            "expr": "avg((etcd_mvcc_db_total_size_in_bytes{cluster=\"production\",job=\"kube-etcd\"} - etcd_mvcc_db_total_size_in_use_in_bytes{cluster=\"production\",job=\"kube-etcd\"}) / etcd_mvcc_db_total_size_in_bytes{cluster=\"production\",job=\"kube-etcd\"}) by (instance) * on(instance) group_left(node) label_replace(kube_node_info, \"instance\", \"$1:2379\",\"internal_ip\",\"(.*)\")",
+            "legendFormat": "{{node}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "etcd Fragmentation",
+        "transparent": true,
+        "type": "bargauge"
       }
     ],
     "preload": false,
     "refresh": "30s",
-    "schemaVersion": 40,
+    "schemaVersion": 41,
     "tags": [],
     "templating": {
       "list": []
@@ -237,7 +307,6 @@
     },
     "timepicker": {},
     "timezone": "browser",
-    "title": "Homelab Maintenance",
-    "weekStart": ""
+    "title": "Homelab Maintenance"
   }
 }
