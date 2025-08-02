@@ -1,5 +1,5 @@
 {
-  "apiVersion": "dashboard.grafana.app/v1beta1",
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
   "kind": "Dashboard",
   "metadata": {
     "name": "_f0DUpY4k"
@@ -472,7 +472,7 @@
     ],
     "refresh": "",
     "revision": 1,
-    "schemaVersion": 41,
+    "schemaVersion": 38,
     "style": "dark",
     "tags": [
       "kubecon-demo"
@@ -585,6 +585,17 @@
         "1h",
         "2h",
         "1d"
+      ],
+      "time_options": [
+        "5m",
+        "15m",
+        "1h",
+        "6h",
+        "12h",
+        "24h",
+        "2d",
+        "7d",
+        "30d"
       ]
     },
     "timezone": "",
