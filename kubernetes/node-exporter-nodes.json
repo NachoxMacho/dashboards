@@ -1,5 +1,5 @@
 {
-  "apiVersion": "dashboard.grafana.app/v1beta1",
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
   "kind": "Dashboard",
   "metadata": {
     "name": "7d57716318ee0dddbac5a7f451fb7753"
@@ -673,7 +673,7 @@
       }
     ],
     "refresh": "30s",
-    "schemaVersion": 41,
+    "schemaVersion": 39,
     "tags": [
       "node-exporter-mixin"
     ],
