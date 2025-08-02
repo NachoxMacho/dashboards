@@ -116,12 +116,16 @@
         "pluginVersion": "12.1.0",
         "targets": [
           {
-            "editorMode": "code",
-            "expr": "sum(rate(coredns_dns_requests_total[$__rate_interval])) by (zone)",
+            "disableTextWrap": false,
+            "editorMode": "builder",
+            "expr": "sum by(zone) (rate(coredns_dns_requests_total[$__rate_interval]))",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
             "interval": "30s",
             "legendFormat": "__auto",
             "range": true,
-            "refId": "A"
+            "refId": "A",
+            "useBackend": false
           }
         ],
         "title": "Query Rate",
