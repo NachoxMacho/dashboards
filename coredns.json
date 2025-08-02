@@ -1,5 +1,5 @@
 {
-  "apiVersion": "dashboard.grafana.app/v1beta1",
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
   "kind": "Dashboard",
   "metadata": {
     "name": "7e4ee089-f4e7-4edb-a8e5-5e2d2e1690ec"
@@ -116,16 +116,12 @@
         "pluginVersion": "12.1.0",
         "targets": [
           {
-            "disableTextWrap": false,
-            "editorMode": "builder",
-            "expr": "sum by(zone) (rate(coredns_dns_requests_total[$__rate_interval]))",
-            "fullMetaSearch": false,
-            "includeNullMetadata": true,
+            "editorMode": "code",
+            "expr": "sum(rate(coredns_dns_requests_total[$__rate_interval])) by (zone)",
             "interval": "30s",
             "legendFormat": "__auto",
             "range": true,
-            "refId": "A",
-            "useBackend": false
+            "refId": "A"
           }
         ],
         "title": "Query Rate",
