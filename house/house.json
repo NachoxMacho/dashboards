@@ -1,5 +1,5 @@
 {
-  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "apiVersion": "dashboard.grafana.app/v1beta1",
   "kind": "Dashboard",
   "metadata": {
     "name": "ce303v3juf1mof"
@@ -78,7 +78,7 @@
               "steps": [
                 {
                   "color": "green",
-                  "value": null
+                  "value": 0
                 }
               ]
             }
@@ -105,7 +105,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "11.5.0",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -161,6 +161,7 @@
               "mode": "fixed"
             },
             "custom": {
+              "axisPlacement": "auto",
               "fillOpacity": 70,
               "hideFrom": {
                 "legend": false,
@@ -177,7 +178,7 @@
               "steps": [
                 {
                   "color": "green",
-                  "value": null
+                  "value": 0
                 }
               ]
             },
@@ -275,7 +276,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "11.5.0",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -312,7 +313,7 @@
               "steps": [
                 {
                   "color": "green",
-                  "value": null
+                  "value": 0
                 }
               ]
             },
@@ -345,7 +346,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "11.5.0",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -392,7 +393,7 @@
               "steps": [
                 {
                   "color": "red",
-                  "value": null
+                  "value": 0
                 },
                 {
                   "color": "#EAB839",
@@ -433,7 +434,7 @@
           "showThresholdMarkers": true,
           "sizing": "auto"
         },
-        "pluginVersion": "11.5.0",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -453,7 +454,8 @@
       }
     ],
     "preload": false,
-    "schemaVersion": 40,
+    "refresh": "30s",
+    "schemaVersion": 41,
     "tags": [],
     "templating": {
       "list": []
@@ -464,7 +466,6 @@
     },
     "timepicker": {},
     "timezone": "browser",
-    "title": "House",
-    "weekStart": ""
+    "title": "House"
   }
 }
