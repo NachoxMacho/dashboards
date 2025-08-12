@@ -123,8 +123,11 @@
               "uid": "mimir"
             },
             "editorMode": "code",
-            "expr": "sum(rate(container_cpu_usage_seconds_total[$__rate_interval])) by (pod,container,namespace) / sum(kube_pod_container_resource_requests{resource=\"cpu\",unit=\"core\"}) by (pod,container,namespace)",
-            "legendFormat": "{{namespace}}/{{pod}}/{{container}}",
+            "exemplar": false,
+            "expr": "sum(rate(container_cpu_usage_seconds_total{namespace=~\"$namespace\",pod=~\"$pod\"}[$__rate_interval])) by (pod,namespace) / sum(kube_pod_container_resource_requests{namespace=~\"$namespace\",pod=~\"$pod\",resource=\"cpu\"}) by (pod,namespace)",
+            "format": "time_series",
+            "instant": false,
+            "legendFormat": "{{namespace}}/{{pod}}",
             "range": true,
             "refId": "A"
           }
@@ -230,7 +233,7 @@
               "uid": "mimir"
             },
             "editorMode": "code",
-            "expr": "sum(container_memory_usage_bytes) by (pod,container,namespace) / sum(kube_pod_container_resource_requests{resource=\"memory\",}) by (pod,container,namespace)",
+            "expr": "sum(container_memory_usage_bytes{namespace=~\"$namespace\",pod=~\"$pod\"}) by (pod,namespace) / sum(kube_pod_container_resource_requests{namespace=~\"$namespace\",pod=~\"$pod\",resource=\"memory\"}) by (pod,namespace)",
             "legendFormat": "{{namespace}}/{{pod}}/{{container}}",
             "range": true,
             "refId": "A"
@@ -239,16 +242,281 @@
         "title": "Memory Request %",
         "transparent": true,
         "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "mimir"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Pod"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 402
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 18
+        },
+        "id": 4,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true,
+          "sortBy": []
+        },
+        "pluginVersion": "12.1.0",
+        "targets": [
+          {
+            "editorMode": "code",
+            "expr": "avg(max_over_time(rate(container_cpu_usage_seconds_total{namespace=~\"$namespace\",pod=~\"$pod\"}[$__rate_interval])[$__range:])) by (pod,namespace) * 0.8",
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Expected CPU",
+        "transformations": [
+          {
+            "id": "reduce",
+            "options": {
+              "labelsToFields": true,
+              "reducers": [
+                "p95"
+              ]
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Field": true
+              },
+              "includeByName": {},
+              "indexByName": {},
+              "renameByName": {
+                "namespace": "Namespace",
+                "pod": "Pod"
+              }
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "mimir"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Pod"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 402
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 18
+        },
+        "id": 3,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true,
+          "sortBy": []
+        },
+        "pluginVersion": "12.1.0",
+        "targets": [
+          {
+            "editorMode": "code",
+            "expr": "avg(max_over_time(container_memory_usage_bytes{namespace=~\"$namespace\",pod=~\"$pod\"}[$__range])) by (pod,namespace) * 0.8",
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Expected Memory",
+        "transformations": [
+          {
+            "id": "reduce",
+            "options": {
+              "labelsToFields": true,
+              "reducers": [
+                "p95"
+              ]
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Field": true
+              },
+              "includeByName": {},
+              "indexByName": {},
+              "renameByName": {
+                "namespace": "Namespace",
+                "pod": "Pod"
+              }
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "table"
       }
     ],
     "preload": false,
+    "refresh": "30s",
     "schemaVersion": 41,
     "tags": [],
     "templating": {
-      "list": []
+      "list": [
+        {
+          "allowCustomValue": false,
+          "current": {
+            "text": [
+              "tempo"
+            ],
+            "value": [
+              "tempo"
+            ]
+          },
+          "definition": "label_values(kube_namespace_labels,namespace)",
+          "description": "",
+          "includeAll": true,
+          "label": "Namespace",
+          "multi": true,
+          "name": "namespace",
+          "options": [],
+          "query": {
+            "qryType": 1,
+            "query": "label_values(kube_namespace_labels,namespace)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "sort": 1,
+          "type": "query"
+        },
+        {
+          "allowCustomValue": false,
+          "current": {
+            "text": "All",
+            "value": "$__all"
+          },
+          "definition": "label_values(kube_pod_info{namespace=~\"$namespace\"},pod)",
+          "description": "",
+          "includeAll": true,
+          "label": "Pod",
+          "multi": true,
+          "name": "pod",
+          "options": [],
+          "query": {
+            "qryType": 1,
+            "query": "label_values(kube_pod_info{namespace=~\"$namespace\"},pod)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "sort": 1,
+          "type": "query"
+        }
+      ]
     },
     "time": {
-      "from": "now-30m",
+      "from": "now-1h",
       "to": "now"
     },
     "timepicker": {},
