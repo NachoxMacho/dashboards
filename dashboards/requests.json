@@ -33,6 +33,246 @@
         },
         "fieldConfig": {
           "defaults": {
+            "fieldMinMax": true,
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "percentage",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 70
+                },
+                {
+                  "color": "red",
+                  "value": 90
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "id": 5,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "value_and_name",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.1.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "mimir"
+            },
+            "editorMode": "code",
+            "expr": "sum(kube_pod_container_resource_requests{resource=\"cpu\",container!=\"\",job=\"kube-state-metrics\"}) ",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Requests",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "mimir"
+            },
+            "editorMode": "code",
+            "expr": "sum(rate(container_cpu_usage_seconds_total{namespace!=\"\",container!=\"\",job=\"kubelet\"}[$__rate_interval]))",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Consumed",
+            "range": true,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "mimir"
+            },
+            "editorMode": "code",
+            "expr": "sum(kube_node_status_capacity_cpu_cores{job=\"opencost\"} * on (node) kube_node_status_condition{cluster=\"production\",condition=\"Ready\",status=\"true\"})",
+            "format": "time_series",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Available",
+            "range": true,
+            "refId": "Available"
+          }
+        ],
+        "title": "Cluster Utilization",
+        "transformations": [
+          {
+            "id": "configFromData",
+            "options": {
+              "applyTo": {
+                "id": "byRegexp",
+                "options": ".*"
+              },
+              "configRefId": "Available",
+              "mappings": [
+                {
+                  "fieldName": "Available",
+                  "handlerKey": "max"
+                }
+              ]
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "mimir"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "fieldMinMax": true,
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "percentage",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 70
+                },
+                {
+                  "color": "red",
+                  "value": 90
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        },
+        "id": 6,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.1.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "mimir"
+            },
+            "editorMode": "code",
+            "expr": "sum(kube_pod_info * on(pod,namespace,cluster) group_left() max(kube_pod_container_resource_requests{resource=\"cpu\",container!=\"\",job=\"kube-state-metrics\"}) by (pod,namespace,cluster) unless on(node) kube_node_role{role=\"control-plane\"})",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Requests",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "mimir"
+            },
+            "editorMode": "code",
+            "expr": "sum(kube_pod_info * on(pod,namespace,cluster) group_left() sum(rate(container_cpu_usage_seconds_total{namespace!=\"\",container!=\"\",job=\"kubelet\"}[$__rate_interval])) by (pod,namespace,cluster) unless on(node) kube_node_role{role=\"control-plane\"})",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Consumed",
+            "range": true,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "mimir"
+            },
+            "editorMode": "code",
+            "expr": "sum((kube_node_info{} unless on(node) kube_node_role{role=\"control-plane\"}) * on(node) kube_node_status_allocatable{resource=\"cpu\",job=\"kube-state-metrics\",unit=\"core\"} * on(node) kube_node_status_condition{status=\"true\",condition=\"Ready\"})",
+            "format": "time_series",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Available",
+            "range": true,
+            "refId": "Available"
+          }
+        ],
+        "title": "Cluster Worker Node Utilization",
+        "transformations": [
+          {
+            "id": "configFromData",
+            "options": {
+              "applyTo": {
+                "id": "byRegexp",
+                "options": ".*"
+              },
+              "configRefId": "Available",
+              "mappings": [
+                {
+                  "fieldName": "Available",
+                  "handlerKey": "max"
+                }
+              ]
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "mimir"
+        },
+        "fieldConfig": {
+          "defaults": {
             "color": {
               "mode": "palette-classic"
             },
@@ -95,7 +335,7 @@
           "h": 9,
           "w": 24,
           "x": 0,
-          "y": 0
+          "y": 8
         },
         "id": 1,
         "options": {
@@ -115,7 +355,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.1.1",
         "targets": [
           {
             "datasource": {
@@ -205,7 +445,7 @@
           "h": 9,
           "w": 24,
           "x": 0,
-          "y": 9
+          "y": 17
         },
         "id": 2,
         "options": {
@@ -225,7 +465,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.1.1",
         "targets": [
           {
             "datasource": {
@@ -294,7 +534,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 18
+          "y": 26
         },
         "id": 4,
         "options": {
@@ -310,7 +550,7 @@
           "showHeader": true,
           "sortBy": []
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.1.1",
         "targets": [
           {
             "editorMode": "code",
@@ -401,7 +641,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 18
+          "y": 26
         },
         "id": 3,
         "options": {
@@ -417,7 +657,7 @@
           "showHeader": true,
           "sortBy": []
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.1.1",
         "targets": [
           {
             "editorMode": "code",
@@ -516,7 +756,7 @@
       ]
     },
     "time": {
-      "from": "now-1h",
+      "from": "now-12h",
       "to": "now"
     },
     "timepicker": {},
