@@ -1,5 +1,5 @@
 {
-  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "apiVersion": "dashboard.grafana.app/v1beta1",
   "kind": "Dashboard",
   "metadata": {
     "name": "fe32vcaq7981sa"
@@ -75,7 +75,7 @@
               "steps": [
                 {
                   "color": "green",
-                  "value": null
+                  "value": 0
                 },
                 {
                   "color": "red",
@@ -107,7 +107,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "11.5.2",
+        "pluginVersion": "12.1.1",
         "targets": [
           {
             "datasource": {
@@ -174,7 +174,7 @@
               "steps": [
                 {
                   "color": "green",
-                  "value": null
+                  "value": 0
                 },
                 {
                   "color": "orange",
@@ -220,7 +220,7 @@
           "xTickLabelRotation": 0,
           "xTickLabelSpacing": 0
         },
-        "pluginVersion": "11.5.2",
+        "pluginVersion": "12.1.1",
         "targets": [
           {
             "datasource": {
@@ -303,7 +303,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "11.5.2",
+        "pluginVersion": "12.1.1",
         "targets": [
           {
             "datasource": {
@@ -319,7 +319,8 @@
             "refId": "A"
           }
         ],
-        "title": "Panel Title",
+        "title": "Current Data Breakdown",
+        "transparent": true,
         "type": "piechart"
       },
       {
@@ -345,7 +346,7 @@
               "steps": [
                 {
                   "color": "green",
-                  "value": null
+                  "value": 0
                 },
                 {
                   "color": "red",
@@ -376,7 +377,7 @@
           "frameIndex": 1,
           "showHeader": true
         },
-        "pluginVersion": "11.5.2",
+        "pluginVersion": "12.1.1",
         "targets": [
           {
             "datasource": {
@@ -445,7 +446,7 @@
               "steps": [
                 {
                   "color": "green",
-                  "value": null
+                  "value": 0
                 },
                 {
                   "color": "red",
@@ -476,7 +477,7 @@
           "frameIndex": 1,
           "showHeader": true
         },
-        "pluginVersion": "11.5.2",
+        "pluginVersion": "12.1.1",
         "targets": [
           {
             "datasource": {
@@ -545,7 +546,7 @@
     ],
     "preload": false,
     "refresh": "5m",
-    "schemaVersion": 40,
+    "schemaVersion": 41,
     "tags": [],
     "templating": {
       "list": []
@@ -556,7 +557,6 @@
     },
     "timepicker": {},
     "timezone": "browser",
-    "title": "Ceph",
-    "weekStart": ""
+    "title": "Ceph"
   }
 }
