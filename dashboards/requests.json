@@ -40,12 +40,24 @@
               "mode": "percentage",
               "steps": [
                 {
-                  "color": "green",
+                  "color": "red",
                   "value": 0
+                },
+                {
+                  "color": "orange",
+                  "value": 25
+                },
+                {
+                  "color": "green",
+                  "value": 40
                 },
                 {
                   "color": "#EAB839",
                   "value": 70
+                },
+                {
+                  "color": "orange",
+                  "value": 80
                 },
                 {
                   "color": "red",
@@ -55,7 +67,23 @@
             },
             "unit": "short"
           },
-          "overrides": []
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Available"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "text",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            }
+          ]
         },
         "gridPos": {
           "h": 8,
@@ -122,9 +150,23 @@
             "legendFormat": "Available",
             "range": true,
             "refId": "Available"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "mimir"
+            },
+            "editorMode": "code",
+            "expr": "sum(kube_node_status_capacity_cpu_cores{job=\"opencost\"} * on (node) kube_node_status_condition{cluster=\"production\",condition=\"Ready\",status=\"true\"})",
+            "format": "time_series",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Available",
+            "range": true,
+            "refId": "C"
           }
         ],
-        "title": "Cluster Utilization",
+        "title": "Cluster CPU Utilization",
         "transformations": [
           {
             "id": "configFromData",
@@ -160,12 +202,183 @@
               "mode": "percentage",
               "steps": [
                 {
-                  "color": "green",
+                  "color": "red",
                   "value": 0
+                },
+                {
+                  "color": "orange",
+                  "value": 25
+                },
+                {
+                  "color": "green",
+                  "value": 40
                 },
                 {
                   "color": "#EAB839",
                   "value": 70
+                },
+                {
+                  "color": "orange",
+                  "value": 80
+                },
+                {
+                  "color": "red",
+                  "value": 90
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Available"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "text",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        },
+        "id": 8,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "value_and_name",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.1.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "mimir"
+            },
+            "editorMode": "code",
+            "expr": "sum(kube_pod_container_resource_requests{resource=\"memory\",container!=\"\",job=\"kube-state-metrics\"}) ",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Requests",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "mimir"
+            },
+            "editorMode": "code",
+            "expr": "sum(container_memory_usage_bytes{container!=\"\",job=\"kubelet\"})",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Consumed",
+            "range": true,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "mimir"
+            },
+            "editorMode": "code",
+            "expr": "sum(kube_node_status_capacity_memory_bytes{job=\"opencost\"} * on (node) kube_node_status_condition{cluster=\"production\",condition=\"Ready\",status=\"true\"})",
+            "format": "time_series",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Available",
+            "range": true,
+            "refId": "Available"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "mimir"
+            },
+            "editorMode": "code",
+            "expr": "sum(kube_node_status_capacity_memory_bytes{job=\"opencost\"} * on (node) kube_node_status_condition{cluster=\"production\",condition=\"Ready\",status=\"true\"})",
+            "format": "time_series",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Available",
+            "range": true,
+            "refId": "D"
+          }
+        ],
+        "title": "Cluster RAM Utilization",
+        "transformations": [
+          {
+            "id": "configFromData",
+            "options": {
+              "applyTo": {
+                "id": "byRegexp",
+                "options": ".*"
+              },
+              "configRefId": "Available",
+              "mappings": [
+                {
+                  "fieldName": "Available",
+                  "handlerKey": "max"
+                }
+              ]
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "mimir"
+        },
+        "description": "The total usage across worker nodes in the cluster, in # of cores",
+        "fieldConfig": {
+          "defaults": {
+            "fieldMinMax": true,
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "percentage",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": 0
+                },
+                {
+                  "color": "orange",
+                  "value": 25
+                },
+                {
+                  "color": "green",
+                  "value": 40
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 80
                 },
                 {
                   "color": "red",
@@ -175,13 +388,29 @@
             },
             "unit": "short"
           },
-          "overrides": []
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Available"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "text",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            }
+          ]
         },
         "gridPos": {
           "h": 8,
           "w": 12,
-          "x": 12,
-          "y": 0
+          "x": 0,
+          "y": 8
         },
         "id": 6,
         "options": {
@@ -242,9 +471,182 @@
             "legendFormat": "Available",
             "range": true,
             "refId": "Available"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "mimir"
+            },
+            "editorMode": "code",
+            "expr": "sum((kube_node_info{} unless on(node) kube_node_role{role=\"control-plane\"}) * on(node) kube_node_status_allocatable{resource=\"cpu\",job=\"kube-state-metrics\",unit=\"core\"} * on(node) kube_node_status_condition{status=\"true\",condition=\"Ready\"})",
+            "format": "time_series",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Available",
+            "range": true,
+            "refId": "C"
           }
         ],
-        "title": "Cluster Worker Node Utilization",
+        "title": "Cluster Worker Node CPU Utilization",
+        "transformations": [
+          {
+            "id": "configFromData",
+            "options": {
+              "applyTo": {
+                "id": "byRegexp",
+                "options": ".*"
+              },
+              "configRefId": "Available",
+              "mappings": [
+                {
+                  "fieldName": "Available",
+                  "handlerKey": "max"
+                }
+              ]
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "mimir"
+        },
+        "description": "The total amount of of RAM used on worker nodes in the cluster.",
+        "fieldConfig": {
+          "defaults": {
+            "fieldMinMax": true,
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "percentage",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": 0
+                },
+                {
+                  "color": "orange",
+                  "value": 25
+                },
+                {
+                  "color": "green",
+                  "value": 40
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 80
+                },
+                {
+                  "color": "red",
+                  "value": 90
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Available"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "text",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 8
+        },
+        "id": 7,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.1.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "mimir"
+            },
+            "editorMode": "code",
+            "expr": "sum(kube_pod_info * on(pod,namespace,cluster) group_left() max(kube_pod_container_resource_requests{resource=\"memory\",container!=\"\",job=\"kube-state-metrics\"}) by (pod,namespace,cluster) unless on(node) kube_node_role{role=\"control-plane\"})",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Requests",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "mimir"
+            },
+            "editorMode": "code",
+            "expr": "sum(kube_pod_info * on(pod,namespace,cluster) group_left() sum(container_memory_usage_bytes{cluster=\"production\",container!=\"\",job=\"kubelet\"}) by (pod,namespace,cluster) unless on(node) kube_node_role{role=\"control-plane\"})",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Consumed",
+            "range": true,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "mimir"
+            },
+            "editorMode": "code",
+            "expr": "sum((kube_node_info{} unless on(node) kube_node_role{role=\"control-plane\"}) * on(node) kube_node_status_allocatable{resource=\"memory\",job=\"kube-state-metrics\",unit=\"byte\"} * on(node) kube_node_status_condition{status=\"true\",condition=\"Ready\"})",
+            "format": "time_series",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Available",
+            "range": true,
+            "refId": "Available"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "mimir"
+            },
+            "editorMode": "code",
+            "expr": "sum((kube_node_info{} unless on(node) kube_node_role{role=\"control-plane\"}) * on(node) kube_node_status_allocatable{resource=\"memory\",job=\"kube-state-metrics\",unit=\"byte\"} * on(node) kube_node_status_condition{status=\"true\",condition=\"Ready\"})",
+            "format": "time_series",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Available",
+            "range": true,
+            "refId": "C"
+          }
+        ],
+        "title": "Cluster Worker Node RAM Utilization",
         "transformations": [
           {
             "id": "configFromData",
@@ -335,7 +737,7 @@
           "h": 9,
           "w": 24,
           "x": 0,
-          "y": 8
+          "y": 16
         },
         "id": 1,
         "options": {
@@ -445,7 +847,7 @@
           "h": 9,
           "w": 24,
           "x": 0,
-          "y": 17
+          "y": 25
         },
         "id": 2,
         "options": {
@@ -534,7 +936,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 26
+          "y": 34
         },
         "id": 4,
         "options": {
@@ -641,7 +1043,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 26
+          "y": 34
         },
         "id": 3,
         "options": {
