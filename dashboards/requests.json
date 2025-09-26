@@ -40,16 +40,8 @@
               "mode": "percentage",
               "steps": [
                 {
-                  "color": "red",
-                  "value": 0
-                },
-                {
-                  "color": "orange",
-                  "value": 25
-                },
-                {
                   "color": "green",
-                  "value": 40
+                  "value": 0
                 },
                 {
                   "color": "#EAB839",
@@ -117,12 +109,12 @@
               "uid": "mimir"
             },
             "editorMode": "code",
-            "expr": "sum(kube_pod_container_resource_requests{resource=\"cpu\",container!=\"\",job=\"kube-state-metrics\"}) ",
+            "expr": "sum(rate(container_cpu_usage_seconds_total{namespace!=\"\",container!=\"\",job=\"kubelet\"}[$__rate_interval]))",
             "hide": false,
             "instant": false,
-            "legendFormat": "Requests",
+            "legendFormat": "Consumed",
             "range": true,
-            "refId": "A"
+            "refId": "B"
           },
           {
             "datasource": {
@@ -130,12 +122,12 @@
               "uid": "mimir"
             },
             "editorMode": "code",
-            "expr": "sum(rate(container_cpu_usage_seconds_total{namespace!=\"\",container!=\"\",job=\"kubelet\"}[$__rate_interval]))",
+            "expr": "sum(kube_pod_container_resource_requests{resource=\"cpu\",container!=\"\",job=\"kube-state-metrics\"}) ",
             "hide": false,
             "instant": false,
-            "legendFormat": "Consumed",
+            "legendFormat": "Requests",
             "range": true,
-            "refId": "B"
+            "refId": "A"
           },
           {
             "datasource": {
@@ -202,16 +194,8 @@
               "mode": "percentage",
               "steps": [
                 {
-                  "color": "red",
-                  "value": 0
-                },
-                {
-                  "color": "orange",
-                  "value": 25
-                },
-                {
                   "color": "green",
-                  "value": 40
+                  "value": 0
                 },
                 {
                   "color": "#EAB839",
@@ -279,12 +263,12 @@
               "uid": "mimir"
             },
             "editorMode": "code",
-            "expr": "sum(kube_pod_container_resource_requests{resource=\"memory\",container!=\"\",job=\"kube-state-metrics\"}) ",
+            "expr": "sum(container_memory_usage_bytes{container!=\"\",job=\"kubelet\"})",
             "hide": false,
             "instant": false,
-            "legendFormat": "Requests",
+            "legendFormat": "Consumed",
             "range": true,
-            "refId": "A"
+            "refId": "B"
           },
           {
             "datasource": {
@@ -292,12 +276,12 @@
               "uid": "mimir"
             },
             "editorMode": "code",
-            "expr": "sum(container_memory_usage_bytes{container!=\"\",job=\"kubelet\"})",
+            "expr": "sum(kube_pod_container_resource_requests{resource=\"memory\",container!=\"\",job=\"kube-state-metrics\"}) ",
             "hide": false,
             "instant": false,
-            "legendFormat": "Consumed",
+            "legendFormat": "Requests",
             "range": true,
-            "refId": "B"
+            "refId": "A"
           },
           {
             "datasource": {
@@ -365,19 +349,15 @@
               "mode": "percentage",
               "steps": [
                 {
-                  "color": "red",
+                  "color": "green",
                   "value": 0
                 },
                 {
-                  "color": "orange",
-                  "value": 25
-                },
-                {
-                  "color": "green",
-                  "value": 40
-                },
-                {
                   "color": "#EAB839",
+                  "value": 70
+                },
+                {
+                  "color": "orange",
                   "value": 80
                 },
                 {
@@ -438,12 +418,12 @@
               "uid": "mimir"
             },
             "editorMode": "code",
-            "expr": "sum(kube_pod_info * on(pod,namespace,cluster) group_left() max(kube_pod_container_resource_requests{resource=\"cpu\",container!=\"\",job=\"kube-state-metrics\"}) by (pod,namespace,cluster) unless on(node) kube_node_role{role=\"control-plane\"})",
+            "expr": "sum(kube_pod_info * on(pod,namespace,cluster) group_left() sum(rate(container_cpu_usage_seconds_total{namespace!=\"\",container!=\"\",job=\"kubelet\"}[$__rate_interval])) by (pod,namespace,cluster) unless on(node) kube_node_role{role=\"control-plane\"})",
             "hide": false,
             "instant": false,
-            "legendFormat": "Requests",
+            "legendFormat": "Consumed",
             "range": true,
-            "refId": "A"
+            "refId": "B"
           },
           {
             "datasource": {
@@ -451,12 +431,12 @@
               "uid": "mimir"
             },
             "editorMode": "code",
-            "expr": "sum(kube_pod_info * on(pod,namespace,cluster) group_left() sum(rate(container_cpu_usage_seconds_total{namespace!=\"\",container!=\"\",job=\"kubelet\"}[$__rate_interval])) by (pod,namespace,cluster) unless on(node) kube_node_role{role=\"control-plane\"})",
+            "expr": "sum(kube_pod_info * on(pod,namespace,cluster) group_left() max(kube_pod_container_resource_requests{resource=\"cpu\",container!=\"\",job=\"kube-state-metrics\"}) by (pod,namespace,cluster) unless on(node) kube_node_role{role=\"control-plane\"})",
             "hide": false,
             "instant": false,
-            "legendFormat": "Consumed",
+            "legendFormat": "Requests",
             "range": true,
-            "refId": "B"
+            "refId": "A"
           },
           {
             "datasource": {
@@ -524,19 +504,15 @@
               "mode": "percentage",
               "steps": [
                 {
-                  "color": "red",
+                  "color": "green",
                   "value": 0
                 },
                 {
+                  "color": "#eab839",
+                  "value": 70
+                },
+                {
                   "color": "orange",
-                  "value": 25
-                },
-                {
-                  "color": "green",
-                  "value": 40
-                },
-                {
-                  "color": "#EAB839",
                   "value": 80
                 },
                 {
@@ -597,12 +573,12 @@
               "uid": "mimir"
             },
             "editorMode": "code",
-            "expr": "sum(kube_pod_info * on(pod,namespace,cluster) group_left() max(kube_pod_container_resource_requests{resource=\"memory\",container!=\"\",job=\"kube-state-metrics\"}) by (pod,namespace,cluster) unless on(node) kube_node_role{role=\"control-plane\"})",
+            "expr": "sum(kube_pod_info * on(pod,namespace,cluster) group_left() sum(container_memory_usage_bytes{cluster=\"production\",container!=\"\",job=\"kubelet\"}) by (pod,namespace,cluster) unless on(node) kube_node_role{role=\"control-plane\"})",
             "hide": false,
             "instant": false,
-            "legendFormat": "Requests",
+            "legendFormat": "Consumed",
             "range": true,
-            "refId": "A"
+            "refId": "B"
           },
           {
             "datasource": {
@@ -610,12 +586,12 @@
               "uid": "mimir"
             },
             "editorMode": "code",
-            "expr": "sum(kube_pod_info * on(pod,namespace,cluster) group_left() sum(container_memory_usage_bytes{cluster=\"production\",container!=\"\",job=\"kubelet\"}) by (pod,namespace,cluster) unless on(node) kube_node_role{role=\"control-plane\"})",
+            "expr": "sum(kube_pod_info * on(pod,namespace,cluster) group_left() max(kube_pod_container_resource_requests{resource=\"memory\",container!=\"\",job=\"kube-state-metrics\"}) by (pod,namespace,cluster) unless on(node) kube_node_role{role=\"control-plane\"})",
             "hide": false,
             "instant": false,
-            "legendFormat": "Consumed",
+            "legendFormat": "Requests",
             "range": true,
-            "refId": "B"
+            "refId": "A"
           },
           {
             "datasource": {
